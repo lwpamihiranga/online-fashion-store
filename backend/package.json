@@ -1,0 +1,11 @@
+{
+  "name": "rest-api-online-shopping-cart",
+  "version": "1.0.0",
+  "description": "This is a REST API for an online shopping cart",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Amith Mihiranga <lwpamihiranga@gmail.com>",
+  "license": "ISC"
+}
