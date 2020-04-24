@@ -4,6 +4,12 @@
     flex-direction: row;
     margin-left: auto;
     margin-right: auto;
+    list-style: none;
+    overflow-x: auto;
+    padding-right: 50px;
+    padding-left: 20px;
+    overflow-y: auto;
+
 
 }
 .productItem
@@ -17,6 +23,12 @@
     margin-bottom: 50px;
     border: 3px solid rebeccapurple;
     cursor: pointer;
+
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: repeat(6, calc(50% - 40px));
+    grid-template-rows: minmax(200px, 1fr);
+    padding: 0 30px;
 }
 .productItem:hover
 {
