@@ -49,6 +49,7 @@ router.get('/:id', (req, res) => {
 router.post('/', (req, res) => {
     const product = new Product({
         _id: new mongoose.Types.ObjectId(),
+        categoryId : req.body.categoryId,
         name: req.body.name,
         price: req.body.price,
     });

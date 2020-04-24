@@ -1,0 +1,35 @@
+.categoryList
+{
+    width: 85%;
+    background-color: rebeccapurple;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 10px;
+    padding:20px;
+    margin-top: 5%;
+}
+.categoryItem
+{
+    width: 90%;
+    background-color: white;
+    margin-top: 30px;
+    min-height: 200px;
+    height: auto;
+    margin-bottom: 5px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 10px;
+
+}
+#catName
+{
+    text-align: center;
+    padding: 1%;
+    color: #282c34;
+    size: 30px;
+}
+#mainName
+{
+    margin-left: 5%;
+    color: white;
+}
