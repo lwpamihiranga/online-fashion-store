@@ -6,6 +6,7 @@ const mongoose = require('mongoose');
 
 const productRouter = require('./routes/products');
 const ratingRouter = require('./routes/ratings');
+const categoryRouter = require('./routes/category');
 
 const app = express();
 
@@ -21,6 +22,7 @@ app.use(cors());
 
 app.use('/api/products', productRouter);
 app.use('/api/ratings',ratingRouter);
+app.use('/api/category',categoryRouter);
 
 app.use((req, res, next) => {
     const error = new Error();

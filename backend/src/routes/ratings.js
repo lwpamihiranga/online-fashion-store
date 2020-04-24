@@ -33,8 +33,6 @@ router.post('/create',(req,res) => {
    {
       res.status(400).json('Error : parameters are missing!');
    }
-
-
 });
 
 module.exports = router;
