@@ -36,7 +36,7 @@ class App extends React.Component
     getProducts(id)
     {
         //loading products according to the id and store in states
-        axios.get("http://localhost:5000/api/products/")
+        axios.get("http://localhost:5000/api/products/findByCategoryId?id=" + id)
             .then(response => {
                 if(response.status === 200)
                 {
