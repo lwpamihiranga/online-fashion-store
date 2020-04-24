@@ -37,6 +37,6 @@ app.use((error, req, res, next) => {
 });
 
 // app.listen(3000);
-app.listen(3000, () => {
-    console.log(`REST API on http://localhost:3000/api`);
+app.listen(5000, () => {
+    console.log(`REST API on http://localhost:5000/api`);
 });
