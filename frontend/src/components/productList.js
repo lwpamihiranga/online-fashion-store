@@ -12,6 +12,7 @@ class App extends React.Component
                 isFirstTime : true
             }
         )
+        this.handleProductItemClick = this.handleProductItemClick.bind();
     }
     render() {
 
@@ -21,7 +22,7 @@ class App extends React.Component
         const list = this.state.productList.map(product => {
 
             return(
-                <div className="productItem" key={product._id}>
+                <div className="productItem" key={product._id} onClick={ () => this.handleProductItemClick(product)}>
                     <h3 id="productName">{product.name}</h3>
                 </div>
             )
@@ -50,6 +51,10 @@ class App extends React.Component
                 }
             })
             .catch(error => console.log(error));
+    }
+    handleProductItemClick(product)
+    {
+        alert("Clicked ProductId : " + product._id + " CategoryId : " + product.categoryId);
     }
 }
 export default App;

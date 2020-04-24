@@ -2,13 +2,10 @@
 {
     display: flex;
     flex-direction: row;
-    margin-left: auto;
-    margin-right: auto;
     list-style: none;
-    overflow-x: auto;
     padding-right: 50px;
     padding-left: 20px;
-    overflow-y: auto;
+    overflow: auto;
 
 
 }
@@ -16,6 +13,8 @@
 {
     width: 200px;
     height: 200px;
+    min-width: 200px;
+    min-height: 200px;
     margin-left: 10px;
     margin-right: 10px;
     background-color: white;
@@ -23,12 +22,6 @@
     margin-bottom: 50px;
     border: 3px solid rebeccapurple;
     cursor: pointer;
-
-    display: grid;
-    grid-gap: 10px;
-    grid-template-columns: repeat(7, calc(50% - 40px));
-    grid-template-rows: minmax(200px, 1fr);
-    padding: 0 30px;
 }
 .productItem:hover
 {
