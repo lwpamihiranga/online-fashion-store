@@ -1,0 +1,33 @@
+.container
+{
+    width: 90%;
+    margin-right: auto;
+    margin-left: auto;
+    border-radius: 10px;
+    min-height: 600px;
+    margin-top: 2%;
+    height: auto;
+    background-color: rebeccapurple;
+}
+.productDetails
+{
+    display: flex;
+    flex-direction: row;
+    color: white;
+    /*width: 99.5%;*/
+    /*border-radius: 10px;*/
+    /*background-color: white;*/
+    /*border-top: 3px solid rebeccapurple;*/
+    /*border-left: 3px solid rebeccapurple;*/
+    /*border-right: 3px solid rebeccapurple;*/
+}
+#productImage
+{
+    width: 20%;
+    margin: 1%;
+    border-radius: 10px;
+}
+#productName
+{
+    color: rebeccapurple;
+}

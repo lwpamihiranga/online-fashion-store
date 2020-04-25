@@ -1,6 +1,13 @@
 import React from 'react'
 import axios from "axios";
 import css from '../css/productList.css'
+import {BrowserRouter as Router,Link} from "react-router-dom";
+import Route from "react-router-dom/Route";
+
+
+
+import ProductViewComponent from '../productDetailsView';
+
 
 class App extends React.Component
 {
@@ -11,7 +18,7 @@ class App extends React.Component
                 productList : [],
                 isFirstTime : true
             }
-        )
+        );
         this.handleProductItemClick = this.handleProductItemClick.bind();
     }
     render() {
@@ -22,9 +29,12 @@ class App extends React.Component
         const list = this.state.productList.map(product => {
 
             return(
+                <Link to={"/product/" + product._id} style={{ textDecoration: 'none' }}>
+
                 <div className="productItem" key={product._id} onClick={ () => this.handleProductItemClick(product)}>
-                    <h3 id="productName">{product.name}</h3>
                 </div>
+                    <h3 id="productName">{product.name}</h3>
+                </Link>
             )
         });
 
@@ -54,7 +64,8 @@ class App extends React.Component
     }
     handleProductItemClick(product)
     {
-        alert("Clicked ProductId : " + product._id + " CategoryId : " + product.categoryId);
+        //this.props.history.push('http://localhost:3000/login')
+       // window.location.href="http://localhost:3000/login";
     }
 }
 export default App;

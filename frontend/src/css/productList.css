@@ -20,15 +20,30 @@
     background-color: white;
     border-radius: 10px;
     margin-bottom: 50px;
-    border: 3px solid rebeccapurple;
     cursor: pointer;
+    color: white;
+    background-image: url('https://lh3.googleusercontent.com/proxy/xRKiLuKs6XmLuUlyRVBhk-z_eXnlffYa3U-KXaRIcV2qCRJg_chXZ3JALVrdcKX1cXyldrQoTXuByOztNtv6jmuP6DCf9_bS7xvb740LbtgrXQ_c7zyebV-5uufOX_iNmBPXfODFQplBwyZWLWBI24Hz8VGd4Zup0VGGh1hiqs2OrBiuvRP2_Y43yHQZQJ0JeZf5bbdZR3B-HFqebA');
+    box-shadow: inset 0 0 0 1000px rgba(0,0,0,.2);
+    background-repeat: no-repeat;
+    border: 3px solid white;
+    background-size: 200px auto;
+    background-position: center center;
 }
 .productItem:hover
 {
-    background-color: rebeccapurple;
+    box-shadow: inset 0 0 0 1000px rgba(0,0,0,.4);
+    border: 3px solid rebeccapurple;
+
+    /*-webkit-filter: brightness(70%);*/
+    /*-webkit-transition: all 1s ease;*/
+    /*-moz-transition: all 1s ease;*/
+    /*-o-transition: all 1s ease;*/
+    /*-ms-transition: all 1s ease;*/
+    /*transition: all 1s ease;*/
     color: white;
 }
 #productName
 {
     text-align: center;
+    margin-top: -40px;
 }

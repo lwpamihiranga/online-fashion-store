@@ -3,7 +3,13 @@ import axios from 'axios';
 import logo from './logo.svg';
 import './App.css';
 
+
 import CategoryList from './components/categoryList';
+import {BrowserRouter as Router,Link} from "react-router-dom";
+import Route from "react-router-dom/Route";
+
+//components
+import ProductDetailsView from './productDetailsView';
 
 class App extends React.Component
 {
@@ -18,8 +24,19 @@ class App extends React.Component
   }
   render() {
     return(
-        <CategoryList categoryList ={this.state.categoryList}/>
-    )
+        <Router>
+          <Route path="/" exact strict render={
+            () => {
+              return(
+                  <CategoryList categoryList ={this.state.categoryList}/>
+              );
+            }
+          }
+          />
+          <Route  path={"/product/:pid"} exact strict component={ProductDetailsView}/>
+
+        </Router>
+        )
   }
   getCategoriesFromApi()
   {

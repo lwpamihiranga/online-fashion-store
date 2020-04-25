@@ -35,6 +35,22 @@ router.get('/findByCategoryId', (req, res) => {
             });
         });
 });
+router.get('/findByProductId', (req, res) => {
+
+    const id = req.query.id;
+    Product.find({"_id" : id})
+        .exec()
+        .then((docs) => {
+            res.status(200).json(docs);
+        })
+        .catch((err) => {
+            res.status(500).json({
+                error: {
+                    message: 'Cannot find',
+                },
+            });
+        });
+});
 
 router.get('/:id', (req, res) => {
     const id = req.params.id;
