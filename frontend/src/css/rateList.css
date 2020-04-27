@@ -8,15 +8,29 @@
     width: 30px;
     height: 30px;
 }
-.inputstar
+.inputstarInactive
 {
     width: 30px;
     height: 30px;
     cursor: pointer;
 }
+.inputstarActive
+{
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+}
+
+/*.inputstarInactive:hover*/
+/*{*/
+/*    content: url('http://localhost:3000/static/media/filled_rating.37d75099.png');*/
+/*}*/
+/*}*/
+
 #rateName
 {
     color: white;
     margin-left: 0.5%;
     margin-top: -5px;
 }
+

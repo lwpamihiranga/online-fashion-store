@@ -60,12 +60,12 @@ class App extends React.Component
         const userInputRatings = this.state.starSize.map(i => {
 
             return(
-                <div key={i}>
+                <div className="input" key={i}>
                     {i <= this.state.selectedStarCount &&
-                    <img className="inputstar" src={filledStar}  onClick={ () => this.setState({selectedStarCount : i})}/>
+                    <img className="inputstarActive" src={filledStar}  onClick={ () => this.setState({selectedStarCount : i})}/>
                     }
                     {i > this.state.selectedStarCount &&
-                    <img className="inputstar" src={unfilledStar}   onClick={ () => this.setState({selectedStarCount : i})}/>
+                    <img className="inputstarInactive" src={unfilledStar}   onClick={ () => this.setState({selectedStarCount : i})}/>
                     }
                 </div>
             )
