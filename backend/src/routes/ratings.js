@@ -34,5 +34,12 @@ router.post('/create',(req,res) => {
       res.status(400).json('Error : parameters are missing!');
    }
 });
+router.get('/findByProductId', (req, res) => {
+
+   const productId = req.query.productId;
+   ratingModel.find({productId : productId})
+       .then(ratings => res.status(200).json(ratings))
+       .catch(err => res.status(400).json('Error: ' + err));
+});
 
 module.exports = router;

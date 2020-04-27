@@ -1,0 +1,22 @@
+.rateItem
+{
+    display: flex;
+    flex-direction: row;
+}
+.star
+{
+    width: 30px;
+    height: 30px;
+}
+.inputstar
+{
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+}
+#rateName
+{
+    color: white;
+    margin-left: 0.5%;
+    margin-top: -5px;
+}
