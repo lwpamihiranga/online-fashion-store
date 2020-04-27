@@ -1,7 +1,7 @@
 import React from 'react';
-import css from './css/productDetailsView.css';
+import css from '../../css/productDetailsView.css';
 import axios from "axios";
-import RatingList from './components/ratingList';
+import RatingList from '../lists/ratingList';
 
 class App extends React.Component
 {

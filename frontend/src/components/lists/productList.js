@@ -1,12 +1,12 @@
 import React from 'react'
 import axios from "axios";
-import css from '../css/productList.css'
+import css from '../../css/productList.css'
 import {BrowserRouter as Router,Link} from "react-router-dom";
 import Route from "react-router-dom/Route";
 
 
 
-import ProductViewComponent from '../productDetailsView';
+import ProductViewComponent from '../main/productDetailsView';
 
 
 class App extends React.Component

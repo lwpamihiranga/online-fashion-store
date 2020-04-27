@@ -1,7 +1,7 @@
 import React from 'react'
-import filledStar from '../images/filled_rating.png';
-import unfilledStar from '../images/unfilled_rating.png';
-import css from '../css/rateList.css';
+import filledStar from '../../images/filled_rating.png';
+import unfilledStar from '../../images/unfilled_rating.png';
+import css from '../../css/rateList.css';
 import axios from "axios";
 import {Link} from "react-router-dom";
 

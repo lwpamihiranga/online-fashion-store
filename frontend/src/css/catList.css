@@ -36,4 +36,21 @@
 {
     margin-left: 5%;
     color: white;
+    margin-bottom: 20px;
+}
+.navigation
+{
+    display: flex;
+    flex-direction: row;
+    margin-right: auto;
+    margin-left: auto;
+    width: 90%;
+    height: auto;
+    background-color: white;
+    border-radius: 10px;
+}
+.NavigationItem
+{
+    color: black;
+    margin-left: 15px;
 }

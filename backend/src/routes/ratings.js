@@ -41,5 +41,13 @@ router.get('/findByProductId', (req, res) => {
        .then(ratings => res.status(200).json(ratings))
        .catch(err => res.status(400).json('Error: ' + err));
 });
+router.get('/findByUserAndProductId', (req, res) => {
+
+   const productId = req.query.productId;
+   const userId = req.query.userId;
+   ratingModel.find({productId : productId,userId : userId})
+       .then(ratings => res.status(200).json(ratings))
+       .catch(err => res.status(400).json('Error: ' + err));
+});
 
 module.exports = router;
