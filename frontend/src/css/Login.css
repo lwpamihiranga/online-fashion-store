@@ -44,3 +44,7 @@
     color: white;
     padding-left: 10px;
 }
+.NavigationItem
+{
+    cursor: pointer;
+}

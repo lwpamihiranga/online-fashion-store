@@ -20,6 +20,7 @@ class App extends React.Component
                     <input className="textInput" type="password" value={this.state.password} onChange={(e)=> this.setState({password:e.target.value})} placeholder="Password"/>
                     <input className="buttons" type="button" value="Login as user" onClick={() => this.checkLogin(this.state.username,this.state.password,"user")}/>
                     <input className="buttons"  type="button" value="Login as admin" onClick={() => this.checkLogin(this.state.username,this.state.password,"admin")}/>
+                    <input className="buttons"  type="button" value="Login as store manager" onClick={() => this.checkLogin(this.state.username,this.state.password,"manager")}/>
                 </div>
             </div>
         )
