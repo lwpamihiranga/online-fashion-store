@@ -5,8 +5,8 @@
 }
 .star
 {
-    width: 30px;
-    height: 30px;
+    width: 15px;
+    height: 15px;
 }
 .inputstarInactive
 {
@@ -29,8 +29,57 @@
 
 #rateName
 {
-    color: white;
-    margin-left: 0.5%;
-    margin-top: -5px;
+    color: black;
+    max-lines: 1;
+    font-size: 15px;
+    width: 100%;
+    margin-top: 10px;
 }
+.crudOperations
+{
+    display: flex;
+    flex-direction: row;
+}
+.crudImg
+{
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+}
+#commentInput
+{
+    width: 45%;
+    padding-left: 10px;
+}
+.rateItemContainer
+{
+    display: flex;
+    flex-direction: column;
+    padding-left: 10px;
+}
+.ratingList
+{
+    background-color: white;
+    border-radius: 10px;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom: 30px;
+}
+#commentText
+{
+    padding-left: 10px;
+    padding-top: 10px;
+}
+.fivestars
+{
+    margin-top: -10px;
+}
+.ratingContainer
+{
 
+}
+.userInputRating
+{
+    margin-left: 10px;
+}

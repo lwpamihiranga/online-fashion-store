@@ -47,7 +47,6 @@ class App extends React.Component
             () => {
               return(
                   <div>
-
                       <div className="categoryList">
                           <h1 id="mainName">Fashion Store</h1>
                           <div className="navigation">
@@ -83,9 +82,9 @@ class App extends React.Component
             }
           }
           />
-          <Route  path={"/product/:pid"} exact strict component={ProductDetailsView}/>
-          <Route  path={"/login"} exact strict component={Login}/>
-          <Route  path={"/register"} exact strict component={Register}/>
+          <Route path={"/product/:pid"} exact strict component={ProductDetailsView}/>
+          <Route path={"/login"} exact strict component={Login}/>
+          <Route path={"/register"} exact strict component={Register}/>
 
         </Router>
         )

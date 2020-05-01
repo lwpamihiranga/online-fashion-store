@@ -10,10 +10,10 @@ router.get('/', (req, res) => {
 });
 router.post('/create',(req,res) => {
 
-   const userId = req.body.userId;
-   const productId = req.body.productId;
-   const comment = req.body.comment;
-   const rate = req.body.rate;
+   const userId = req.query.userId;
+   const productId = req.query.productId;
+   const comment = req.query.comment;
+   const rate = req.query.rate;
 
    if(userId != null && productId != null && comment != null && rate != null)
    {
@@ -47,6 +47,24 @@ router.get('/findByUserAndProductId', (req, res) => {
    const userId = req.query.userId;
    ratingModel.find({productId : productId,userId : userId})
        .then(ratings => res.status(200).json(ratings))
+       .catch(err => res.status(400).json('Error: ' + err));
+});
+router.post('/update', (req, res) => {
+
+   const rateId = req.query.rateId;
+   const newComment = req.query.comment;
+   const newRate = req.query.rate;
+
+   ratingModel.update({_id: rateId}, {comment: newComment, rate: newRate})
+       .then(()=> res.json('Rating Updated!').sendStatus(200))
+       .catch(err => res.status(400).json('Error: ' + err));
+});
+router.post('/delete', (req, res) => {
+
+   const rateId = req.query.rateId;
+
+   ratingModel.deleteOne({_id: rateId})
+       .then(()=> res.json('Rating Deleted!').sendStatus(200))
        .catch(err => res.status(400).json('Error: ' + err));
 });
 

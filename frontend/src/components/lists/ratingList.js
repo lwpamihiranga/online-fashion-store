@@ -1,28 +1,48 @@
 import React from 'react'
 import filledStar from '../../images/filled_rating.png';
 import unfilledStar from '../../images/unfilled_rating.png';
+import editImage from '../../images/edit.png';
+import finishImage from '../../images/finish.png';
+import deleteImage from '../../images/delete.png';
 import css from '../../css/rateList.css';
 import axios from "axios";
 import {Link} from "react-router-dom";
 
 class App extends React.Component
 {
+
     constructor(props) {
         super(props);
 
         this.state = ({
-           ratingList : [],
-            isFirstTime : true,
+            ratingList : [],
+            isNeedToGetFromServer : true,
+            isRatingNeedsToBeChanged: true,
             starSize : [1,2,3,4,5],
-            selectedStarCount : 1
+            selectedStarCount : 1,
+            userTypingComment : "",
+            userCommentId : ""
         });
 
-        this.handleStarOnClick = this.handleStarOnClick.bind();
+        this.updateRating = this.updateRating.bind();
+        this.deleteRating = this.deleteRating.bind();
+
     }
     render() {
 
+
+        //user login informations
+        var name = localStorage.getItem('userName');
+        var password = localStorage.getItem('userPassword');
+        var type = localStorage.getItem('userType');
+        var userid = localStorage.getItem('userId');
+        var imageLink = localStorage.getItem('userImageLink');
+        var email = localStorage.getItem('userEmail');
+
+
+        //productId
         const productId = this.props.productId;
-        if(this.state.isFirstTime)
+        if(this.state.isNeedToGetFromServer)
         {
             this.getRatingsByProductId(productId);
         }
@@ -30,30 +50,49 @@ class App extends React.Component
 
         const list = this.state.ratingList.map(rating => {
 
-            let comment = rating.comment;
-            const rate = this.state.starSize.map(i => {
-                return(
-                    <div>
-                        {rating.rate >= i &&
+            if(rating.userId !== userid)
+            {
+                let comment = rating.comment;
+                const rate = this.state.starSize.map(i => {
+                    return(
+                        <div className="fivestars">
+                            {rating.rate >= i &&
                             <img className="star" src={filledStar}/>
-                        }
-                        {rating.rate < i &&
-                        <img className="star" src={unfilledStar}/>
-                        }
+                            }
+                            {rating.rate < i &&
+                            <img className="star" src={unfilledStar}/>
+                            }
+                        </div>
+
+                    )
+                });
+
+                return(
+                    <div  className="rateItemContainer">
+                        <div>
+                            <p id="rateName">{comment}</p>
+                        </div>
+                        <div className="rateItem">
+                            {rate}
+                        </div>
                     </div>
                 )
-            });
+            }
+            else
+            {
 
-            return(
-                <div  className="rateItemContainer">
-                    <div className="rateItem">
-                        {rate}
-                    </div>
-                    <div>
-                        <h3 id="rateName">{comment}</h3>
-                    </div>
-                </div>
-            )
+
+                if(this.state.isRatingNeedsToBeChanged)
+                {
+                    //this is a rating of the current login user
+                    this.state.userTypingComment = rating.comment;
+                    this.state.userCommentId = rating._id;
+                    this.state.isRatingNeedsToBeChanged = false;
+                    this.state.selectedStarCount = rating.rate;
+                }
+
+
+            }
 
         });
 
@@ -62,10 +101,10 @@ class App extends React.Component
             return(
                 <div className="input" key={i}>
                     {i <= this.state.selectedStarCount &&
-                    <img className="inputstarActive" src={filledStar}  onClick={ () => this.setState({selectedStarCount : i})}/>
+                        <img className="inputstarActive" src={filledStar}  onClick={ () => this.setState({selectedStarCount : i})}/>
                     }
                     {i > this.state.selectedStarCount &&
-                    <img className="inputstarInactive" src={unfilledStar}   onClick={ () => this.setState({selectedStarCount : i})}/>
+                        <img className="inputstarInactive" src={unfilledStar}   onClick={ () => this.setState({selectedStarCount : i})}/>
                     }
                 </div>
             )
@@ -77,14 +116,22 @@ class App extends React.Component
 
 
             <div className="ratingContainer">
-                <div className="userInputRating">
-                    <div className="rateItem">
-                        {userInputRatings}
-                    </div>
-                    <input type="text"/>
-                </div>
-                <h3>Comments</h3>
                 <div className="ratingList">
+                    <h3 id="commentText">Comments</h3>
+
+                        {userid != null && type === 'user' &&
+                            <div className="userInputRating">
+                                <div className="rateItem">
+                                    {userInputRatings}
+                                </div>
+                                <div className="crudOperations">
+                                    <input id="commentInput" type="text" onChange={(e)=> this.setState({userTypingComment:e.target.value})} value={this.state.userTypingComment} placeholder="Enter your comment"/>
+                                    <img className="crudImg" onClick={()=> this.updateRating(userid,productId,this.state.userCommentId,this.state.userTypingComment,this.state.selectedStarCount)} src={finishImage}/>
+                                    <img className="crudImg" onClick={()=> this.deleteRating(this.state.userCommentId)} src={deleteImage}/>
+                                </div>
+
+                            </div>
+                        }
                     {list}
                 </div>
             </div>
@@ -98,20 +145,62 @@ class App extends React.Component
             .then(response => {
                 if(response.status === 200)
                 {
-                    if(this.state.isFirstTime)
+                    if(this.state.isNeedToGetFromServer)
                     {
                         var list = response.data;
-                        this.setState({ratingList :list, isFirstTime : false,starSize : [1,2,3,4,5],selectedStarCount : 1});
+                        //making it reverse to get the latest comment to the top
+                        list.reverse();
+                        this.setState({ratingList :list, isNeedToGetFromServer : false,starSize : [1,2,3,4,5],selectedStarCount : 1});
                     }
 
                 }
             })
             .catch(error => console.log(error));
     }
-    handleStarOnClick(count)
+    updateRating(userId,productId,ratingId,comment,rate)
     {
+        if(ratingId !== "")
+        {
+            //user needs to update
+            axios.post("http://localhost:5000/api/ratings/update?rateId=" + ratingId + "&rate=" + rate + "&comment=" + comment)
+                .then(response => {
+                    if(response.status === 200)
+                    {
+                        var list = response.data;
+                        alert("Updated");
+                    }
+                })
+                .catch(error => console.log(error));
+        }
+        else
+        {
+
+            //user needs to create new rating
+            axios.post("http://localhost:5000/api/ratings/create?userId=" + userId + "&productId=" + productId + "&comment=" + comment + "&rate=" + rate)
+                .then(response => {
+                    if(response.status === 200)
+                    {
+                        var list = response.data;
+                        alert("Created new Rate");
+                    }
+                })
+                .catch(error => console.log(error));
+        }
 
     }
+    deleteRating(id)
+    {
+        axios.post("http://localhost:5000/api/ratings/delete?rateId=" + id)
+            .then(response => {
+                if(response.status === 200)
+                {
+                    var list = response.data;
+                    alert("Deleted!");
+                }
+            })
+            .catch(error => console.log(error));
+    }
+
 
 }
 export default App;

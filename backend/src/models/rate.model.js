@@ -5,6 +5,6 @@ const ratingSchema = mongoose.Schema({
     productId : String,
     comment : String,
     rate : Number
-})
+});
 
 module.exports = mongoose.model('Rating', ratingSchema);
