@@ -81,9 +81,9 @@ class App extends React.Component
             else
             {
 
-
                 if(this.state.isRatingNeedsToBeChanged)
                 {
+                    console.log(rating.comment);
                     //this is a rating of the current login user
                     this.state.userTypingComment = rating.comment;
                     this.state.userCommentId = rating._id;
@@ -127,7 +127,11 @@ class App extends React.Component
                                 <div className="crudOperations">
                                     <input id="commentInput" type="text" onChange={(e)=> this.setState({userTypingComment:e.target.value})} value={this.state.userTypingComment} placeholder="Enter your comment"/>
                                     <img className="crudImg" onClick={()=> this.updateRating(userid,productId,this.state.userCommentId,this.state.userTypingComment,this.state.selectedStarCount)} src={finishImage}/>
-                                    <img className="crudImg" onClick={()=> this.deleteRating(this.state.userCommentId)} src={deleteImage}/>
+
+                                    {this.state.userCommentId != "" &&
+                                     <img className="crudImg" onClick={()=> this.deleteRating(productId,this.state.userCommentId)} src={deleteImage}/>
+                                    }
+
                                 </div>
 
                             </div>
@@ -150,52 +154,73 @@ class App extends React.Component
                         var list = response.data;
                         //making it reverse to get the latest comment to the top
                         list.reverse();
-                        this.setState({ratingList :list, isNeedToGetFromServer : false,starSize : [1,2,3,4,5],selectedStarCount : 1});
+                        this.setState({ratingList :list, isNeedToGetFromServer : false,isRatingNeedsToBeChanged : true,starSize : [1,2,3,4,5]});
                     }
 
                 }
             })
             .catch(error => console.log(error));
     }
-    updateRating(userId,productId,ratingId,comment,rate)
-    {
-        if(ratingId !== "")
+    updateRating = (userId,productId,ratingId,comment,rate) => {
+
+        if(this.state.userTypingComment === "")
         {
-            //user needs to update
-            axios.post("http://localhost:5000/api/ratings/update?rateId=" + ratingId + "&rate=" + rate + "&comment=" + comment)
-                .then(response => {
-                    if(response.status === 200)
-                    {
-                        var list = response.data;
-                        alert("Updated");
-                    }
-                })
-                .catch(error => console.log(error));
+            alert("Enter a comment");
         }
         else
         {
+            if (ratingId !== "")
+            {
+                //user needs to update
+                axios.post("http://localhost:5000/api/ratings/update?rateId=" + ratingId + "&rate=" + rate + "&comment=" + comment)
+                    .then(response => {
+                        if (response.status === 200) {
+                            var list = response.data;
+                            this.setState({isRatingNeedsToBeChanged: true, isNeedToGetFromServer: true, ratingList : []});
+                        }
+                    })
+                    .catch(error => console.log(error));
+            }
+            else
+            {
 
-            //user needs to create new rating
-            axios.post("http://localhost:5000/api/ratings/create?userId=" + userId + "&productId=" + productId + "&comment=" + comment + "&rate=" + rate)
-                .then(response => {
-                    if(response.status === 200)
-                    {
-                        var list = response.data;
-                        alert("Created new Rate");
-                    }
-                })
-                .catch(error => console.log(error));
+                //user needs to create new rating
+                axios.post("http://localhost:5000/api/ratings/create?userId=" + userId + "&productId=" + productId + "&comment=" + comment + "&rate=" + rate)
+                    .then(response => {
+                        if (response.status === 200) {
+                            var list = response.data;
+                            this.setState({
+                                isRatingNeedsToBeChanged: true,
+                                isNeedToGetFromServer: true,
+                                ratingList : []
+                            });
+                        }
+                    })
+                    .catch(error => console.log(error));
+            }
         }
 
     }
-    deleteRating(id)
-    {
+    deleteRating = (productId,id) => {
+
+
         axios.post("http://localhost:5000/api/ratings/delete?rateId=" + id)
             .then(response => {
                 if(response.status === 200)
                 {
                     var list = response.data;
-                    alert("Deleted!");
+                    this.setState({
+                        isRatingNeedsToBeChanged : true,
+                        isNeedToGetFromServer : true,
+                        ratingList : [],
+                        userTypingComment : "",
+                        userCommentId : "",
+                        selectedStarCount : 1
+
+                    });
+
+                    this.getRatingsByProductId(productId);
+
                 }
             })
             .catch(error => console.log(error));
