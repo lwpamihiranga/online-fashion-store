@@ -116,28 +116,30 @@ class App extends React.Component
 
 
             <div className="ratingContainer">
-                <div className="ratingList">
-                    <h3 id="commentText">Comments</h3>
+                {(this.state.ratingList.length > 0 || (userid != null)) &&
+
+                    <div className="ratingList">
+                        <h3 id="commentText">Comments</h3>
 
                         {userid != null && type === 'user' &&
                             <div className="userInputRating">
                                 <div className="rateItem">
                                     {userInputRatings}
-                                </div>
-                                <div className="crudOperations">
+                                    </div>
+                                    <div className="crudOperations">
                                     <input id="commentInput" type="text" onChange={(e)=> this.setState({userTypingComment:e.target.value})} value={this.state.userTypingComment} placeholder="Enter your comment"/>
                                     <img className="crudImg" onClick={()=> this.updateRating(userid,productId,this.state.userCommentId,this.state.userTypingComment,this.state.selectedStarCount)} src={finishImage}/>
 
                                     {this.state.userCommentId != "" &&
-                                     <img className="crudImg" onClick={()=> this.deleteRating(productId,this.state.userCommentId)} src={deleteImage}/>
+                                    <img className="crudImg" onClick={()=> this.deleteRating(productId,this.state.userCommentId)} src={deleteImage}/>
                                     }
-
                                 </div>
-
                             </div>
-                        }
+                    }
                     {list}
-                </div>
+                        </div>
+                }
+
             </div>
 
         )
