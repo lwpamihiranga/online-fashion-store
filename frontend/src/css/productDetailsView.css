@@ -12,22 +12,76 @@
 .productDetails
 {
     display: flex;
-    flex-direction: row;
-    color: white;
-    /*width: 99.5%;*/
-    /*border-radius: 10px;*/
-    /*background-color: white;*/
-    /*border-top: 3px solid rebeccapurple;*/
-    /*border-left: 3px solid rebeccapurple;*/
-    /*border-right: 3px solid rebeccapurple;*/
+    flex-direction: revert;
 }
 #productImage
 {
     width: 20%;
     margin: 1%;
+    min-width: 130px;
     border-radius: 10px;
+    margin-left: 5%;
+    border: 5px solid white;
+    margin-top:5%;
 }
 #productName
 {
-    color: rebeccapurple;
+    color: black;
+    background-color: white;
+    text-align: left;
+    margin-top: 5px;
+    margin-left: 5px;
+}
+#productPrice
+{
+    color: black;
+    background-color: white;
+    text-align: left;
+    margin-top: -15px;
+    margin-left: 5px;
+}
+.productInfoContainer
+{
+    width: 100%;
+    margin-top:5%;
+    margin-right: 5%;
+    margin-left: 2%;
+    margin-bottom: 1%;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+}
+.buttonContainer
+{
+    display: flex;
+    flex-direction: row;
+    width: 90%;
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+}
+#addToWishListButton
+{
+    width: 50%;
+    background-color: white;
+    padding: 10px;
+    border-radius: 10px;
+    outline: none;
+    float: left;
+    margin-left: 10px;
+    text-decoration: none;
+    cursor: pointer;
+}
+#buyButton
+{
+    width: 50%;
+    background-color: white;
+    padding: 10px;
+    border-radius: 10px;
+    outline: none;
+    float: left;
+    text-decoration: none;
+    cursor: pointer;
+
 }
