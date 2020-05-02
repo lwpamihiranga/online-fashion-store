@@ -14,6 +14,15 @@ class App extends React.Component
     }
     render() {
 
+        //user login informations
+        var name = localStorage.getItem('userName');
+        var password = localStorage.getItem('userPassword');
+        var type = localStorage.getItem('userType');
+        var userid = localStorage.getItem('userId');
+        var imageLink = localStorage.getItem('userImageLink');
+        var email = localStorage.getItem('userEmail');
+
+
         const productId = this.props.match.params.pid;
         this.getProductDetails(productId);
 
@@ -36,7 +45,7 @@ class App extends React.Component
                </div>
                <div className="buttonContainer">
                    <input id="buyButton" type="button" value="Buy Now"/>
-                   <input id="addToWishListButton" type="button" value="Add to WishList"/>
+                   <input id="addToWishListButton" type="button" value="Add to WishList" onClick={() =>this.addToWishList(productId,userid)}/>
                </div>
                <div className="ratings">
                    <RatingList productId = {productId}/>
@@ -59,6 +68,25 @@ class App extends React.Component
                     }
 
 
+                }
+            })
+            .catch(error => console.log(error));
+    }
+    addToWishList = (productId,userId) => {
+
+        axios.post("http://localhost:5000/api/wishList/create?productId=" + productId +"&userId=" + userId)
+            .then(response => {
+                if (response.status === 200)
+                {
+                   var list = response.data;
+                   if(list.length === 0)
+                   {
+                       alert("This product has already added to your wishList");
+                   }
+                   else
+                   {
+                       alert("Successfully added to the wishList!");
+                   }
                 }
             })
             .catch(error => console.log(error));

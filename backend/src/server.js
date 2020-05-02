@@ -8,6 +8,7 @@ const productRouter = require('./routes/products');
 const ratingRouter = require('./routes/ratings');
 const categoryRouter = require('./routes/category');
 const userRouter = require('./routes/users');
+const wishListRouter = require('./routes/wishList');
 
 const app = express();
 
@@ -25,6 +26,7 @@ app.use('/api/products', productRouter);
 app.use('/api/ratings',ratingRouter);
 app.use('/api/category',categoryRouter);
 app.use('/api/users',userRouter);
+app.use('/api/wishList',wishListRouter);
 
 app.use((req, res, next) => {
     const error = new Error();
