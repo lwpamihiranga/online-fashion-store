@@ -12,6 +12,7 @@ import Route from "react-router-dom/Route";
 import ProductDetailsView from './components/main/productDetailsView';
 import Login from './components/main/Login';
 import Register from './components/main/Register';
+import WishList from './components/main/WishList';
 
 class App extends React.Component
 {
@@ -69,7 +70,9 @@ class App extends React.Component
 
 
                               {type != null && type === "user" &&
-                              <p className="NavigationItem">WishList</p>
+                              <Link to={"/wishList"} style={{ textDecoration: 'none' }}>
+                                <p className="NavigationItem">WishList</p>
+                              </Link>
                               }
 
 
@@ -85,6 +88,7 @@ class App extends React.Component
           <Route path={"/product/:pid"} exact strict component={ProductDetailsView}/>
           <Route path={"/login"} exact strict component={Login}/>
           <Route path={"/register"} exact strict component={Register}/>
+          <Route path={"/wishList"} exact strict component={WishList}/>
 
         </Router>
         )
