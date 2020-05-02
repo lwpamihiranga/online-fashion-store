@@ -1,11 +1,11 @@
 import React from "react";
-
+import WishListList from '../lists/wishListList';
 class App extends React.Component
 {
     render() {
         return(
             <div>
-                <h1>Hi</h1>
+                <WishListList/>
             </div>
         )
     }

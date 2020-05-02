@@ -50,7 +50,12 @@ router.get('/find',(req,res) => {
 
                 ProductModel.find({_id : item.productId})
                     .then(itm => {
-                        productList.push(itm);
+
+                        itm.map(it => {
+
+                            productList.push(it);
+                        });
+
                         //its time to send the response since the loop is completed
                         if(list.length === productList.length)
                         {
@@ -70,6 +75,16 @@ router.get('/find',(req,res) => {
 
         })
         .catch(err => res.status(400).json('Error ' + err));
+});
+router.post('/delete',(req,res) =>{
+
+    const userId = req.query.userId;
+    const productId = req.query.productId;
+
+    WishListModel.deleteOne({userId : userId, productId : productId})
+        .then(()=> res.json('Item was Deleted!').sendStatus(200))
+        .catch(err => res.status(400).json('Error: ' + err));
+
 });
 
 module.exports = router;

@@ -55,7 +55,6 @@ class App extends React.Component
                     {
                         var list = response.data;
                         this.setState({productList :list, isFirstTime : false});
-                        console.log("called");
                     }
 
                 }

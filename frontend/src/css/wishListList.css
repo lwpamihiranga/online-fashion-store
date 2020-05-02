@@ -1,0 +1,50 @@
+.wishListContainer
+{
+    display: flex;
+    flex-direction: row;
+    margin-left: auto;
+    margin-right: auto;
+    overflow: auto;
+}
+.wishListTopContainer
+{
+    background-color: rebeccapurple;
+    width: 85%;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 15px;
+    margin-top: 4%;
+    padding-top: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 50px;
+}
+#wishListRemoveBtn
+{
+    width: 90%;
+    margin-left: 5%;
+    margin-right: 5%;
+    background-color: white;
+    padding: 10px;
+    color: black;
+    margin-top: -10px;
+    margin-bottom: 20px;
+    cursor: pointer;
+    border-radius: 8px;
+}
+#wishListRemoveBtn:hover
+{
+    background-color: red;
+    color: white;
+}
+#wishListproductName
+{
+    color: white;
+    text-align: center;
+    margin-top: -40px;
+}
+#wishListTopic
+{
+    color: white;
+    margin-left: 10px;
+}
