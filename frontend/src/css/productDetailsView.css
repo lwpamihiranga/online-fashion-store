@@ -13,16 +13,14 @@
 {
     display: flex;
     flex-direction: revert;
+    margin-top: 20px;
 }
 #productImage
 {
     width: 20%;
-    margin: 1%;
     min-width: 130px;
     border-radius: 10px;
-    margin-left: 5%;
     border: 5px solid white;
-    margin-top:5%;
 }
 #productName
 {
@@ -43,10 +41,7 @@
 .productInfoContainer
 {
     width: 100%;
-    margin-top:5%;
-    margin-right: 5%;
-    margin-left: 2%;
-    margin-bottom: 1%;
+    margin-left: 20px;
     border-radius: 10px;
     display: flex;
     flex-direction: column;
@@ -56,8 +51,8 @@
 {
     display: flex;
     flex-direction: row;
-    width: 90%;
-    margin-top: 10px;
+    width: 100%;
+    margin-top: 20px;
     margin-left: auto;
     margin-right: auto;
 }
