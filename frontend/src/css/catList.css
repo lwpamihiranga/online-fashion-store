@@ -36,7 +36,8 @@
 {
     margin-left: 5%;
     color: white;
-    margin-bottom: 20px;
+    padding-top: 50px;
+
 }
 .navigation
 {
@@ -48,9 +49,20 @@
     height: auto;
     background-color: white;
     border-radius: 10px;
+    padding: 5px;
 }
 .NavigationItem
 {
-    color: black;
+    color: rebeccapurple;
     margin-left: 15px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 8px;
+    padding-right: 8px;
+}
+.NavigationItem:hover
+{
+    background-color: rebeccapurple;
+    color: white;
+    border-radius: 10px;
 }
