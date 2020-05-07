@@ -1,12 +1,12 @@
 const express = require('express');
 const router = express.Router();
 const mongoose =  require('mongoose');
-const WishListModel = require('./wishList.model');
+const CartModel = require('./cart.model');
 const ProductModel = require('../product/product.model');
 
 
 router.get('/', (req, res) => {
-    WishListModel.find()
+    CartModel.find()
         .then(list => res.status(200).json(list))
         .catch(err => res.status(400).json('Error: ' + err));
 });
@@ -17,7 +17,7 @@ router.post('/create',(req,res) => {
 
     if(userId != null && productId != null)
     {
-        WishListModel.find({userId : userId,productId : productId})
+        CartModel.find({userId : userId,productId : productId})
             .then(list => {
 
                 if(list.length === 0)
@@ -25,11 +25,11 @@ router.post('/create',(req,res) => {
                     //save only if an item is not available with the specified attributes of  product id and user id.
                     //doing this to eleminate duplicates
 
-                    const wish = new WishListModel();
-                    wish.productId = productId;
-                    wish.userId = userId;
-                    wish.save()
-                        .then(wishList => res.status(200).json(wishList))
+                    const cart = new CartModel();
+                    cart.productId = productId;
+                    cart.userId = userId;
+                    cart.save()
+                        .then(cartList => res.status(200).json(cartList))
                         .catch(err => res.status(400).json('Error: ' + err));
                 }
                 else
@@ -52,7 +52,7 @@ router.get('/find',(req,res) => {
     const userId = req.query.userId;
     var productList = [];
 
-    WishListModel.find({userId : userId})
+    CartModel.find({userId : userId})
         .then(list => {
             list.map(item => {
 
@@ -89,7 +89,7 @@ router.post('/delete',(req,res) =>{
     const userId = req.query.userId;
     const productId = req.query.productId;
 
-    WishListModel.deleteOne({userId : userId, productId : productId})
+    CartModel.deleteOne({userId : userId, productId : productId})
         .then(()=> res.json('Item was Deleted!').sendStatus(200))
         .catch(err => res.status(400).json('Error: ' + err));
 

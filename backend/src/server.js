@@ -9,6 +9,7 @@ const ratingRouter = require('./resources/rating/rating.router');
 const categoryRouter = require('./resources/category/category.router');
 const userRouter = require('./resources/user/user.router');
 const wishListRouter = require('./resources/wishList/wishList.router');
+const cartRouter = require('./resources/cart/cart.router');
 
 const app = express();
 
@@ -27,10 +28,11 @@ app.use(bodyParser.json());
 app.use(cors());
 
 app.use('/api/products', productRouter);
-app.use('/api/ratings',ratingRouter);
-app.use('/api/category',categoryRouter);
-app.use('/api/users',userRouter);
-app.use('/api/wishList',wishListRouter);
+app.use('/api/ratings', ratingRouter);
+app.use('/api/category', categoryRouter);
+app.use('/api/users', userRouter);
+app.use('/api/wishList', wishListRouter);
+app.use('/api/cart', cartRouter);
 
 app.use((req, res, next) => {
     const error = new Error();

@@ -33,7 +33,7 @@ class App extends React.Component
 
                 <div className="productItem" key={product._id} onClick={ () => this.handleProductItemClick(product)}>
                 </div>
-                    <h3 id="productName">{product.name}</h3>
+                    <h3 id="productNameMain">{product.name}</h3>
                 </Link>
             )
         });
