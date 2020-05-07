@@ -44,7 +44,7 @@ class App extends React.Component
 
                </div>
                <div className="buttonContainer">
-                   <input id="buyButton" type="button" value="Buy Now"/>
+                   <input id="buyButton" type="button" value="Add to Cart" onClick={() =>this.addToCart(productId,userid)}/>
                    <input id="addToWishListButton" type="button" value="Add to WishList" onClick={() =>this.addToWishList(productId,userid)}/>
                </div>
                <div className="ratings">
@@ -74,22 +74,72 @@ class App extends React.Component
     }
     addToWishList = (productId,userId) => {
 
-        axios.post("http://localhost:5000/api/wishList/create?productId=" + productId +"&userId=" + userId)
-            .then(response => {
-                if (response.status === 200)
-                {
-                   var list = response.data;
-                   if(list.length === 0)
-                   {
-                       alert("This product has already added to your wishList");
-                   }
-                   else
-                   {
-                       alert("Successfully added to the wishList!");
-                   }
-                }
-            })
-            .catch(error => console.log(error));
+        if(productId != null && userId != null)
+        {
+            axios.post("http://localhost:5000/api/wishList/create?productId=" + productId +"&userId=" + userId)
+                .then(response => {
+                    if (response.status === 200)
+                    {
+                        var list = response.data;
+                        if(list.length === 0)
+                        {
+                            alert("This product has already added to your wishList");
+                        }
+                        else
+                        {
+                            alert("Successfully added to the wishList!");
+                        }
+                    }
+                })
+                .catch(error => console.log(error));
+        }
+        else
+        {
+            if(productId == null)
+            {
+                alert("ProductId is null");
+            }
+            if(userId == null)
+            {
+                alert("Login to the system!");
+            }
+        }
+
+    }
+    addToCart = (productId,userId) => {
+
+        if(productId != null && userId != null)
+        {
+            axios.post("http://localhost:5000/api/cart/create?productId=" + productId +"&userId=" + userId)
+                .then(response => {
+                    if (response.status === 200)
+                    {
+                        var list = response.data;
+                        if(list.length === 0)
+                        {
+                            alert("This product has already added to your cart");
+                        }
+                        else
+                        {
+                            alert("Successfully added to the cart!");
+                        }
+                    }
+                })
+                .catch(error => console.log(error));
+        }
+        else
+        {
+            if(productId == null)
+            {
+                alert("ProductId is null");
+            }
+            if(userId == null)
+            {
+                alert("Login to the system!");
+            }
+        }
+
+
     }
 }
 export default App;
