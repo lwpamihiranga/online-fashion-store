@@ -59,6 +59,7 @@ class App extends React.Component
                     if(this.state.isNeedToRefresh)
                     {
                         var list = response.data;
+                        list.reverse();
                         this.setState({wishList :list, isNeedToRefresh : false});
                     }
 
