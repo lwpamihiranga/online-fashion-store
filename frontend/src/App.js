@@ -13,6 +13,7 @@ import ProductDetailsView from './components/main/productDetailsView';
 import Login from './components/main/Login';
 import Register from './components/main/Register';
 import WishList from './components/main/WishList';
+import Cart from './components/main/Cart';
 
 class App extends React.Component
 {
@@ -75,6 +76,12 @@ class App extends React.Component
                               </Link>
                               }
 
+                              {type != null && type === "user" &&
+                              <Link to={"/cart"} style={{ textDecoration: 'none' }}>
+                                  <p className="NavigationItem">Cart</p>
+                              </Link>
+                              }
+
 
                       </div>
                       <CategoryList categoryList ={this.state.categoryList}/>
@@ -89,6 +96,7 @@ class App extends React.Component
           <Route path={"/login"} exact strict component={Login}/>
           <Route path={"/register"} exact strict component={Register}/>
           <Route path={"/wishList"} exact strict component={WishList}/>
+          <Route path={"/cart"} exact strict component={Cart}/>
 
         </Router>
         )

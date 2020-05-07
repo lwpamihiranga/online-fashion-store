@@ -36,6 +36,7 @@ class App extends React.Component
                         </div>
                         <h3 id="wishListproductName">{product.name}</h3>
                     </Link>
+                    <input id="addTocartBtn" type="button" value="Add to Cart" onClick={() => this.addToCart(userid,product._id)}/>
                     <input id="wishListRemoveBtn" type="button" value="Remove" onClick={() => this.removeProductFromWishList(userid,product._id)}/>
                 </div>
 
@@ -79,5 +80,40 @@ class App extends React.Component
             })
             .catch(error => console.log(error));
     };
+    addToCart = (userId,productId) => {
+
+        if(productId != null && userId != null)
+        {
+            axios.post("http://localhost:5000/api/cart/create?productId=" + productId +"&userId=" + userId)
+                .then(response => {
+                    if (response.status === 200)
+                    {
+                        var list = response.data;
+                        if(list.length === 0)
+                        {
+                            alert("This product has already added to your cart");
+                        }
+                        else
+                        {
+                            alert("Successfully added to the cart!");
+                        }
+                    }
+                })
+                .catch(error => console.log(error));
+        }
+        else
+        {
+            if(productId == null)
+            {
+                alert("ProductId is null");
+            }
+            if(userId == null)
+            {
+                alert("Login to the system!");
+            }
+        }
+
+
+    }
 }
 export default App;
