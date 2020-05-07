@@ -7,7 +7,7 @@ const mongoose = require('mongoose');
 const productRouter = require('./resources/product/product.router');
 const ratingRouter = require('./routes/ratings');
 const categoryRouter = require('./routes/category');
-const userRouter = require('./routes/users');
+const userRouter = require('./resources/user/user.router');
 const wishListRouter = require('./routes/wishList');
 
 const app = express();
