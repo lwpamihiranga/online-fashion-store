@@ -5,7 +5,7 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 
 const productRouter = require('./resources/product/product.router');
-const ratingRouter = require('./routes/ratings');
+const ratingRouter = require('./resources/rating/rating.router');
 const categoryRouter = require('./resources/category/category.router');
 const userRouter = require('./resources/user/user.router');
 const wishListRouter = require('./routes/wishList');
