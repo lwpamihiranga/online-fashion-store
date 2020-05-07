@@ -4,11 +4,11 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const mongoose = require('mongoose');
 
-const productRouter = require('./routes/products');
-const ratingRouter = require('./routes/ratings');
-const categoryRouter = require('./routes/category');
-const userRouter = require('./routes/users');
-const wishListRouter = require('./routes/wishList');
+const productRouter = require('./resources/product/product.router');
+const ratingRouter = require('./resources/rating/rating.router');
+const categoryRouter = require('./resources/category/category.router');
+const userRouter = require('./resources/user/user.router');
+const wishListRouter = require('./resources/wishList/wishList.router');
 
 const app = express();
 

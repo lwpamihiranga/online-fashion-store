@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const mongoose =  require('mongoose');
-const categoryModel = require('../models/category.model');
+const categoryModel = require('./category.model');
 
 router.get('/', (req, res) => {
 
@@ -9,6 +9,7 @@ router.get('/', (req, res) => {
         .then(categories => res.status(200).json(categories))
         .catch(err => res.status(400).json('Error: ' + err));
 });
+
 router.post('/create',(req,res) => {
 
     const catName = req.body.catName;
