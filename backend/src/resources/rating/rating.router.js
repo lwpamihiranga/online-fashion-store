@@ -1,13 +1,14 @@
 const express = require('express');
 const router = express.Router();
 const mongoose =  require('mongoose');
-const ratingModel = require('../models/rate.model');
+const ratingModel = require('./rating.model');
 
 router.get('/', (req, res) => {
    ratingModel.find()
        .then(ratings => res.status(200).json(ratings))
        .catch(err => res.status(400).json('Error: ' + err));
 });
+
 router.post('/create',(req,res) => {
 
    const userId = req.query.userId;
@@ -34,6 +35,7 @@ router.post('/create',(req,res) => {
       res.status(400).json('Error : parameters are missing!');
    }
 });
+
 router.get('/findByProductId', (req, res) => {
 
    const productId = req.query.productId;
@@ -41,6 +43,7 @@ router.get('/findByProductId', (req, res) => {
        .then(ratings => res.status(200).json(ratings))
        .catch(err => res.status(400).json('Error: ' + err));
 });
+
 router.get('/findByUserAndProductId', (req, res) => {
 
    const productId = req.query.productId;
@@ -49,6 +52,7 @@ router.get('/findByUserAndProductId', (req, res) => {
        .then(ratings => res.status(200).json(ratings))
        .catch(err => res.status(400).json('Error: ' + err));
 });
+
 router.post('/update', (req, res) => {
 
    const rateId = req.query.rateId;
@@ -59,6 +63,7 @@ router.post('/update', (req, res) => {
        .then(()=> res.json('Rating Updated!').sendStatus(200))
        .catch(err => res.status(400).json('Error: ' + err));
 });
+
 router.post('/delete', (req, res) => {
 
    const rateId = req.query.rateId;

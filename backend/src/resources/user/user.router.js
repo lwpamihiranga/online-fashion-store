@@ -1,13 +1,14 @@
 const express = require('express');
 const router = express.Router();
 const mongoose =  require('mongoose');
-const userModel = require('../models/user.model');
+const userModel = require('./user.model');
 
 router.get('/', (req, res) => {
     userModel.find()
         .then(users => res.status(200).json(users))
         .catch(err => res.status(400).json('Error: ' + err));
 });
+
 router.get('/login', (req, res) => {
 
     const password = req.query.password;
@@ -18,6 +19,7 @@ router.get('/login', (req, res) => {
         .then(users => res.status(200).json(users))
         .catch(err => res.status(400).json('Error: ' + err));
 });
+
 router.post('/register', (req, res) => {
 
     const password = req.body.password;
