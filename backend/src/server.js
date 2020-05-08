@@ -39,7 +39,7 @@ app.use('/api/cart', cartRouter);
 
 app.use((req, res, next) => {
     const error = new Error();
-    error.message = 'Not Found';
+    error.message = 'route not Found';
     next(error);
 });
 
