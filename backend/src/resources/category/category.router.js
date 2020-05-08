@@ -1,7 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const mongoose = require('mongoose');
+
 const categoryModel = require('./category.model');
+
+const CategoryController = require('./category.controller');
 
 router.get('/', (req, res) => {
     categoryModel
@@ -10,20 +12,6 @@ router.get('/', (req, res) => {
         .catch((err) => res.status(400).json('Error: ' + err));
 });
 
-router.post('/create', (req, res) => {
-    const catName = req.body.catName;
-
-    if (catName != null) {
-        let category = new categoryModel();
-        category.catName = catName;
-
-        category
-            .save()
-            .then(() => res.json('Category was added!'))
-            .catch((err) => res.status(400).json('Error: ' + err));
-    } else {
-        res.status(400).json('Error : parameters are missing!');
-    }
-});
+router.post('/create', CategoryController.createOne);
 
 module.exports = router;
