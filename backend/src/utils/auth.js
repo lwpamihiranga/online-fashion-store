@@ -28,3 +28,25 @@ exports.checkBeforeAddUser = (req, res, next) => {
 
     next();
 };
+
+/**
+ * @summary check if the req is made by an admin type user
+ */
+exports.checkAdmin = (req, res, next) => {
+    try {
+        const token = req.headers.authorization;
+        const user = jwt.verify(token, 'secret');
+
+        if (user.type === 'admin') {
+            return next();
+        } else {
+            return res.status(401).json({
+                error: 'unathorized',
+            });
+        }
+    } catch (err) {
+        return res.status(401).json({
+            error: 'unathorized',
+        });
+    }
+};
