@@ -22,6 +22,7 @@ router.get('/login', (req, res) => {
         .catch((err) => res.status(400).json('Error: ' + err));
 });
 
+router.post('/login', UserController.login);
 router.post('/register', UserController.register);
 
 module.exports = router;
