@@ -11,6 +11,10 @@ router.get('/', (req, res) => {
         .catch((err) => res.status(400).json('Error: ' + err));
 });
 
+/**
+ * TODO: this route should be deleted
+ * REASON: in a rest api login should not be a GET request. it should be a POST request
+ */
 router.get('/login', (req, res) => {
     const password = req.query.password;
     const email = req.query.email;
@@ -22,6 +26,7 @@ router.get('/login', (req, res) => {
         .catch((err) => res.status(400).json('Error: ' + err));
 });
 
+router.post('/login', UserController.login);
 router.post('/register', UserController.register);
 
 module.exports = router;
