@@ -4,6 +4,7 @@ const router = express.Router();
 const categoryModel = require('./category.model');
 
 const CategoryController = require('./category.controller');
+const Auth = require('../../utils/auth');
 
 router.get('/', (req, res) => {
     categoryModel
@@ -12,6 +13,6 @@ router.get('/', (req, res) => {
         .catch((err) => res.status(400).json('Error: ' + err));
 });
 
-router.post('/create', CategoryController.createOne);
+router.post('/create', Auth.checkAdmin, CategoryController.createOne);
 
 module.exports = router;
