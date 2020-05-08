@@ -42,3 +42,58 @@ exports.register = (req, res, next) => {
             }
         });
 };
+
+/**
+ * @summary athenticate user and return jwt token with email, userId, type signed
+ */
+exports.login = (req, res, next) => {
+    console.log(req.body);
+    User.find({ email: req.body.email })
+        .exec()
+        .then((user) => {
+            ``;
+            if (user.length < 1) {
+                return res.status(401).json({
+                    message: 'authentication failed',
+                });
+            }
+
+            bcrypt.compare(
+                req.body.password,
+                user[0].password,
+                (err, result) => {
+                    if (err) {
+                        return res.status(401).json({
+                            message: 'authentication failed',
+                        });
+                    }
+
+                    if (result) {
+                        const token = jwt.sign(
+                            {
+                                userId: user[0]._id,
+                                email: user[0].email,
+                                type: user[0].type,
+                            },
+                            'secret', // this should be changed and set up as env variable for more protection
+                            {
+                                expiresIn: '1h',
+                            }
+                        );
+
+                        return res.status(200).json({
+                            message: 'authentication successfull',
+                            token: token,
+                        });
+                    }
+
+                    res.status(401).json({
+                        message: 'authentication failed',
+                    });
+                }
+            );
+        })
+        .catch((err) => {
+            res.status(500).json({ error: err });
+        });
+};
