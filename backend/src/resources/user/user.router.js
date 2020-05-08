@@ -13,7 +13,7 @@ router.get('/', (req, res) => {
 
 /**
  * TODO: this route should be deleted
- * REASON: in a rest api login should not be a GET request. it should be a POST requests
+ * REASON: in a rest api login should not be a GET request. it should be a POST request
  */
 router.get('/login', (req, res) => {
     const password = req.query.password;
