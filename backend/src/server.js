@@ -13,10 +13,17 @@ const cartRouter = require('./resources/cart/cart.router');
 
 const app = express();
 
-mongoose.connect('mongodb://localhost:27017/fashion_store', {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-});
+mongoose
+    .connect('mongodb://localhost:27017/fashion_store', {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+    })
+    .then((result) => {
+        console.log('Successfully connected to local MongoDB database');
+    })
+    .catch((err) => {
+        console.log('Error! Failed to connect the local MongoDB database');
+    });
 
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -32,7 +39,7 @@ app.use('/api/cart', cartRouter);
 
 app.use((req, res, next) => {
     const error = new Error();
-    error.message = 'Not Found';
+    error.message = 'route not Found';
     next(error);
 });
 
