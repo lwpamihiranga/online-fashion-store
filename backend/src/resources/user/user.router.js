@@ -34,6 +34,6 @@ router.post('/login', UserController.login);
  * check admin middleware checks if the req made by an admin user before creating manager or admin user.
  * middleware not affects for creating normal users.
  */
-router.post('/register', Auth.checkAdmin, UserController.register);
+router.post('/register', Auth.checkBeforeAddUser, UserController.register);
 
 module.exports = router;
