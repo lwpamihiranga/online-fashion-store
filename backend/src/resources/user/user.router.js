@@ -52,6 +52,4 @@ router.post('/register', (req, res) => {
     }
 });
 
-router.post('/signup', UserController.register);
-
 module.exports = router;
