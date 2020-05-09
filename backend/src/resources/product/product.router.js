@@ -20,9 +20,8 @@ router.get('/', (req, res) => {
 });
 
 router.get('/findByCategoryId', (req, res) => {
-
     const id = req.query.id;
-    Product.find({"categoryId" : id})
+    Product.find({ categoryId: id })
         .exec()
         .then((docs) => {
             res.status(200).json(docs);
@@ -35,10 +34,10 @@ router.get('/findByCategoryId', (req, res) => {
             });
         });
 });
-router.get('/findByProductId', (req, res) => {
 
+router.get('/findByProductId', (req, res) => {
     const id = req.query.id;
-    Product.find({"_id" : id})
+    Product.find({ _id: id })
         .exec()
         .then((docs) => {
             res.status(200).json(docs);
@@ -82,7 +81,7 @@ router.get('/:id', (req, res) => {
 router.post('/', (req, res) => {
     const product = new Product({
         _id: new mongoose.Types.ObjectId(),
-        categoryId : req.body.categoryId,
+        categoryId: req.body.categoryId,
         name: req.body.name,
         price: req.body.price,
     });
