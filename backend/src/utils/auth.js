@@ -13,6 +13,8 @@ exports.checkBeforeAddUser = (req, res, next) => {
             const user = jwt.verify(token, 'secret');
 
             if (user.type === 'admin') {
+                // attach admin's email to the req
+                req.adminEmail = user.email;
                 return next();
             } else {
                 return res.status(401).json({
