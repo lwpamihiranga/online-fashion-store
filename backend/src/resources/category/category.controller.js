@@ -30,3 +30,16 @@ exports.createOne = (req, res, next) => {
             }
         });
 };
+
+exports.getAll = (req, res, next) => {
+    Category.find()
+        .exec()
+        .then((categories) => {
+            res.status(200).json(categories);
+        })
+        .catch((err) => {
+            res.status(500).json({
+                error: err,
+            });
+        });
+};
