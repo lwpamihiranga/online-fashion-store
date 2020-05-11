@@ -15,6 +15,7 @@ exports.register = (req, res, next) => {
                     message: 'email already exists',
                 });
             } else {
+
                 // bcrypt package has used to HASH the password before saving the user
                 bcrypt.hash(req.body.password, 10, (err, hash) => {
                     if (err) {
