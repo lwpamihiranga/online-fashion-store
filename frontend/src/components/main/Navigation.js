@@ -55,6 +55,11 @@ class App extends React.Component
                                         </Link>
                                         }
 
+                                        {type != null && type === "user" &&
+                                        <Link to={"/cart"} style={{textDecoration: 'none'}}>
+                                            <p className="NavigationItem mt-3">Cart</p>
+                                        </Link>
+                                        }
 
                                         {type != null && type === "user" &&
                                         <Link to={"/wishList"} style={{textDecoration: 'none'}}>
@@ -62,11 +67,6 @@ class App extends React.Component
                                         </Link>
                                         }
 
-                                        {type != null && type === "user" &&
-                                        <Link to={"/cart"} style={{textDecoration: 'none'}}>
-                                            <p className="NavigationItem mt-3">Cart</p>
-                                        </Link>
-                                        }
 
                                     </div>
                             </div>

@@ -36,8 +36,8 @@ class App extends React.Component
                         </div>
                         <h3 id="wishListproductName">{product.name}</h3>
                     </Link>
-                    <input id="addTocartBtn" type="button" value="Buy" onClick={() => this.buyProduct(userid,product._id)}/>
-                    <input id="wishListRemoveBtn" type="button" value="Remove" onClick={() => this.removeProductFromCart(userid,product._id)}/>
+                    <input className="btn btn-primary mt-2 mx-auto d-block  w-75" type="button" value="Buy" onClick={() => this.buyProduct(userid,product._id)}/>
+                    <input className="btn btn-primary mt-2 mx-auto d-block  w-75" type="button" value="Remove" onClick={() => this.removeProductFromCart(userid,product._id)}/>
                 </div>
 
             )
