@@ -13,7 +13,7 @@ const cartRouter = require('./resources/cart/cart.router');
 
 const app = express();
 
-mongoose.connect('mongodb://localhost:27017/fashion_store', {
+mongoose.connect('mongodb+srv://admin:123OnlineFashionStore456@fashion-store-5gi7w.mongodb.net/test?authSource=admin&replicaSet=fashion-store-shard-0&w=majority&readPreference=primary&appname=MongoDB%20Compass%20Community&retryWrites=true&ssl=true', {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 });
