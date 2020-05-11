@@ -1,8 +1,11 @@
 const express = require('express');
+
 const router = express.Router();
-const mongoose = require('mongoose');
+
 const userModel = require('./user.model');
 const UserController = require('./user.controller');
+const Auth = require('../../utils/auth');
+const FileHandler = require('../../utils/file-upload');
 
 router.get('/', (req, res) => {
     userModel
@@ -27,6 +30,16 @@ router.get('/login', (req, res) => {
 });
 
 router.post('/login', UserController.login);
-router.post('/register', UserController.register);
+
+/**
+ * check admin middleware checks if the req made by an admin user before creating manager or admin user.
+ * middleware not affects for creating normal users.
+ */
+router.post(
+    '/register',
+    Auth.checkBeforeAddUser,
+    FileHandler.single('imageLink'),
+    UserController.register
+);
 
 module.exports = router;
