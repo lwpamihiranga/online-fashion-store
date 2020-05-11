@@ -5,16 +5,6 @@ const Product = require('./product.model');
 const ProductController = require('./product.controller');
 const FileHandler = require('../../utils/file-upload');
 
-router
-    .route('/')
-    .get(ProductController.getAll)
-    .post(FileHandler.single('imageLink'), ProductController.createOne);
-
-router
-    .route('/:id')
-    .get(ProductController.getOne)
-    .patch(ProductController.updateOne)
-    .delete(ProductController.deleteOne);
 
 router.get('/findByCategoryId', (req, res) => {
     const id = req.query.id;
@@ -47,6 +37,21 @@ router.get('/findByProductId', (req, res) => {
             });
         });
 });
+
+
+
+router
+    .route('/')
+    .get(ProductController.getAll)
+    .post(FileHandler.single('imageLink'), ProductController.createOne);
+
+router
+    .route('/:id')
+    .get(ProductController.getOne)
+    .patch(ProductController.updateOne)
+    .delete(ProductController.deleteOne);
+
+
 
 
 router.get('/:id', (req, res) => {
