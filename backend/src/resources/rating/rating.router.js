@@ -60,7 +60,7 @@ router.post('/update', (req, res) => {
    const newRate = req.query.rate;
 
    ratingModel.update({_id: rateId}, {comment: newComment, rate: newRate})
-       .then(()=> res.json('Rating Updated!').sendStatus(200))
+       .then(()=> res.json('Rating Updated!').status(200))
        .catch(err => res.status(400).json('Error: ' + err));
 });
 
@@ -69,7 +69,7 @@ router.post('/delete', (req, res) => {
    const rateId = req.query.rateId;
 
    ratingModel.deleteOne({_id: rateId})
-       .then(()=> res.json('Rating Deleted!').sendStatus(200))
+       .then(()=> res.json('Rating Deleted!').status(200))
        .catch(err => res.status(400).json('Error: ' + err));
 });
 

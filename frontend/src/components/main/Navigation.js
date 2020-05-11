@@ -32,38 +32,39 @@ class App extends React.Component
                 <Route path="/"  render={
                     () => {
                         return (
-                            <div>
+                            <div className="navigationContainer">
+                                <h1 id="mainName">Fashion Store</h1>
                                     <div className="navigation">
                                         <Link to={"/"} style={{textDecoration: 'none'}}>
-                                            <p className="NavigationItem">Home</p>
+                                            <p className="NavigationItem mt-3">Home</p>
                                         </Link>
                                         {email != null && password != null &&
 
-                                        <p className="NavigationItem" onClick={this.LogoutUser}>Logout</p>
+                                        <p className="NavigationItem mt-3" onClick={this.LogoutUser}>Logout</p>
 
                                         }
                                         {email == null && password == null &&
 
                                         <Link to={"/login"} style={{textDecoration: 'none'}}>
-                                            <p className="NavigationItem">Login</p>
+                                            <p className="NavigationItem mt-3">Login</p>
                                         </Link>
                                         }
                                         {email == null && password == null &&
                                         <Link to={"/register"} style={{textDecoration: 'none'}}>
-                                            <p className="NavigationItem">Register</p>
+                                            <p className="NavigationItem mt-3">Register</p>
                                         </Link>
                                         }
 
 
                                         {type != null && type === "user" &&
                                         <Link to={"/wishList"} style={{textDecoration: 'none'}}>
-                                            <p className="NavigationItem">WishList</p>
+                                            <p className="NavigationItem mt-3">WishList</p>
                                         </Link>
                                         }
 
                                         {type != null && type === "user" &&
                                         <Link to={"/cart"} style={{textDecoration: 'none'}}>
-                                            <p className="NavigationItem">Cart</p>
+                                            <p className="NavigationItem mt-3">Cart</p>
                                         </Link>
                                         }
 
