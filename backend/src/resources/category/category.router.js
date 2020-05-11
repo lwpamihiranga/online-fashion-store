@@ -16,7 +16,6 @@ router.post('/create',(req,res) => {
 
     if(catName != null)
     {
-
         let category = new categoryModel();
         category.catName = catName;
 

@@ -1,5 +1,9 @@
 import React from 'react'
 import axios from "axios";
+import 'bootstrap/dist/css/bootstrap.css';
+import {Bootstrap, Grid, Row, Col,Card,Button} from 'react-bootstrap';
+// import 'bootstrap/dist/css/bootstrap-theme.css';
+
 import css from '../../css/productList.css'
 import {BrowserRouter as Router,Link} from "react-router-dom";
 import Route from "react-router-dom/Route";
@@ -29,11 +33,12 @@ class App extends React.Component
         const list = this.state.productList.map(product => {
 
             return(
-                <Link to={"/product/" + product._id} style={{ textDecoration: 'none' }}>
 
-                <div className="productItem" key={product._id} onClick={ () => this.handleProductItemClick(product)}>
-                </div>
-                    <h3 id="productNameMain">{product.name}</h3>
+                <Link to={"/product/" + product._id} style={{ textDecoration: 'none' }}>
+                    <div key={product._id} onClick={ () => this.handleProductItemClick(product)}>
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTU0GPr5IVLKBcS8YXXT4hpcHPltFM1cPNpW2ZnYQAmIl7FKnaq&usqp=CAU" alt="..." className="productItem"/>
+                    </div>
+                    <strong><p id="productNameMain" className="font-weight-bold">{product.name}</p></strong>
                 </Link>
             )
         });

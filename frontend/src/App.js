@@ -18,7 +18,6 @@ class App extends React.Component
                 () => {
                     return(
                         <div className="container">
-                            <h1 id="mainName">Fashion Store</h1>
                             <Navigation/>
                         </div>
 
