@@ -43,29 +43,21 @@ class App extends React.Component
             alert("Enter details Properly");
             return;
         }
-        axios.get("http://localhost:5000/api/users/login?email=" + email + "&password=" + password + "&type=" +type)
+
+        axios.get("http://localhost:5000/api/users/login?email=" + email + "&password=" + password + "&type=" + type)
             .then(response => {
                 if(response.status === 200)
                 {
-                    var list = [];
-                    list = response.data;
-
-                    var userObject;
-                    list.map(user =>{
-                        userObject = user;
-                    });
-                    if(list.length > 0)
-                    {
-                        this.saveUser(userObject);
-
-
-                    }
-                    else {
-                        alert("Login failed");
-                    }
+                    var list = response.data;
+                    this.saveUser(list);
                 }
+                else
+                {
+                    alert("Login failed");
+                }
+
             })
-            .catch(error => console.log(error));
+            .catch(error =>  alert("Login failed"));
     }
     saveUser(userObject)
     {
