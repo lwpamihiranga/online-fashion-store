@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "axios";
 import {Link} from "react-router-dom";
+import 'bootstrap/dist/css/bootstrap.css';
 import css from '../../css/wishListList.css';
 
 class App extends React.Component
@@ -34,17 +35,17 @@ class App extends React.Component
                     <Link to={"/product/" + product._id} style={{ textDecoration: 'none' }}>
                         <div className="productItem" key={product._id}>
                         </div>
-                        <h3 id="wishListproductName">{product.name}</h3>
+                        <h3 id="wishListproductName" >{product.name}</h3>
                     </Link>
-                    <input id="addTocartBtn" type="button" value="Add to Cart" onClick={() => this.addToCart(userid,product._id)}/>
-                    <input id="wishListRemoveBtn" type="button" value="Remove" onClick={() => this.removeProductFromWishList(userid,product._id)}/>
+                    <input className="btn btn-primary mt-2 mx-auto d-block  w-75" type="button"  value="Add to Cart" onClick={() => this.addToCart(userid,product._id)}/>
+                    <input className="btn btn-primary mt-2 mx-auto d-block w-75" type="button"  value="Remove" onClick={() => this.removeProductFromWishList(userid,product._id)}/>
                 </div>
 
             )
         });
         return(
             <div className="wishListTopContainer">
-                <h1 id="wishListTopic">Your WishList</h1>
+                <span className="label label-default">Your WishList</span>
                 <div className="wishListContainer">
                     {wishList}
                 </div>
