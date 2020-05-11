@@ -1,6 +1,6 @@
 .loginContainer
 {
-    width: 90%;
+    width: 95%;
     margin-left: auto;
     margin-right: auto;
     height: auto;
@@ -14,7 +14,7 @@
     width: 100%;
     margin-left: auto;
     margin-right: auto;
-    height: 300px;
+    height: auto;
     padding-top: 60px;
     padding-bottom: 60px;
     display: flex;
@@ -48,4 +48,9 @@
 .NavigationItem
 {
     cursor: pointer;
+}
+.loginImage
+{
+    width: 30%;
+    height: 30%;
 }
