@@ -1,16 +1,17 @@
 const express = require('express');
 const router = express.Router();
-const mongoose =  require('mongoose');
-const categoryModel = require('./category.model');
 
-router.get('/', (req, res) => {
+const CategoryController = require('./category.controller');
+const Auth = require('../../utils/auth');
 
-    categoryModel.find()
-        .then(categories => res.status(200).json(categories))
-        .catch(err => res.status(400).json('Error: ' + err));
-});
+router.get('/', CategoryController.getAll);
 
-router.post('/create',(req,res) => {
+/**
+ * checkAdmin middleware check the user type for admin before creating a category
+ */
+// TODO: this route should be corrected to / only. REST API route system should be universal
+router.post('/create', Auth.checkAdmin, CategoryController.createOne);
+
 
     const catName = req.body.catName;
 
@@ -31,3 +32,4 @@ router.post('/create',(req,res) => {
 });
 
 module.exports = router;
+
