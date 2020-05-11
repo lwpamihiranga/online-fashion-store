@@ -19,6 +19,7 @@ mongoose.connect('mongodb+srv://admin:123OnlineFashionStore456@fashion-store-5gi
 });
 
 app.use(morgan('dev'));
+app.use('/uploads', express.static('uploads')); // this middleware makes the uploads folder a static folder, so anyone can access it
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cors());
