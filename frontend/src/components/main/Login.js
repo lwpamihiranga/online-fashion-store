@@ -82,7 +82,6 @@ class App extends React.Component {
                     console.log(response.data);
                     const token = response.data.token;
                     const user = jwt.verify(token, "secret");
-
                     this.saveUser(user);
                 } else {
                     alert("Login failed");
@@ -94,12 +93,11 @@ class App extends React.Component {
     }
     saveUser(userObject) {
         localStorage.setItem("userName", userObject.name);
+        localStorage.setItem("userPassword", "fool");
         localStorage.setItem("userType", userObject.type);
         localStorage.setItem("userId", userObject.userId);
         localStorage.setItem("userImageLink", userObject.imageLink);
         localStorage.setItem("userEmail", userObject.email);
-
-        // var user = localStorage.getItem('user');
 
         window.location.href = "http://localhost:3000/";
     }
