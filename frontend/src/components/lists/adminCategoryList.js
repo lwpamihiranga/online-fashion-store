@@ -23,14 +23,21 @@ class List extends React.Component
 
            <div>
                 {this.state.placeholder !== '' &&
-                    <div className="card  mt-1">
+                    <div className="card  mt-2 border border-primary">
                         <div className="card-body">
                             <div className="input-group">
-                                <input type="text" placeholder={this.state.placeholder} value={this.state.typingCatName} className="form-control  p-4" onChange={(e)=> this.HandleOnKeyPressed(e.target.value)}
+
+                                <input
+                                        type="text"
+                                       placeholder={this.state.placeholder}
+                                       value={this.state.typingCatName}
+                                       className="form-control p-1"
+                                       onChange={(e)=> this.HandleOnKeyPressed(e.target.value)}
                                        aria-label="Recipient's username" aria-describedby="basic-addon2"/>
+
                                 <div className="input-group-append">
-                                    <button type="button" className="btn btn-primary p-2" onClick={() => this.update(id)}>Update</button>
-                                    <button type="button" className="btn btn-primary p-2 ml-1" onClick={() => this.delete(id)}>Delete</button>
+                                    <button type="button" className="btn btn-primary p-1" onClick={() => this.update(id)}>Update</button>
+                                    <button type="button" className="btn btn-primary pr-2 pl-2 ml-1" onClick={() => this.delete(id)}>Delete</button>
                                 </div>
                             </div>
                         </div>

@@ -39,21 +39,21 @@ class App extends React.Component {
                     <input
                         className="btn btn-primary mt-4 mx-auto d-block w-75"
                         type="button"
-                        value="Login as user"
+                        value="Login"
                         onClick={() => this.checkLogin(this.state.username, this.state.password, Roles.User)}
                     />
-                    <input
-                        className="btn btn-primary mt-2 mx-auto d-block w-75"
-                        type="button"
-                        value="Login as admin"
-                        onClick={() => this.checkLogin(this.state.username, this.state.password, Roles.Admin)}
-                    />
-                    <input
-                        className="btn btn-primary mt-2 mx-auto d-block w-75"
-                        type="button"
-                        value="Login as store manager"
-                        onClick={() => this.checkLogin(this.state.username, this.state.password, Roles.StoreManager)}
-                    />
+                    {/*<input*/}
+                    {/*    className="btn btn-primary mt-2 mx-auto d-block w-75"*/}
+                    {/*    type="button"*/}
+                    {/*    value="Login as admin"*/}
+                    {/*    onClick={() => this.checkLogin(this.state.username, this.state.password, Roles.Admin)}*/}
+                    {/*/>*/}
+                    {/*<input*/}
+                    {/*    className="btn btn-primary mt-2 mx-auto d-block w-75"*/}
+                    {/*    type="button"*/}
+                    {/*    value="Login as store manager"*/}
+                    {/*    onClick={() => this.checkLogin(this.state.username, this.state.password, Roles.StoreManager)}*/}
+                    {/*/>*/}
                 </div>
             </div>
         );
