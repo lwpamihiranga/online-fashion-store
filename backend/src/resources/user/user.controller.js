@@ -15,7 +15,6 @@ exports.register = (req, res, next) => {
                     message: 'email already exists',
                 });
             } else {
-
                 // bcrypt package has used to HASH the password before saving the user
                 bcrypt.hash(req.body.password, 10, (err, hash) => {
                     if (err) {
@@ -83,6 +82,8 @@ exports.login = (req, res, next) => {
                                 userId: user[0]._id,
                                 email: user[0].email,
                                 type: user[0].type,
+                                name: user[0].name,
+                                imageLink: user[0].imageLink,
                             },
                             'secret', // this should be changed and set up as env variable for more protection
                             {
