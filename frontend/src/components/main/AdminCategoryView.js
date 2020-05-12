@@ -29,11 +29,11 @@ class AdminCategoryView extends React.Component {
         });
 
         return (
-            <div className="container-fluid w-100 p-5 mt-5">
-                <div className="input-group mb-3">
+            <div className="container-fluid p-5 mt-5 ">
+                <div className="input-group mb-3 p-4 bg-primary">
                     <input
                         type="text"
-                        className="form-control  p-4"
+                        className="form-control  p-3"
                         placeholder="Category Name"
                         value={this.state.typingCatName}
                         onChange={(e) => this.OnKeyPressed(e.target.value)}

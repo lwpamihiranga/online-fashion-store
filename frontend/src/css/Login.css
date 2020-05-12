@@ -15,7 +15,7 @@
     margin-left: auto;
     margin-right: auto;
     height: auto;
-    padding-top: 60px;
+    padding-top: 20px;
     padding-bottom: 60px;
     display: flex;
     flex-direction: column;
@@ -51,8 +51,8 @@
 }
 .loginImage
 {
-    width: 30%;
-    height: 30%;
+    width: 25%;
+    height: 25%;
 }
 .registerContainer
 {
