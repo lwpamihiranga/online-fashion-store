@@ -3,6 +3,8 @@ import css from '../../css/Login.css';
 import axios from "axios";
 import loginImage from '../../images/login_image.png';
 
+import Roles from '../../_helpers/role';
+
 class App extends React.Component
 {
     constructor(props) {
@@ -20,9 +22,9 @@ class App extends React.Component
                     <img className="img-fluid mx-auto d-block loginImage" src={loginImage}/>
                     <input className="form-control  mx-auto d-block mt-4 w-75 p-4" aria-label="Default" type="text" value={this.state.username}  onChange={(e)=> this.setState({username:e.target.value})} placeholder="Username"/>
                     <input className="form-control  mx-auto d-block mt-2 w-75 p-4" aria-label="Default" type="password" value={this.state.password} onChange={(e)=> this.setState({password:e.target.value})} placeholder="Password"/>
-                    <input className="btn btn-primary mt-4 mx-auto d-block w-75" type="button" value="Login as user" onClick={() => this.checkLogin(this.state.username,this.state.password,"user")}/>
-                    <input className="btn btn-primary mt-2 mx-auto d-block w-75"  type="button" value="Login as admin" onClick={() => this.checkLogin(this.state.username,this.state.password,"admin")}/>
-                    <input className="btn btn-primary mt-2 mx-auto d-block w-75"  type="button" value="Login as store manager" onClick={() => this.checkLogin(this.state.username,this.state.password,"manager")}/>
+                    <input className="btn btn-primary mt-4 mx-auto d-block w-75" type="button" value="Login as user" onClick={() => this.checkLogin(this.state.username,this.state.password,Roles.User)}/>
+                    <input className="btn btn-primary mt-2 mx-auto d-block w-75"  type="button" value="Login as admin" onClick={() => this.checkLogin(this.state.username,this.state.password,Roles.Admin)}/>
+                    <input className="btn btn-primary mt-2 mx-auto d-block w-75"  type="button" value="Login as store manager" onClick={() => this.checkLogin(this.state.username,this.state.password,Roles.StoreManager)}/>
                 </div>
             </div>
         )

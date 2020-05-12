@@ -13,8 +13,8 @@ const userSchema = mongoose.Schema({
     password: { type: String, required: true },
     type: {
         type: String,
-        enum: ['admin', 'manager', 'user'],
-        default: 'user',
+        enum: ['Admin', 'Manager', 'User'],
+        default: 'User',
         trim: true,
     },
     imageLink: { type: String, default: 'uploads/profile-pics/default.jpg' },

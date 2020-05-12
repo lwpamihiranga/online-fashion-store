@@ -10,6 +10,10 @@ import Register from './Register';
 import WishList from './WishList';
 import Cart from './Cart';
 import Category from "./Category";
+import AdminCategoryView from "./AdminCategoryView";
+import ManagerView from "./StoreManagerView";
+
+import Roles from '../../_helpers/role';
 
 class App extends React.Component
 {
@@ -35,36 +39,46 @@ class App extends React.Component
                             <div className="navigationContainer">
                                 <h1 id="mainName">Fashion Store</h1>
                                     <div className="navigation">
+
+
                                         <Link to={"/"} style={{textDecoration: 'none'}}>
                                             <p className="NavigationItem mt-3">Home</p>
                                         </Link>
+
                                         {email != null && password != null &&
-
-                                        <p className="NavigationItem mt-3" onClick={this.LogoutUser}>Logout</p>
-
+                                            <p className="NavigationItem mt-3" onClick={this.LogoutUser}>Logout</p>
                                         }
                                         {email == null && password == null &&
-
-                                        <Link to={"/login"} style={{textDecoration: 'none'}}>
-                                            <p className="NavigationItem mt-3">Login</p>
-                                        </Link>
+                                            <Link to={"/login"} style={{textDecoration: 'none'}}>
+                                                <p className="NavigationItem mt-3">Login</p>
+                                            </Link>
                                         }
                                         {email == null && password == null &&
-                                        <Link to={"/register"} style={{textDecoration: 'none'}}>
-                                            <p className="NavigationItem mt-3">Register</p>
-                                        </Link>
+                                            <Link to={"/register"} style={{textDecoration: 'none'}}>
+                                                <p className="NavigationItem mt-3">Register</p>
+                                            </Link>
                                         }
-
-                                        {type != null && type === "user" &&
-                                        <Link to={"/cart"} style={{textDecoration: 'none'}}>
-                                            <p className="NavigationItem mt-3">Cart</p>
-                                        </Link>
+                                        {type != null && type === Roles.User &&
+                                            <Link to={"/cart"} style={{textDecoration: 'none'}}>
+                                                <p className="NavigationItem mt-3">Cart</p>
+                                            </Link>
                                         }
-
-                                        {type != null && type === "user" &&
-                                        <Link to={"/wishList"} style={{textDecoration: 'none'}}>
-                                            <p className="NavigationItem mt-3">WishList</p>
-                                        </Link>
+                                        {type != null && type === Roles.User &&
+                                            <Link to={"/wishList"} style={{textDecoration: 'none'}}>
+                                                <p className="NavigationItem mt-3">WishList</p>
+                                            </Link>
+                                        }
+                                        {
+                                            email != null && password != null && type === Roles.Admin &&
+                                            <Link to={"/categories"} style={{textDecoration: 'none'}}>
+                                                <p className="NavigationItem mt-3">Categories</p>
+                                            </Link>
+                                        }
+                                        {
+                                            email != null && password != null && type === Roles.StoreManager &&
+                                            <Link to={"/products"} style={{textDecoration: 'none'}}>
+                                                <p className="NavigationItem mt-3">Products</p>
+                                            </Link>
                                         }
 
 
@@ -81,6 +95,8 @@ class App extends React.Component
                 <Route path={"/register"} exact strict component={Register}/>
                 <Route path={"/wishList"} exact strict component={WishList}/>
                 <Route path={"/cart"} exact strict component={Cart}/>
+                <Route path={"/categories"} exact strict component={AdminCategoryView}/>
+                <Route path={"/products"} exact strict component={ManagerView}/>
 
             </Router>
         )
