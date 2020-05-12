@@ -64,7 +64,11 @@ class AdminCategoryView extends React.Component {
             alert("Enter a valid category Name");
         } else {
             axios
-                .post("http://localhost:5000/api/category", { catName: this.state.typingCatName })
+                .post(
+                    "http://localhost:5000/api/category/",
+                    { catName: this.state.typingCatName },
+                    { headers: { Authorization: localStorage.getItem("token") } }
+                )
                 .then((response) => {
                     if (response.status === 200) {
                         this.getAllCategories();
