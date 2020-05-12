@@ -19,11 +19,11 @@ class ManagerView extends React.Component
                     </div>
                     <div className="form-group">
                         <label htmlFor="pwd">Price:</label>
-                        <input type="password" className="form-control" id="pwd"/>
+                        <input type="text" className="form-control" id="pwd"/>
                     </div>
                     <div className="form-group">
                         <label htmlFor="pwd">Discount:</label>
-                        <input type="password" className="form-control" id="pwd"/>
+                        <input type="text" className="form-control" id="pwd"/>
                     </div>
                     <div className="form-group">
                         <label htmlFor="exampleFormControlTextarea1">Description</label>
