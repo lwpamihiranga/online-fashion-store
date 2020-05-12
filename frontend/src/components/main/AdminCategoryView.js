@@ -1,11 +1,17 @@
 import React from "react";
 import axios from 'axios';
 
+import AdminCatItem from '../lists/adminCategoryList';
+
 class AdminCategoryView extends React.Component
 {
     constructor(props) {
         super(props);
-        this.state = ({catList : []});
+        this.state = (
+            {
+                catList : [],
+                typingCatName : ''
+            });
         this.getAllCategories();
     }
     render() {
@@ -14,13 +20,7 @@ class AdminCategoryView extends React.Component
 
             return(
                 <div>
-                    <div className="card  mt-1">
-                        <div className="card-body">
-                           <input type='text' placeholder={item.catName} className="w-100 p-2" onChange={(e)=> this.Handle(e.target.value)}/>
-                            <button type="button" className="btn btn-primary p-2 mt-3">Update</button>
-                            <button type="button" className="btn btn-primary p-2 mt-3 ml-2">Delete</button>
-                        </div>
-                    </div>
+                    <AdminCatItem catName={item.catName} id={item._id}/>
                 </div>
             )
         });
@@ -28,6 +28,13 @@ class AdminCategoryView extends React.Component
 
         return(
             <div className="container-fluid w-100 mt-5">
+                <div className="input-group mb-3">
+                    <input type="text" className="form-control  p-4" placeholder="Category Name" value={this.state.typingCatName} onChange={(e) => this.OnKeyPressed(e.target.value)}
+                           aria-label="Recipient's username" aria-describedby="basic-addon2"/>
+                        <div className="input-group-append">
+                            <button type="button" className="btn btn-primary" onClick={()=>this.OnSubmit()}>Create New</button>
+                        </div>
+                </div>
               {list}
           </div>
         )
@@ -48,6 +55,39 @@ class AdminCategoryView extends React.Component
             .catch(error => {
 
             })
+    }
+    OnKeyPressed = (value) => {
+
+        this.setState({typingCatName : value});
+    };
+    OnSubmit = () => {
+
+        if(this.state.typingCatName === '')
+        {
+            alert('Enter a valid category Name');
+        }
+        else
+        {
+            axios.post("http://localhost:5000/api/category",{catName : this.state.typingCatName})
+                .then(response => {
+                    if(response.status === 200)
+                    {
+                        this.getAllCategories();
+                    }
+                    else if(response.status === 201)
+                    {
+                        alert("A Category already exists with the specified name!");
+                    }
+                    else
+                    {
+                        alert("Something went wrong!");
+                    }
+
+                })
+                .catch(error => {
+
+                });
+        }
     }
 }
 export default AdminCategoryView;
