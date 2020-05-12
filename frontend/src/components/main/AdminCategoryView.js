@@ -2,6 +2,7 @@ import React from "react";
 import axios from "axios";
 
 import AdminCatItem from "../lists/adminCategoryList";
+import LoginState from '../../_helpers/loginState';
 
 class AdminCategoryView extends React.Component {
     constructor(props) {
@@ -14,6 +15,11 @@ class AdminCategoryView extends React.Component {
         this.getAllCategories();
     }
     render() {
+
+
+        this.checkAuthentication();
+
+
         const list = this.state.catList.map((item) => {
             return (
                 <div key={item._id}>
@@ -80,6 +86,12 @@ class AdminCategoryView extends React.Component {
                 })
                 .catch((error) => {});
             this.getAllCategories();
+        }
+    };
+    checkAuthentication = () =>
+    {
+        if(!LoginState.isLoggedIn() || !LoginState.isAdmin()) {
+            this.props.history.push("/error");
         }
     };
 }

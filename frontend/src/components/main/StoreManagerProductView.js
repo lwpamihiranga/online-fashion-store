@@ -1,10 +1,16 @@
 import React from "react";
 import css from '../../css/StoreManager.css';
 import UploadImage from "../../images/store_manager_upload.png";
+import LoginState from '../../_helpers/loginState';
 
 class ManagerView extends React.Component
 {
     render() {
+
+
+        this.checkAuthentication();
+
+
         return(
             <div className='container-fluid mt-4'>
 
@@ -38,5 +44,11 @@ class ManagerView extends React.Component
             </div>
         )
     }
+    checkAuthentication = () =>
+    {
+        if(!LoginState.isLoggedIn() || !LoginState.isManager()) {
+            this.props.history.push("/error");
+        }
+    };
 }
 export default ManagerView;
