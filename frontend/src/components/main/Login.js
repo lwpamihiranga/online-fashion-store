@@ -79,8 +79,10 @@ class App extends React.Component {
             .post("http://localhost:5000/api/users/login", bodyObj)
             .then((response) => {
                 if (response.status === 200) {
-                    console.log(response.data);
                     const token = response.data.token;
+                    if (token !== null) {
+                        localStorage.setItem("token", token);
+                    }
                     const user = jwt.verify(token, "secret");
                     this.saveUser(user);
                 } else {
