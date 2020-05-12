@@ -4,6 +4,7 @@ import axios from "axios";
 import loginImage from "../../images/login_image.png";
 
 import Roles from "../../_helpers/role";
+import jwt from "jsonwebtoken";
 
 class App extends React.Component {
     constructor(props) {
@@ -67,23 +68,34 @@ class App extends React.Component {
             return;
         }
 
+        const bodyObj = {
+            email,
+            password,
+        };
+
+        const reqBody = JSON.stringify(bodyObj);
+
         axios
-            .get("http://localhost:5000/api/users/login?email=" + email + "&password=" + password + "&type=" + type)
+            .post("http://localhost:5000/api/users/login", bodyObj)
             .then((response) => {
                 if (response.status === 200) {
-                    var list = response.data;
-                    this.saveUser(list);
+                    console.log(response.data);
+                    const token = response.data.token;
+                    const user = jwt.verify(token, "secret");
+
+                    this.saveUser(user);
                 } else {
                     alert("Login failed");
                 }
             })
-            .catch((error) => alert("Login failed"));
+            .catch((err) => {
+                alert("Login failed");
+            });
     }
     saveUser(userObject) {
         localStorage.setItem("userName", userObject.name);
-        localStorage.setItem("userPassword", userObject.password);
         localStorage.setItem("userType", userObject.type);
-        localStorage.setItem("userId", userObject._id);
+        localStorage.setItem("userId", userObject.userId);
         localStorage.setItem("userImageLink", userObject.imageLink);
         localStorage.setItem("userEmail", userObject.email);
 
