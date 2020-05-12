@@ -14,7 +14,10 @@ import AdminCategoryView from './AdminCategoryView';
 import ManagerView from './StoreManagerProductView';
 
 import Roles from '../../_helpers/role';
-
+import { Navbar, Nav, Button } from 'react-bootstrap';
+import '../../css/style.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faShoppingCart, faHeart } from '@fortawesome/free-solid-svg-icons';
 class App extends React.Component {
     render() {
         //user login informations
@@ -32,96 +35,100 @@ class App extends React.Component {
                     path="/"
                     render={() => {
                         return (
-                            <div className="navigationContainer">
-                                <h1 id="mainName">Fashion Store</h1>
-                                <div className="navigation">
-                                    <Link
-                                        to={'/'}
-                                        style={{ textDecoration: 'none' }}
-                                    >
-                                        <p className="NavigationItem mt-3">
+                            <Navbar
+                                expand="lg"
+                                sticky="top"
+                                className="navbar-color"
+                            >
+                                <Navbar.Brand href="/">
+                                    Fashion Store
+                                </Navbar.Brand>
+                                <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                                <Navbar.Collapse id="basic-navbar-nav">
+                                    <Nav className="mr-auto">
+                                        <Nav.Link
+                                            href="/"
+                                            className="header-link"
+                                        >
                                             Home
-                                        </p>
-                                    </Link>
-
-                                    {email != null && password != null && (
-                                        <p
-                                            className="NavigationItem mt-3"
-                                            onClick={this.LogoutUser}
-                                        >
-                                            Logout
-                                        </p>
-                                    )}
-                                    {email == null && password == null && (
-                                        <Link
-                                            to={'/login'}
-                                            style={{ textDecoration: 'none' }}
-                                        >
-                                            <p className="NavigationItem mt-3">
+                                        </Nav.Link>
+                                        {email != null && password != null && (
+                                            <Nav.Link
+                                                href="/"
+                                                className="header-link"
+                                                onClick={this.LogoutUser}
+                                            >
+                                                Logout
+                                            </Nav.Link>
+                                        )}
+                                        {email == null && password == null && (
+                                            <Nav.Link
+                                                href="/login"
+                                                className="header-link"
+                                            >
                                                 Login
-                                            </p>
-                                        </Link>
-                                    )}
-                                    {email == null && password == null && (
-                                        <Link
-                                            to={'/register'}
-                                            style={{ textDecoration: 'none' }}
-                                        >
-                                            <p className="NavigationItem mt-3">
+                                            </Nav.Link>
+                                        )}
+                                        {email == null && password == null && (
+                                            <Nav.Link
+                                                href="/register"
+                                                className="header-link"
+                                            >
                                                 Register
-                                            </p>
-                                        </Link>
-                                    )}
-                                    {type != null && type === Roles.User && (
-                                        <Link
-                                            to={'/cart'}
-                                            style={{ textDecoration: 'none' }}
-                                        >
-                                            <p className="NavigationItem mt-3">
+                                            </Nav.Link>
+                                        )}
+                                        {type != null && type === Roles.User && (
+                                            <Nav.Link
+                                                href="/cart"
+                                                className="header-link"
+                                            >
+                                                <FontAwesomeIcon
+                                                    icon={faShoppingCart}
+                                                />
                                                 Cart
-                                            </p>
-                                        </Link>
-                                    )}
-                                    {type != null && type === Roles.User && (
-                                        <Link
-                                            to={'/wishList'}
-                                            style={{ textDecoration: 'none' }}
-                                        >
-                                            <p className="NavigationItem mt-3">
+                                            </Nav.Link>
+                                        )}
+                                        {type != null && type === Roles.User && (
+                                            <Nav.Link
+                                                href="/wishList"
+                                                className="header-link"
+                                            >
+                                                <FontAwesomeIcon
+                                                    icon={faHeart}
+                                                    className="icon"
+                                                />
                                                 WishList
-                                            </p>
-                                        </Link>
-                                    )}
-                                    {email != null &&
-                                        password != null &&
-                                        type === Roles.Admin && (
-                                            <Link
-                                                to={'/categories'}
-                                                style={{
-                                                    textDecoration: 'none',
-                                                }}
-                                            >
-                                                <p className="NavigationItem mt-3">
+                                            </Nav.Link>
+                                        )}
+                                        {email != null &&
+                                            password != null &&
+                                            type === Roles.Admin && (
+                                                <Nav.Link
+                                                    href="/categories"
+                                                    className="header-link"
+                                                >
                                                     Categories
-                                                </p>
-                                            </Link>
-                                        )}
-                                    {email != null &&
-                                        password != null &&
-                                        type === Roles.StoreManager && (
-                                            <Link
-                                                to={'/products'}
-                                                style={{
-                                                    textDecoration: 'none',
-                                                }}
-                                            >
-                                                <p className="NavigationItem mt-3">
+                                                </Nav.Link>
+                                            )}
+                                        {email != null &&
+                                            password != null &&
+                                            type === Roles.StoreManager && (
+                                                <Nav.Link
+                                                    href="/products"
+                                                    className="header-link"
+                                                >
                                                     Products
-                                                </p>
-                                            </Link>
-                                        )}
-                                </div>
-                            </div>
+                                                </Nav.Link>
+                                            )}
+                                    </Nav>
+                                    {name != null && (
+                                        <Navbar.Text className="justify-content-end">
+                                            Signed in as:
+                                            <a> {name}</a>
+                                        </Navbar.Text>
+                                    )}
+                                </Navbar.Collapse>
+                            </Navbar>
                         );
                     }}
                 />
