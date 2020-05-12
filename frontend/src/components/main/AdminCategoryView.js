@@ -22,14 +22,8 @@ class AdminCategoryView extends React.Component {
             );
         });
 
-<<<<<<< HEAD
         return (
-            <div className="container-fluid w-100 mt-5">
-=======
-
-        return(
             <div className="container-fluid w-100 p-5 mt-5">
->>>>>>> 1157e0ba55d4abb2ed4c9c144b7556bafbccacd5
                 <div className="input-group mb-3">
                     <input
                         type="text"
