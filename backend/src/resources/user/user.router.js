@@ -15,56 +15,6 @@ router.get('/', (req, res) => {
         .catch((err) => res.status(400).json('Error: ' + err));
 });
 
-/**
- * TODO: this route should be deleted
- * REASON: in a rest api login should not be a GET request. it should be a POST request
- */
-router.get('/login', (req, res) => {
-    var password = req.query.password;
-    const email = req.query.email;
-    const type = req.query.type;
-
-
-    userModel
-        .find({email: email, type: type})
-        .then((users) =>
-        {
-            if(users.length <= 0)
-            {
-                res.status(400).json('Error: authentication failed');
-                return;
-            }
-
-            users.map(user => {
-
-                bcrypt.compare(
-                    password,
-                    user.password,
-                    (err, result) => {
-                        if (err)
-                        {
-                            return res.status(400).json({
-                                message: 'authentication failed',
-                            });
-                        }
-                        else if (result)
-                        {
-                            res.status(200).json(user);
-                        }
-                        else
-                        {
-                            return res.status(400).json({
-                                message: 'authentication failed',
-                            });
-                        }
-
-
-                    });
-            });
-        })
-        .catch((err) => res.status(400).json('Error: ' + err));
-});
-
 router.post('/login', UserController.login);
 
 /**
