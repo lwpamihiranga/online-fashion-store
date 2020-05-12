@@ -75,4 +75,14 @@ exports.updateOne = (req,res,next) => {
         .catch(error => {
            req.status(400).json('Error ' + error);
         });
-}
+};
+exports.findOne = (req,res,next) => {
+
+    Category.find({_id: req.query.id})
+        .then(result => {
+            res.status(200).json(result);
+        })
+        .catch(error => {
+            res.status(400).json('Error : ' + error);
+        })
+};

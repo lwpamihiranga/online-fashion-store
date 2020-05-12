@@ -12,15 +12,15 @@ class AdminCategoryView extends React.Component
                 catList : [],
                 typingCatName : ''
             });
+
         this.getAllCategories();
     }
     render() {
 
         const list = this.state.catList.map(item => {
-
             return(
-                <div>
-                    <AdminCatItem catName={item.catName} id={item._id}/>
+                <div key={item._id}>
+                    <AdminCatItem id={item._id}/>
                 </div>
             )
         });
@@ -32,7 +32,7 @@ class AdminCategoryView extends React.Component
                     <input type="text" className="form-control  p-4" placeholder="Category Name" value={this.state.typingCatName} onChange={(e) => this.OnKeyPressed(e.target.value)}
                            aria-label="Recipient's username" aria-describedby="basic-addon2"/>
                         <div className="input-group-append">
-                            <button type="button" className="btn btn-primary" onClick={()=>this.OnSubmit()}>Create New</button>
+                            <button type="button" className="btn btn-primary" onClick={() => this.OnSubmit()}>Create New</button>
                         </div>
                 </div>
               {list}
@@ -48,7 +48,7 @@ class AdminCategoryView extends React.Component
                 {
                     var list = response.data;
                     list.reverse();
-                    this.setState({catList : list});
+                    this.setState({catList : list,typingCatName :''});
                 }
 
             })
@@ -83,10 +83,12 @@ class AdminCategoryView extends React.Component
                         alert("Something went wrong!");
                     }
 
+
                 })
                 .catch(error => {
 
                 });
+            this.getAllCategories();
         }
     }
 }

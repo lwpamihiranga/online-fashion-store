@@ -5,6 +5,7 @@ const CategoryController = require('./category.controller');
 const Auth = require('../../utils/auth');
 
 router.get('/', CategoryController.getAll);
+router.get('/find',CategoryController.findOne);
 
 /**
  * checkAdmin middleware check the user type for admin before creating a category
