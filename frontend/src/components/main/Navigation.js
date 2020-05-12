@@ -12,6 +12,7 @@ import Cart from './Cart';
 import Category from './Category';
 import AdminCategoryView from './AdminCategoryView';
 import ManagerView from './StoreManagerProductView';
+import Error from './Error';
 
 import Roles from '../../_helpers/role';
 import { Navbar, Nav, Button } from 'react-bootstrap';
@@ -139,6 +140,14 @@ class App extends React.Component {
                     strict
                     component={ProductDetailsView}
                 />
+
+                <Route path={'/'} exact strict component={Category} />
+                <Route
+                    path={'/product/:pid'}
+                    exact
+                    strict
+                    component={ProductDetailsView}
+                />
                 <Route path={'/login'} exact strict component={Login} />
                 <Route path={'/register'} exact strict component={Register} />
                 <Route path={'/wishList'} exact strict component={WishList} />
@@ -155,6 +164,7 @@ class App extends React.Component {
                     strict
                     component={ManagerView}
                 />
+                <Route path={'/error'} exact strict component={Error} />
             </Router>
         );
     }

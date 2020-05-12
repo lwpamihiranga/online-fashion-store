@@ -2,6 +2,7 @@ import React from "react";
 import axios from "axios";
 
 import AdminCatItem from "../lists/adminCategoryList";
+import LoginState from '../../_helpers/loginState';
 
 class AdminCategoryView extends React.Component {
     constructor(props) {
@@ -14,6 +15,11 @@ class AdminCategoryView extends React.Component {
         this.getAllCategories();
     }
     render() {
+
+
+        this.checkAuthentication();
+
+
         const list = this.state.catList.map((item) => {
             return (
                 <div key={item._id}>
@@ -23,11 +29,11 @@ class AdminCategoryView extends React.Component {
         });
 
         return (
-            <div className="container-fluid w-100 p-5 mt-5">
-                <div className="input-group mb-3">
+            <div className="container-fluid p-5 mt-5 ">
+                <div className="input-group mb-3 p-4 bg-primary">
                     <input
                         type="text"
-                        className="form-control  p-4"
+                        className="form-control  p-3"
                         placeholder="Category Name"
                         value={this.state.typingCatName}
                         onChange={(e) => this.OnKeyPressed(e.target.value)}
@@ -80,6 +86,12 @@ class AdminCategoryView extends React.Component {
                 })
                 .catch((error) => {});
             this.getAllCategories();
+        }
+    };
+    checkAuthentication = () =>
+    {
+        if(!LoginState.isLoggedIn() || !LoginState.isAdmin()) {
+            this.props.history.push("/error");
         }
     };
 }
