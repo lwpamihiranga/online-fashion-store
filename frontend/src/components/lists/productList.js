@@ -33,10 +33,10 @@ class App extends React.Component
         const list = this.state.productList.map(product => {
 
             return(
-
                 <Link to={"/product/" + product._id} style={{ textDecoration: 'none' }}>
                     <div key={product._id} onClick={ () => this.handleProductItemClick(product)}>
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTU0GPr5IVLKBcS8YXXT4hpcHPltFM1cPNpW2ZnYQAmIl7FKnaq&usqp=CAU" alt="..." className="productItem"/>
+                        <img src={product.imageLink} alt="..." className="productItem"/>
+                        {console.log(product.imageLink)}
                     </div>
                     <strong><p id="productNameMain" className="font-weight-bold">{product.name}</p></strong>
                 </Link>

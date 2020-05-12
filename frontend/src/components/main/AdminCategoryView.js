@@ -27,7 +27,7 @@ class AdminCategoryView extends React.Component
 
 
         return(
-            <div className="container-fluid w-100 mt-5">
+            <div className="container-fluid w-100 p-5 mt-5">
                 <div className="input-group mb-3">
                     <input type="text" className="form-control  p-4" placeholder="Category Name" value={this.state.typingCatName} onChange={(e) => this.OnKeyPressed(e.target.value)}
                            aria-label="Recipient's username" aria-describedby="basic-addon2"/>
