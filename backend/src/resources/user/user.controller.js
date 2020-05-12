@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 const User = require('./user.model');
-
+const Roles = require('../../_helpers/role');
 const MailService = require('../../utils/mail-sender');
 
 exports.register = (req, res, next) => {
@@ -37,7 +37,7 @@ exports.register = (req, res, next) => {
                                 res.status(201).json(result);
 
                                 // this will send and email to the created manager's email
-                                if (user.type === 'manager') {
+                                if (user.type === Roles.StoreManager) {
                                     MailService.sendManagerMail(
                                         req.adminEmail,
                                         user.email,
