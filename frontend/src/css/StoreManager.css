@@ -1,0 +1,8 @@
+.container-fluid
+{
+    width: 95%;
+    background-color: white;
+    min-height: 400px;
+    height: auto;
+    border-radius: 10px;
+}
