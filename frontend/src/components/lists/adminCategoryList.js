@@ -5,29 +5,28 @@ class List extends React.Component
     constructor(props) {
         super(props);
 
-        this.state = ({ typingCatName : '',isDeleted : false,isUpdated : false,placeholder :this.props.catName});
+        this.state = (
+            {
+                typingCatName : '',
+                placeholder :''
+            });
+
+        const id = this.props.id;
+        this.getCategoryFromAPI(id);
     }
 
     render() {
 
         const id = this.props.id;
-        // var catName = this.props.catName;
-        //
-        //
-        // if(this.state.isUpdated)
-        // {
-        //     catName = this.state.typingCatName;
-        // }
-
 
         return(
 
            <div>
-                {!this.state.isDeleted &&
+                {this.state.placeholder !== '' &&
                     <div className="card  mt-1">
                         <div className="card-body">
                             <div className="input-group">
-                                <input type="text" placeholder={this.props.catName} value={this.state.typingCatName} className="form-control  p-4" onChange={(e)=> this.HandleOnKeyPressed(e.target.value)}
+                                <input type="text" placeholder={this.state.placeholder} value={this.state.typingCatName} className="form-control  p-4" onChange={(e)=> this.HandleOnKeyPressed(e.target.value)}
                                        aria-label="Recipient's username" aria-describedby="basic-addon2"/>
                                 <div className="input-group-append">
                                     <button type="button" className="btn btn-primary p-2" onClick={() => this.update(id)}>Update</button>
@@ -42,7 +41,7 @@ class List extends React.Component
     }
     HandleOnKeyPressed = (value) => {
 
-        this.setState({typingCatName : value,isUpdated : false,isDeleted : false});
+        this.setState({typingCatName : value});
     };
     update = (id) => {
 
@@ -53,7 +52,7 @@ class List extends React.Component
             .then(res => {
                 if(res.status === 200)
                 {
-                    this.setState({isUpdated : true,placeholder : this.state.typingCatName});
+                    this.getCategoryFromAPI(this.props.id);
                 }
             })
             .catch(error => {alert((error))});
@@ -66,11 +65,28 @@ class List extends React.Component
             .then(res => {
                 if(res.status === 200)
                 {
-                    this.setState({isDeleted : true});
+                    this.setState({placeholder : ''});
                 }
             })
             .catch(error => {alert((error))});
-    }
+    };
+    getCategoryFromAPI = (id) => {
+
+        axios.get("http://localhost:5000/api/category/find?id=" + id)
+            .then(res => {
+                if(res.status === 200)
+                {
+                     var list = res.data;
+                     list.map(item => {
+
+                        this.setState({placeholder : item.catName});
+                     });
+
+                }
+            })
+            .catch(error => {alert((error))});
+
+    };
 
 }
 export default List;
