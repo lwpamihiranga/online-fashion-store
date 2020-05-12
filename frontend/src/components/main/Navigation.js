@@ -11,7 +11,7 @@ import WishList from './WishList';
 import Cart from './Cart';
 import Category from "./Category";
 import AdminCategoryView from "./AdminCategoryView";
-import ManagerView from "./StoreManagerView";
+import ManagerView from "./StoreManagerProductView";
 
 import Roles from '../../_helpers/role';
 
