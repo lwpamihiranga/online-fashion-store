@@ -1,0 +1,13 @@
+.navbar-color {
+    background-color: #b041e4;
+}
+
+.header-link:hover {
+    background-color: #ffffff;
+    border-radius: 20%;
+}
+
+.header-link {
+    margin-left: 2px;
+    margin-right: 2px;
+}
