@@ -1,7 +1,7 @@
-import React from "react";
-import axios from "axios";
+import React from 'react';
+import axios from 'axios';
 
-import AdminCatItem from "../lists/adminCategoryList";
+import AdminCatItem from '../lists/adminCategoryList';
 import LoginState from '../../_helpers/loginState';
 
 class AdminCategoryView extends React.Component {
@@ -9,16 +9,13 @@ class AdminCategoryView extends React.Component {
         super(props);
         this.state = {
             catList: [],
-            typingCatName: "",
+            typingCatName: '',
         };
 
         this.getAllCategories();
     }
     render() {
-
-
         this.checkAuthentication();
-
 
         const list = this.state.catList.map((item) => {
             return (
@@ -50,48 +47,51 @@ class AdminCategoryView extends React.Component {
             </div>
         );
     }
+
     getAllCategories() {
         axios
-            .get("http://localhost:5000/api/category")
+            .get('http://localhost:5000/api/category')
             .then((response) => {
                 if (response.status === 200) {
                     var list = response.data;
                     list.reverse();
-                    this.setState({ catList: list, typingCatName: "" });
+                    this.setState({ catList: list, typingCatName: '' });
                 }
             })
             .catch((error) => {});
     }
+
     OnKeyPressed = (value) => {
         this.setState({ typingCatName: value });
     };
+
     OnSubmit = () => {
-        if (this.state.typingCatName === "") {
-            alert("Enter a valid category Name");
+        if (this.state.typingCatName === '') {
+            alert('Enter a valid category Name');
         } else {
             axios
                 .post(
-                    "http://localhost:5000/api/category/",
+                    'http://localhost:5000/api/category/',
                     { catName: this.state.typingCatName },
-                    { headers: { Authorization: localStorage.getItem("token") } }
+                    { headers: { Authorization: localStorage.getItem('token') } }
                 )
                 .then((response) => {
                     if (response.status === 200) {
                         this.getAllCategories();
                     } else if (response.status === 201) {
-                        alert("A Category already exists with the specified name!");
+                        alert('A Category already exists with the specified name!');
                     } else {
-                        alert("Something went wrong!");
+                        alert('Something went wrong!');
                     }
                 })
                 .catch((error) => {});
             this.getAllCategories();
         }
     };
-    checkAuthentication = () =>
-    {
-        if(!LoginState.isLoggedIn() || !LoginState.isAdmin()) {
-            this.props.history.push("/error");
+
+    checkAuthentication = () => {
+        if (!LoginState.isLoggedIn() || !LoginState.isAdmin()) {
+            this.props.history.push('/error');
         }
     };
 }

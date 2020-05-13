@@ -1,16 +1,17 @@
-import React from "react";
-import css from "../../css/Login.css";
-import axios from "axios";
-import loginImage from "../../images/login_image.png";
+import React from 'react';
+import axios from 'axios';
+import jwt from 'jsonwebtoken';
 
-import Roles from "../../_helpers/role";
-import jwt from "jsonwebtoken";
+import Roles from '../../_helpers/role';
+
+import loginImage from '../../images/login_image.png';
+import '../../css/Login.css';
 
 class App extends React.Component {
     constructor(props) {
         super(props);
 
-        this.state = { username: "", password: "" };
+        this.state = { username: '', password: '' };
         this.handleUsername = this.handleUsername.bind();
         this.handlePassword = this.handlePassword.bind();
     }
@@ -58,13 +59,16 @@ class App extends React.Component {
             </div>
         );
     }
+
     handleUsername(e) {
         //alert("called");
     }
+
     handlePassword(e) {}
+
     checkLogin(email, password, type) {
-        if (email === "" || password === "" || type === "") {
-            alert("Enter details Properly");
+        if (email === '' || password === '' || type === '') {
+            alert('Enter details Properly');
             return;
         }
 
@@ -73,35 +77,34 @@ class App extends React.Component {
             password,
         };
 
-        const reqBody = JSON.stringify(bodyObj);
-
         axios
-            .post("http://localhost:5000/api/users/login", bodyObj)
+            .post('http://localhost:5000/api/users/login', bodyObj)
             .then((response) => {
                 if (response.status === 200) {
                     const token = response.data.token;
                     if (token !== null) {
-                        localStorage.setItem("token", token);
+                        localStorage.setItem('token', token);
                     }
-                    const user = jwt.verify(token, "secret");
+                    const user = jwt.verify(token, 'secret');
                     this.saveUser(user);
                 } else {
-                    alert("Login failed");
+                    alert('Login failed');
                 }
             })
             .catch((err) => {
-                alert("Login failed");
+                alert('Login failed');
             });
     }
-    saveUser(userObject) {
-        localStorage.setItem("userName", userObject.name);
-        localStorage.setItem("userPassword", "fool");
-        localStorage.setItem("userType", userObject.type);
-        localStorage.setItem("userId", userObject.userId);
-        localStorage.setItem("userImageLink", userObject.imageLink);
-        localStorage.setItem("userEmail", userObject.email);
 
-        window.location.href = "http://localhost:3000/";
+    saveUser(userObject) {
+        localStorage.setItem('userName', userObject.name);
+        localStorage.setItem('userPassword', 'fool');
+        localStorage.setItem('userType', userObject.type);
+        localStorage.setItem('userId', userObject.userId);
+        localStorage.setItem('userImageLink', userObject.imageLink);
+        localStorage.setItem('userEmail', userObject.email);
+
+        window.location.href = 'http://localhost:3000/';
     }
 }
 export default App;

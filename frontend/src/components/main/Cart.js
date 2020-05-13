@@ -1,21 +1,19 @@
-import React from "react";
-import LoginState from '../../_helpers/loginState';
+import React from 'react';
 
 import CartList from '../lists/cartList';
-class App extends React.Component
-{
-    render() {
 
+import LoginState from '../../_helpers/loginState';
+
+class App extends React.Component {
+    render() {
         this.checkAuthentication();
 
-        return(
-            <CartList/>
-        )
+        return <CartList />;
     }
-    checkAuthentication = () =>
-    {
-        if(!LoginState.isLoggedIn() || !LoginState.isUser()) {
-            this.props.history.push("/error");
+
+    checkAuthentication = () => {
+        if (!LoginState.isLoggedIn() || !LoginState.isUser()) {
+            this.props.history.push('/error');
         }
     };
 }

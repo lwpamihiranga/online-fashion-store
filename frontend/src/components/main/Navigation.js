@@ -1,7 +1,5 @@
 import React from 'react';
-
-import { BrowserRouter as Router, Link } from 'react-router-dom';
-import Route from 'react-router-dom/Route';
+import { BrowserRouter as Router, Link, Route } from 'react-router-dom';
 
 //components
 import ProductDetailsView from './productDetailsView';
@@ -15,10 +13,12 @@ import ManagerView from './StoreManagerProductView';
 import Error from './Error';
 
 import Roles from '../../_helpers/role';
+
 import { Navbar, Nav, Button } from 'react-bootstrap';
-import '../../css/style.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShoppingCart, faHeart } from '@fortawesome/free-solid-svg-icons';
+import '../../css/style.css';
+
 class App extends React.Component {
     render() {
         //user login informations
@@ -28,7 +28,6 @@ class App extends React.Component {
         var id = localStorage.getItem('userId');
         var imageLink = localStorage.getItem('userImageLink');
         var email = localStorage.getItem('userEmail');
-        //
 
         return (
             <Router>
@@ -36,91 +35,51 @@ class App extends React.Component {
                     path="/"
                     render={() => {
                         return (
-                            <Navbar
-                                expand="lg"
-                                sticky="top"
-                                className="navbar-color  bg-primary p-3"
-                            >
-                                <Navbar.Brand href="/">
-                                    Fashion Store
-                                </Navbar.Brand>
+                            <Navbar expand="lg" sticky="top" className="navbar-color  bg-primary p-3">
+                                <Navbar.Brand href="/">Fashion Store</Navbar.Brand>
                                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                                 <Navbar.Collapse id="basic-navbar-nav">
                                     <Nav className="mr-auto">
-                                        <Nav.Link
-                                            href="/"
-                                            className="header-link"
-                                        >
+                                        <Nav.Link href="/" className="header-link">
                                             Home
                                         </Nav.Link>
                                         {email != null && password != null && (
-                                            <Nav.Link
-                                                href="/"
-                                                className="header-link"
-                                                onClick={this.LogoutUser}
-                                            >
+                                            <Nav.Link href="/" className="header-link" onClick={this.LogoutUser}>
                                                 Logout
                                             </Nav.Link>
                                         )}
                                         {email == null && password == null && (
-                                            <Nav.Link
-                                                href="/login"
-                                                className="header-link"
-                                            >
+                                            <Nav.Link href="/login" className="header-link">
                                                 Login
                                             </Nav.Link>
                                         )}
                                         {email == null && password == null && (
-                                            <Nav.Link
-                                                href="/register"
-                                                className="header-link"
-                                            >
+                                            <Nav.Link href="/register" className="header-link">
                                                 Register
                                             </Nav.Link>
                                         )}
                                         {type != null && type === Roles.User && (
-                                            <Nav.Link
-                                                href="/cart"
-                                                className="header-link"
-                                            >
-                                                <FontAwesomeIcon
-                                                    icon={faShoppingCart}
-                                                />
+                                            <Nav.Link href="/cart" className="header-link">
+                                                <FontAwesomeIcon icon={faShoppingCart} />
                                                 Cart
                                             </Nav.Link>
                                         )}
                                         {type != null && type === Roles.User && (
-                                            <Nav.Link
-                                                href="/wishList"
-                                                className="header-link"
-                                            >
-                                                <FontAwesomeIcon
-                                                    icon={faHeart}
-                                                    className="icon"
-                                                />
+                                            <Nav.Link href="/wishList" className="header-link">
+                                                <FontAwesomeIcon icon={faHeart} className="icon" />
                                                 WishList
                                             </Nav.Link>
                                         )}
-                                        {email != null &&
-                                            password != null &&
-                                            type === Roles.Admin && (
-                                                <Nav.Link
-                                                    href="/categories"
-                                                    className="header-link"
-                                                >
-                                                    Categories
-                                                </Nav.Link>
-                                            )}
-                                        {email != null &&
-                                            password != null &&
-                                            type === Roles.StoreManager && (
-                                                <Nav.Link
-                                                    href="/products"
-                                                    className="header-link"
-                                                >
-                                                    Products
-                                                </Nav.Link>
-                                            )}
+                                        {email != null && password != null && type === Roles.Admin && (
+                                            <Nav.Link href="/categories" className="header-link">
+                                                Categories
+                                            </Nav.Link>
+                                        )}
+                                        {email != null && password != null && type === Roles.StoreManager && (
+                                            <Nav.Link href="/products" className="header-link">
+                                                Products
+                                            </Nav.Link>
+                                        )}
                                     </Nav>
                                     {name != null && (
                                         <Navbar.Text className="justify-content-end">
@@ -133,41 +92,20 @@ class App extends React.Component {
                         );
                     }}
                 />
-                <Route path={'/'} exact strict component={Category} />
-                <Route
-                    path={'/product/:pid'}
-                    exact
-                    strict
-                    component={ProductDetailsView}
-                />
 
                 <Route path={'/'} exact strict component={Category} />
-                <Route
-                    path={'/product/:pid'}
-                    exact
-                    strict
-                    component={ProductDetailsView}
-                />
+                <Route path={'/product/:pid'} exact strict component={ProductDetailsView} />
                 <Route path={'/login'} exact strict component={Login} />
                 <Route path={'/register'} exact strict component={Register} />
                 <Route path={'/wishList'} exact strict component={WishList} />
                 <Route path={'/cart'} exact strict component={Cart} />
-                <Route
-                    path={'/categories'}
-                    exact
-                    strict
-                    component={AdminCategoryView}
-                />
-                <Route
-                    path={'/products'}
-                    exact
-                    strict
-                    component={ManagerView}
-                />
+                <Route path={'/categories'} exact strict component={AdminCategoryView} />
+                <Route path={'/products'} exact strict component={ManagerView} />
                 <Route path={'/error'} exact strict component={Error} />
             </Router>
         );
     }
+
     LogoutUser() {
         localStorage.removeItem('userName');
         localStorage.removeItem('userPassword');
@@ -178,6 +116,7 @@ class App extends React.Component {
 
         window.location.href = 'http://localhost:3000/';
     }
+
     getUser() {
         var name = localStorage.getItem('userName');
         var password = localStorage.getItem('userPassword');

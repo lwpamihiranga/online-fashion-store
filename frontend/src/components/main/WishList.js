@@ -1,22 +1,23 @@
-import React from "react";
-import WishListList from '../lists/wishListList';
-import LoginState from '../../_helpers/loginState';
-class App extends React.Component
-{
-    render() {
+import React from 'react';
 
+import WishListList from '../lists/wishListList';
+
+import LoginState from '../../_helpers/loginState';
+
+class App extends React.Component {
+    render() {
         this.checkAuthentication();
 
-        return(
+        return (
             <div>
-                <WishListList/>
+                <WishListList />
             </div>
-        )
+        );
     }
-    checkAuthentication = () =>
-    {
-        if(!LoginState.isLoggedIn() || !LoginState.isUser()) {
-            this.props.history.push("/error");
+
+    checkAuthentication = () => {
+        if (!LoginState.isLoggedIn() || !LoginState.isUser()) {
+            this.props.history.push('/error');
         }
     };
 }
