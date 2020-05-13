@@ -1,7 +1,5 @@
 import React from 'react';
-
-import { BrowserRouter as Router, Link } from 'react-router-dom';
-import Route from 'react-router-dom/Route';
+import { BrowserRouter as Router, Link, Route } from 'react-router-dom';
 
 //components
 import ProductDetailsView from './productDetailsView';
@@ -15,10 +13,11 @@ import ManagerView from './StoreManagerProductView';
 import Error from './Error';
 
 import Roles from '../../_helpers/role';
+
 import { Navbar, Nav, Button } from 'react-bootstrap';
-import '../../css/style.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShoppingCart, faHeart } from '@fortawesome/free-solid-svg-icons';
+import '../../css/style.css';
 
 class App extends React.Component {
     render() {
@@ -29,7 +28,6 @@ class App extends React.Component {
         var id = localStorage.getItem('userId');
         var imageLink = localStorage.getItem('userImageLink');
         var email = localStorage.getItem('userEmail');
-        //
 
         return (
             <Router>
