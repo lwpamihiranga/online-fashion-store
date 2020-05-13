@@ -35,7 +35,7 @@ class App extends React.Component
             return(
                 <Link to={"/product/" + product._id} style={{ textDecoration: 'none' }}>
                     <div key={product._id} onClick={ () => this.handleProductItemClick(product)}>
-                        <img src={product.imageLink} alt="..." className="productItem"/>
+                        <img src={'http://localhost:5000/' + product.imageLink} alt="..." className="productItem"/>
                         {console.log(product.imageLink)}
                     </div>
                     <strong><p id="productNameMain" className="font-weight-bold">{product.name}</p></strong>
