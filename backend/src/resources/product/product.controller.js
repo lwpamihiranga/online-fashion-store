@@ -38,8 +38,9 @@ exports.getOne = (req, res, next) => {
 };
 
 exports.createOne = (req, res, next) => {
-    console.log(req.file.path);
+    // convert windows path to linux path
     const imagePath = slash(req.file.path);
+
     const product = new Product({
         _id: new mongoose.Types.ObjectId(),
         name: req.body.name,
