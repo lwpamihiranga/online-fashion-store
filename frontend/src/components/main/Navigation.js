@@ -133,14 +133,7 @@ class App extends React.Component {
                         );
                     }}
                 />
-                <Route path={'/'} exact strict component={Category} />
-                <Route
-                    path={'/product/:pid'}
-                    exact
-                    strict
-                    component={ProductDetailsView}
-                />
-
+    
                 <Route path={'/'} exact strict component={Category} />
                 <Route
                     path={'/product/:pid'}
@@ -168,6 +161,7 @@ class App extends React.Component {
             </Router>
         );
     }
+
     LogoutUser() {
         localStorage.removeItem('userName');
         localStorage.removeItem('userPassword');
@@ -178,6 +172,7 @@ class App extends React.Component {
 
         window.location.href = 'http://localhost:3000/';
     }
+    
     getUser() {
         var name = localStorage.getItem('userName');
         var password = localStorage.getItem('userPassword');
