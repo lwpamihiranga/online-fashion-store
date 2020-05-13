@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const slash = require('slash');
 
 const Product = require('../product/product.model');
 
@@ -37,6 +38,8 @@ exports.getOne = (req, res, next) => {
 };
 
 exports.createOne = (req, res, next) => {
+    console.log(req.file.path);
+    const imagePath = slash(req.file.path);
     const product = new Product({
         _id: new mongoose.Types.ObjectId(),
         name: req.body.name,
@@ -46,7 +49,7 @@ exports.createOne = (req, res, next) => {
         categoryName: req.body.categoryName,
         hasDiscount: req.body.hasDiscount,
         discount: req.body.discount,
-        imageLink: req.file.path,
+        imageLink: imagePath,
     });
 
     product
