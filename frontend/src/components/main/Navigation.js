@@ -39,7 +39,7 @@ class App extends React.Component {
                             <Navbar
                                 expand="lg"
                                 sticky="top"
-                                className="navbar-color"
+                                className="navbar-color  bg-primary p-3"
                             >
                                 <Navbar.Brand href="/">
                                     Fashion Store

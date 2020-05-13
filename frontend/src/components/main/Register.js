@@ -28,8 +28,8 @@ class App extends React.Component
                     <input className="form-control  mx-auto d-block mt-4 w-75 p-4" aria-label="Default" type="text" placeholder="Username" value={this.state.username} onChange={(e) => this.setState({username: e.target.value})}/>
                     <input className="form-control  mx-auto d-block mt-2 w-75 p-4" aria-label="Default" type="text" placeholder="Email" value={this.state.email}  onChange={(e) => this.setState({email: e.target.value})}/>
                     <input className="form-control  mx-auto d-block mt-2 w-75 p-4" aria-label="Default" type="password" placeholder="Password" value={this.state.password}  onChange={(e) => this.setState({password: e.target.value})}/>
-                    <input className="btn btn-primary mt-2 mx-auto  mt-4 d-block w-75" type="button" value="Register as user" onClick={() => this.register(Roles.User)}/>
-                    <input className="btn btn-primary mt-2 mx-auto d-block w-75" type="button" value="Register as admin" onClick={() => this.register(Roles.Admin)}/>
+                    <input className="btn btn-primary mt-2 mx-auto  mt-4 d-block w-75" type="button" value="Register" onClick={() => this.register(Roles.User)}/>
+                    {/*<input className="btn btn-primary mt-2 mx-auto d-block w-75" type="button" value="Register as admin" onClick={() => this.register(Roles.Admin)}/>*/}
                 </div>
             </div>
         )
