@@ -13,7 +13,7 @@ const wishListRouter = require('./resources/wishList/wishList.router');
 const cartRouter = require('./resources/cart/cart.router');
 
 const app = express();
-app.use('/src/utils/uploads', express.static('src/utils/uploads'));
+app.use('/utils/uploads', express.static('utils/uploads'));
 
 app.use(morgan('dev'));
 // app.use('/uploads', express.static('uploads')); // this middleware makes the uploads folder a static folder, so anyone can access it

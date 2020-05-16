@@ -10,6 +10,10 @@ const productSchema = mongoose.Schema({
     hasDiscount: { type: Boolean, default: false },
     discount: { type: Number, default: 0 },
     imageLink: { type: String, default: 'uploads/products/default.jpg' },
+    image: {
+        data: Buffer,
+        contentType: String
+    }
 });
 
 module.exports = mongoose.model('Product', productSchema);

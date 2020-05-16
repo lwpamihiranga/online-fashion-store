@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const slash = require('slash');
+const fs = require('fs');
 
 const Product = require('../product/product.model');
 
@@ -51,7 +52,10 @@ exports.createOne = (req, res, next) => {
         hasDiscount: req.body.hasDiscount,
         discount: req.body.discount,
         imageLink: imagePath,
+
     });
+    product.image.data = fs.readFileSync(req.file.path);
+
 
     product
         .save()

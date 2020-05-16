@@ -20,11 +20,18 @@ class App extends React.Component {
         this.getProducts(id);
 
         const list = this.state.productList.map((product) => {
+
+
+                var base64Flag = 'data:image/jpeg;base64,';
+                var imageStr = this.arrayBufferToBase64(product.image.data.data);
+                var link = base64Flag + imageStr;
+
+
             return (
                 <Link to={'/product/' + product._id} style={{ textDecoration: 'none' }}>
+
                     <div key={product._id} onClick={() => this.handleProductItemClick(product)}>
-                        <img src={'http://localhost:5000/' + product.imageLink} alt="..." className="productItem" />
-                        {console.log(product.imageLink)}
+                        <img src={link} alt="..." className="productItem" />
                     </div>
                     <strong>
                         <p id="productNameMain" className="font-weight-bold">
@@ -37,6 +44,13 @@ class App extends React.Component {
 
         return <div className="productList">{list}</div>;
     }
+    arrayBufferToBase64(buffer)
+    {
+        var binary = '';
+        var bytes = [].slice.call(new Uint8Array(buffer));
+        bytes.forEach((b) => binary += String.fromCharCode(b));
+        return window.btoa(binary);
+    };
 
     getProducts(id) {
         //loading products according to the id and store in states
