@@ -5,20 +5,21 @@
  *      uploads/other
  */
 const multer = require('multer');
+// const path = require('../../../frontend/src/uploads');
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
         console.log('dest req: ', req.baseUrl);
         if (req.baseUrl === '/api/users') {
-            return cb(null, __dirname + '/uploads/profile-pics');
+            return cb(null,'../../frontend/src/uploads/profile-pics');
         } else if (req.baseUrl === '/api/products') {
-            return cb(null, __dirname + '/uploads/products');
+            return cb(null,'../../frontend/src/uploads/products');
         }
 
-        cb(null, __dirname + '/uploads/other');
+        cb(null,'../../frontend/src/uploads/other');
     },
     filename: function (req, file, cb) {
-        cb(null, Date.now() + file.originalname);
+        cb(null,file.originalname);
     },
 });
 

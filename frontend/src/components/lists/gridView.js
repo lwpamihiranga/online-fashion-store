@@ -21,19 +21,17 @@ class Grid extends React.Component
 
         const rows = this.state.productList.map(product => {
 
-            var base64Flag = 'data:image/jpeg;base64,';
-            var imageStr = this.arrayBufferToBase64(product.image.data.data);
-            var link = base64Flag + imageStr;
+            const url = require('../../uploads/products/' + product.imageLink);
 
             return (
                 <div className='col-md-3 col-sm-6 col-xs-6' key={product._id}>
 
                     <div className="card">
                         <div className="card-body">
-
+                            {console.log(url)}
                             <div key={product._id}
                                  className="row d-flex justify-content-center">
-                                <img src={link}
+                                <img src={url}
                                      alt="..."
                                      className="img-responsive w-100 h-100 p-1"/>
                                 <strong>
@@ -79,13 +77,6 @@ class Grid extends React.Component
                 alert(error);
             })
 
-    };
-    arrayBufferToBase64(buffer)
-    {
-        var binary = '';
-        var bytes = [].slice.call(new Uint8Array(buffer));
-        bytes.forEach((b) => binary += String.fromCharCode(b));
-        return window.btoa(binary);
     };
 }
 export default Grid;
