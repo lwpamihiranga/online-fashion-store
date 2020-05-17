@@ -10,7 +10,7 @@ class Grid extends React.Component
             const url = require('../../uploads/products/' + product.imageLink);
 
             return (
-                <div className='col-md-3 col-sm-6 col-xs-6' key={product._id}>
+                <div className='col-md-3 col-sm-6 col-xs-6 mb-4' key={product._id}>
 
                     <div className="card">
                         <div className="card-body">
@@ -20,15 +20,15 @@ class Grid extends React.Component
 
                                 <img src={url}
                                      alt="..."
-                                     className="img-responsive w-100 h-100 p-1 productImg"/>
-                                <strong>
-                                    <p
-                                        className="font-weight-bold">
-                                        {product.name}
-                                    </p>
-                                </strong>
+                                     className="img-responsive p-1 productImg"/>
                             </div>
-
+                            <strong>
+                                <p
+                                    className="font-weight-bold">
+                                    {product.name}
+                                </p>
+                            </strong>
+                            <input type="button" className="btn btn-primary mt-2 mx-auto d-block w-100" value="View"/>
                         </div>
                     </div>
 

@@ -20,4 +20,16 @@
 .scrolling-wrapper {
     -webkit-overflow-scrolling: touch;
 }
-
+.productImg
+{
+    width: 100%;
+    height: 250px;
+    overflow: hidden;
+    background-size: cover;
+    margin-left: auto;
+    margin-right: auto;
+}
+.font-weight-bold
+{
+    float: left;
+}

@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import CategoryList from '../lists/categoryList';
 import GridView from '../lists/gridView';
+import style from '../../css/style.css'
 
 class App extends React.Component {
     constructor(props) {
@@ -30,15 +31,18 @@ class App extends React.Component {
 
 
         return(
-            <div>
-                <div>
-                    <select className="mt-2 ml-2 mb-2"
-                            onChange={(e) => this.onCategoryChanged(e.target.value)}>
-                        {categories}
-                    </select>
+            <div className="productBody">
+                <div className="productDiv">
+                    <div>
+                        <select className="mt-2 mb-2"
+                                onChange={(e) => this.onCategoryChanged(e.target.value)}>
+                            {categories}
+                        </select>
+                    </div>
+                    <GridView productList={this.state.productList}/>
                 </div>
-                <GridView productList={this.state.productList}/>
             </div>
+
             )
     }
 
