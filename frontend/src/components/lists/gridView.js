@@ -1,23 +1,9 @@
 import React from "react";
-import axios from 'axios';
-import {Link} from "react-router-dom";
-import {Dropdown,DropdownButton} from "react-bootstrap";
 import css from '../../css/gridView.css';
 
 class Grid extends React.Component
 {
-    constructor(props) {
-        super(props);
-
-        this.state = (
-            {
-                productList : []
-            });
-        //this.getAllProducts();
-    }
-
     render() {
-
 
         const rows = this.props.productList.map(product => {
 
@@ -60,38 +46,5 @@ class Grid extends React.Component
         )
 
     }
-    // getAllProducts = () => {
-    //
-    //     axios.get('http://localhost:5000/api/products')
-    //         .then(response => {
-    //
-    //             if(response.status === 200)
-    //             {
-    //                 const list = response.data;
-    //                 this.setState({productList : response.data});
-    //             }
-    //
-    //         })
-    //         .catch(error => {
-    //
-    //             alert(error);
-    //         })
-    //
-    // };
-    // getAllCategories = () => {
-    //
-    //     axios.get('http://localhost:5000/api/category')
-    //         .then(response => {
-    //
-    //             if(response.status === 200)
-    //             {
-    //                 this.setState({categoryList : response.data})
-    //             }
-    //
-    //         })
-    //         .catch(error => {
-    //
-    //         });
-    // };
 }
 export default Grid;
