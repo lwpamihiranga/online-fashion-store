@@ -35,7 +35,7 @@ class App extends React.Component {
                     path="/"
                     render={() => {
                         return (
-                            <Navbar expand="lg" sticky="top" className="navbar-color p-3">
+                            <Navbar expand="lg" sticky="top" className="navbar-color bg-primary p-3">
                                 <Navbar.Brand href="/">Fashion Store</Navbar.Brand>
                                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                                 <Navbar.Collapse id="basic-navbar-nav">
