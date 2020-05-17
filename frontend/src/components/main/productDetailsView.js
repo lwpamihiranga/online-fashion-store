@@ -1,9 +1,13 @@
 import React from 'react';
 import axios from 'axios';
 
+import css from '../../css/productDetailsView.css';
 import RatingList from '../lists/ratingList';
+const LoginState  = require('../../_helpers/loginState');
 
-import '../../css/productDetailsView.css';
+
+
+
 
 class App extends React.Component {
     constructor(props) {
@@ -13,54 +17,103 @@ class App extends React.Component {
     }
 
     render() {
-        //user login informations
-        var name = localStorage.getItem('userName');
-        var password = localStorage.getItem('userPassword');
-        var type = localStorage.getItem('userType');
-        var userid = localStorage.getItem('userId');
-        var imageLink = localStorage.getItem('userImageLink');
-        var email = localStorage.getItem('userEmail');
+
 
         const productId = this.props.match.params.pid;
         this.getProductDetails(productId);
 
         var name;
         var price;
+        var imageLink;
+        var discount;
+        var discountPrice = 0;
+        var description;
+
         this.state.product.map((product) => {
             name = product.name;
             price = product.price;
-            imageLink = product.imageLink;
+            imageLink = require('../../uploads/products/' + product.imageLink);
+            if(product.discount !== '' && product.discount >= 0)
+            {
+                discount = (product.discount / product.price) * 100;
+            }
+            else
+            {
+                discount = product.discount;
+            }
+            discountPrice =  product.discount;
+            description = product.description;
+
         });
 
         return (
             <div className="productDetailscontainer">
-                <div className="productDetails">
-                    <img id="productImage" src={'http://localhost:5000/' + imageLink} />
-                    <div className="productInfoContainer">
-                        <h3 id="productName" className="mt-0">
-                            {name}
-                        </h3>
-                        <h3 id="productPrice" className="mt-1">
-                            {'Rs:' + price + '/='}
-                        </h3>
+
+                <div className="cont">
+                    <div className="row">
+                        <div className="col">
+                            <img id="productImage" src={imageLink} />
+                        </div>
+                        <div className="col-sm-6 infoDiv">
+
+                            <div className="productInfoContainer">
+                                <strong id="productName">
+                                    {name}
+                                </strong>
+                                {
+                                    discount !== '' && discount > 0
+                                    &&
+                                    <strong>
+                                        {'LKR ' + (price - discountPrice) + '.0/='}
+                                    </strong>
+                                }
+                                {
+                                    discount !== '' && discount > 0
+                                    &&
+                                    <strong>
+                                        <p className="font-weight-bold">
+                                            {~~discount + '% OFF  |  '}
+                                            <strike>{'LKR ' + price + '/='}</strike>
+                                        </p>
+                                    </strong>
+                                }
+                                {
+                                    discount === '' || discount <= 0
+                                    &&
+                                    <strong>
+                                        <p className="font-weight-bold">
+                                            {'LKR ' + price + '/='}
+                                        </p>
+                                    </strong>
+                                }
+                                <strong>
+                                    {description}
+                                </strong>
+                                <input
+                                    className="btn btn-primary w-50 mt-3 btn"
+                                    type="button"
+                                    value="Add to Cart"
+                                    onClick={() => this.addToCart(productId, LoginState.getUserId())}
+                                />
+                                <input
+                                    className="btn btn-primary w-50 mt-2 btn"
+                                    type="button"
+                                    value="Add to WishList"
+                                    onClick={() => this.addToWishList(productId, LoginState.getUserId())}
+                                />
+                                <div className="ratings">
+                                    <RatingList productId={productId} />
+                                </div>
+                            </div>
+
+                        </div>
                     </div>
                 </div>
-                <div className="buttonContainer">
-                    <input
-                        id="buyButton"
-                        type="button"
-                        value="Add to Cart"
-                        onClick={() => this.addToCart(productId, userid)}
-                    />
-                    <input
-                        id="addToWishListButton"
-                        type="button"
-                        value="Add to WishList"
-                        onClick={() => this.addToWishList(productId, userid)}
-                    />
-                </div>
-                <div className="ratings">
-                    <RatingList productId={productId} />
+
+
+
+                <div className="productDetails">
+
                 </div>
             </div>
         );

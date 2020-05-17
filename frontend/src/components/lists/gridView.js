@@ -1,5 +1,6 @@
 import React from "react";
 import css from '../../css/gridView.css';
+import {Link} from "react-router-dom";
 
 class Grid extends React.Component
 {
@@ -40,7 +41,7 @@ class Grid extends React.Component
                                 <strong>
                                     <p className="font-weight-bold">
                                         {~~discount + '% OFF  |  '}
-                                        <strike>{'Rs ' + product.price + '/='}</strike>
+                                        <strike>{'LKR ' + product.price + '/='}</strike>
                                     </p>
                                 </strong>
                             }
@@ -49,19 +50,24 @@ class Grid extends React.Component
                                 &&
                                 <strong>
                                     <p className="font-weight-bold">
-                                        {'Rs ' + product.price + '/='}
+                                        {'LKR ' + product.price + '/='}
                                     </p>
                                 </strong>
                             }
 
 
-                            <input type="button" className="btn btn-primary mt-2 mx-auto d-block w-100" value="View"/>
+                            <Link to={'/product/' + product._id} style={{ textDecoration: 'none' }}>
+                                <input type="button" className="btn btn-primary mt-2 mx-auto d-block w-100" value="View"/>
+                            </Link>
                         </div>
                     </div>
 
                 </div>
             )
         });
+
+
+
 
         return (
             <div>

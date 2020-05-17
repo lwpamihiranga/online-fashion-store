@@ -28,10 +28,8 @@
 }
 #productImage
 {
-    width: 20%;
-    min-width: 130px;
-    border-radius: 10px;
-    border: 5px solid white;
+    width: 100%;
+    height: auto;
 }
 #productName
 {
@@ -39,7 +37,7 @@
     background-color: white;
     text-align: left;
     margin-top: 5px;
-    margin-left: 5px;
+    font-size: 30px;
 }
 #productPrice
 {
@@ -52,8 +50,6 @@
 .productInfoContainer
 {
     width: 100%;
-    margin-left: 20px;
-    border-radius: 10px;
     display: flex;
     flex-direction: column;
     background-color: white;
@@ -79,16 +75,17 @@
     text-decoration: none;
     cursor: pointer;
 }
-#buyButton
+.btn
 {
-    width: 50%;
-    background-color: white;
-    padding: 10px;
-    border-radius: 10px;
-    outline: none;
-    float: left;
-    text-decoration: none;
-    cursor: pointer;
+    width: 90%;
+    min-width: 150px;
+}
+.imageDiv
+{
+
+}
+.infoDiv
+{
 
 }
 

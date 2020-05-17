@@ -21,3 +21,7 @@ exports.isManager = () => {
 exports.isLoggedIn = () => {
     return !(id === null || id === '');
 };
+exports.getUserId = () =>
+{
+    return id;
+}
