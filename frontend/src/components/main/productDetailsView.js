@@ -135,6 +135,12 @@ class App extends React.Component {
     }
 
     addToWishList = (productId, userId) => {
+
+        if(!LoginState.isUser())
+        {
+            return;
+        }
+
         if (productId != null && userId != null) {
             axios
                 .post('http://localhost:5000/api/wishList/create?productId=' + productId + '&userId=' + userId)
@@ -160,6 +166,13 @@ class App extends React.Component {
     };
 
     addToCart = (productId, userId) => {
+
+        if(!LoginState.isUser())
+        {
+            return;
+        }
+
+
         if (productId != null && userId != null) {
             axios
                 .post('http://localhost:5000/api/cart/create?productId=' + productId + '&userId=' + userId)

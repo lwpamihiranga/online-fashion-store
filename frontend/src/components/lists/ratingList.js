@@ -8,6 +8,10 @@ import css from '../../css/rateList.css';
 import axios from "axios";
 import {Link} from "react-router-dom";
 
+
+const LoginState = require('../../_helpers/loginState');
+
+
 class App extends React.Component
 {
 
@@ -31,15 +35,6 @@ class App extends React.Component
     render() {
 
 
-        //user login informations
-        var name = localStorage.getItem('userName');
-        var password = localStorage.getItem('userPassword');
-        var type = localStorage.getItem('userType');
-        var userid = localStorage.getItem('userId');
-        var imageLink = localStorage.getItem('userImageLink');
-        var email = localStorage.getItem('userEmail');
-
-
         //productId
         const productId = this.props.productId;
         if(this.state.isNeedToGetFromServer)
@@ -50,7 +45,7 @@ class App extends React.Component
 
         const list = this.state.ratingList.map(rating => {
 
-            if(rating.userId !== userid)
+            if(rating.userId !== LoginState.getUserId())
             {
                 let comment = rating.comment;
                 const rate = this.state.starSize.map(i => {
@@ -116,29 +111,27 @@ class App extends React.Component
 
 
             <div className="ratingContainer">
-                {(this.state.ratingList.length > 0 || (userid != null)) &&
 
-                    <div className="ratingList">
-                        <h3 id="commentText">Comments</h3>
 
-                        {userid != null && type === 'user' &&
+                    <div className="ratingList mt-3">
+                        <strong>RATINGS</strong>
+
+
                             <div className="userInputRating">
                                 <div className="rateItem">
                                     {userInputRatings}
                                     </div>
                                     <div className="crudOperations">
-                                    <input id="commentInput" type="text" onChange={(e)=> this.setState({userTypingComment:e.target.value})} value={this.state.userTypingComment} placeholder="Enter your comment"/>
-                                    <img className="crudImg" onClick={()=> this.updateRating(userid,productId,this.state.userCommentId,this.state.userTypingComment,this.state.selectedStarCount)} src={finishImage}/>
+                                    <input  className="form-control"  type="text" onChange={(e)=> this.setState({userTypingComment:e.target.value})} value={this.state.userTypingComment} placeholder="Enter your comment"/>
+                                    <img className="crudImg" onClick={()=> this.updateRating(LoginState.getUserId(),productId,this.state.userCommentId,this.state.userTypingComment,this.state.selectedStarCount)} src={finishImage}/>
 
-                                    {this.state.userCommentId != "" &&
-                                    <img className="crudImg" onClick={()=> this.deleteRating(productId,this.state.userCommentId)} src={deleteImage}/>
+                                    {this.state.userCommentId !== "" &&
+                                     <img className="crudImg" onClick={()=> this.deleteRating(productId,this.state.userCommentId)} src={deleteImage}/>
                                     }
                                 </div>
                             </div>
-                    }
                     {list}
                         </div>
-                }
 
             </div>
 
@@ -165,6 +158,11 @@ class App extends React.Component
     }
     updateRating = (userId,productId,ratingId,comment,rate) => {
 
+
+        if(!LoginState.isUser())
+        {
+            return;
+        }
         if(this.state.userTypingComment === "")
         {
             alert("Enter a comment");
@@ -202,9 +200,14 @@ class App extends React.Component
             }
         }
 
-    }
+    };
     deleteRating = (productId,id) => {
 
+
+        if(!LoginState.isUser())
+        {
+            return;
+        }
 
         axios.post("http://localhost:5000/api/ratings/delete?rateId=" + id)
             .then(response => {

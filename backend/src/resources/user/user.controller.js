@@ -28,7 +28,7 @@ exports.register = (req, res, next) => {
                             email: req.body.email,
                             password: hash,
                             type: req.body.type,
-                            imageLink: req.file.path,
+                            imageLink: req.file.originalname,
                         });
 
                         user.save()
