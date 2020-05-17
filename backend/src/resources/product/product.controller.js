@@ -1,8 +1,10 @@
 const mongoose = require('mongoose');
 const slash = require('slash');
 const fs = require('fs');
-
+const Multer = require('multer');
 const Product = require('../product/product.model');
+
+
 
 exports.getAll = (req, res, next) => {
     Product.find()
@@ -51,11 +53,9 @@ exports.createOne = (req, res, next) => {
         categoryName: req.body.categoryName,
         hasDiscount: req.body.hasDiscount,
         discount: req.body.discount,
-        imageLink: imagePath,
+        imageLink: req.file.originalname,
 
     });
-    product.image.data = fs.readFileSync(req.file.path);
-
 
     product
         .save()

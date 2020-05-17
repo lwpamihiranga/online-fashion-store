@@ -8,28 +8,38 @@ class App extends React.Component {
         super(props);
         this.state = {
             categoryList: [],
+            selectedCategory : '',
+            productList : []
         };
         this.getCategoriesFromApi();
     }
 
     render() {
+
+        const categories = this.state.categoryList.map(cat => {
+
+            if(this.state.selectedCategory === cat._id)
+            {
+                return(<option selected value={cat._id}>{cat.catName}</option>)
+            }
+            else
+            {
+                return(<option value={cat._id}>{cat.catName}</option>)
+            }
+        });
+
+
         return(
             <div>
-                {/*<CategoryList categoryList={this.state.categoryList} />*/}
-
-
-                <GridView/>
-                {/*<div className="row mt-5">*/}
-                {/*    <div className="col-sm bg-primary">1 of 4</div>*/}
-                {/*    <div className="col-sm bg-danger">2 of 4</div>*/}
-                {/*    <div className="col-sm bg-success">3 of 4</div>*/}
-                {/*    <div className="col-sm bg-info">4 of 4</div>*/}
-                {/*</div>*/}
+                <div>
+                    <select className="mt-2 ml-2 mb-2"
+                            onChange={(e) => this.onCategoryChanged(e.target.value)}>
+                        {categories}
+                    </select>
+                </div>
+                <GridView productList={this.state.productList}/>
             </div>
             )
-
-
-
     }
 
     getCategoriesFromApi() {
@@ -39,10 +49,36 @@ class App extends React.Component {
             .then((response) => {
                 if (response.status === 200) {
                     var list = response.data;
-                    this.setState({ categoryList: list });
+
+                    list.map((itm,index) => {
+                        if(index === 0)
+                        {
+                            this.setState({ categoryList: list,selectedCategory : itm._id });
+                            this.onCategoryChanged( itm._id);
+                        }
+                    });
+
+
                 }
             })
             .catch((error) => console.log('Category fetch error: ', error));
+    }
+    onCategoryChanged = (catId) => {
+
+        this.setState({ selectedCategory: catId});
+
+        axios.get('http://localhost:5000/api/products/findByCategoryId?id=' + catId)
+            .then(res => {
+
+                if(res.status === 200)
+                {
+                    this.setState({productList : res.data});
+                }
+
+            })
+            .catch(error => {
+
+            });
     }
 }
 export default App;

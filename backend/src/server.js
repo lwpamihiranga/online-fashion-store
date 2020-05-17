@@ -3,6 +3,7 @@ const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
+
 const databaseConnector = require('./utils/db');
 
 const productRouter = require('./resources/product/product.router');
@@ -13,7 +14,7 @@ const wishListRouter = require('./resources/wishList/wishList.router');
 const cartRouter = require('./resources/cart/cart.router');
 
 const app = express();
-app.use('/utils/uploads', express.static('utils/uploads'));
+app.use('./src', express.static('./src/'));
 
 app.use(morgan('dev'));
 // app.use('/uploads', express.static('uploads')); // this middleware makes the uploads folder a static folder, so anyone can access it
@@ -27,6 +28,10 @@ app.use('/api/category', categoryRouter);
 app.use('/api/users', userRouter);
 app.use('/api/wishList', wishListRouter);
 app.use('/api/cart', cartRouter);
+
+
+
+
 
 app.use((req, res, next) => {
     const error = new Error();
