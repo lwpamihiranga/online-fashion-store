@@ -55,8 +55,8 @@ class ManagerView extends React.Component {
                     </div>
                     <div className="form-group">
                         <label htmlFor="usr">Category:</label>
-                        <select id="cars" className="form-control w-100 p-2" onChange={(e) => this.setState({ category: e.target.value})}>
-                            <option disabled selected value></option>
+                        <select className="form-control w-100 p-2" onChange={(e) => this.setState({ category: e.target.value})}>
+                            <option disabled selected value/>
                             {categories}
                         </select>
                     </div>

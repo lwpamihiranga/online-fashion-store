@@ -13,13 +13,13 @@ class Grid extends React.Component
             {
                 productList : []
             });
-        this.getAllProducts();
+        //this.getAllProducts();
     }
 
     render() {
 
 
-        const rows = this.state.productList.map(product => {
+        const rows = this.props.productList.map(product => {
 
             const url = require('../../uploads/products/' + product.imageLink);
 
@@ -60,23 +60,38 @@ class Grid extends React.Component
         )
 
     }
-    getAllProducts = () => {
-
-        axios.get('http://localhost:5000/api/products')
-            .then(response => {
-
-                if(response.status === 200)
-                {
-                    const list = response.data;
-                    this.setState({productList : response.data});
-                }
-
-            })
-            .catch(error => {
-
-                alert(error);
-            })
-
-    };
+    // getAllProducts = () => {
+    //
+    //     axios.get('http://localhost:5000/api/products')
+    //         .then(response => {
+    //
+    //             if(response.status === 200)
+    //             {
+    //                 const list = response.data;
+    //                 this.setState({productList : response.data});
+    //             }
+    //
+    //         })
+    //         .catch(error => {
+    //
+    //             alert(error);
+    //         })
+    //
+    // };
+    // getAllCategories = () => {
+    //
+    //     axios.get('http://localhost:5000/api/category')
+    //         .then(response => {
+    //
+    //             if(response.status === 200)
+    //             {
+    //                 this.setState({categoryList : response.data})
+    //             }
+    //
+    //         })
+    //         .catch(error => {
+    //
+    //         });
+    // };
 }
 export default Grid;
