@@ -37,44 +37,47 @@ class ManagerView extends React.Component {
 
 
         return (
-            <div className="container-fluid mt-4">
+            <div className="container-fluid">
                 <div className="p-5">
-                    <div className="form-group">
-                        <img className="img-fluid mx-auto d-block loginImage" src={UploadImage} />
-                        <input
-                            type="file"
-                            id="file-input"
-                            className="btn btn-primary mt-2 mx-auto d-block"
-                            name="imageLink"
-                            onChange={(e) => this.setState({ imageLink: e.target.files[0] })}
-                        />
+                    <div className="form-group2">
+                        <div className="form-group">
+                            <img className="img-fluid mx-auto d-block loginImage" src={UploadImage} />
+                            <input
+                                type="file"
+                                id="file-input"
+                                className="btn btn-primary mt-2 mx-auto d-block form-group"
+                                name="imageLink"
+                                onChange={(e) => this.setState({ imageLink: e.target.files[0] })}
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="usr" className="label">Product Name:</label>
+                            <input type="text" className="form-control" id="usr"  onChange={(e) => this.setState({ name: e.target.value})}/>
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="usr" className="label">Category:</label>
+                            <select className="form-control w-100 p-2" onChange={(e) => this.setState({ category: e.target.value})}>
+                                <option disabled selected value/>
+                                {categories}
+                            </select>
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="pwd" className="label">Price:</label>
+                            <input type="number" min="1" step="any" className="form-control" id="pwd"  onChange={(e) => this.setState({ price: e.target.value})}/>
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="pwd" className="label">Discount:</label>
+                            <input type="number" min="1" step="any" className="form-control" id="pwd"  onChange={(e) => this.setState({ discount: e.target.value})}/>
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="exampleFormControlTextarea1" className="label">Description</label>
+                            <textarea className="form-control" id="exampleFormControlTextarea1" rows="4"  onChange={(e) => this.setState({ description: e.target.value})}/>
+                        </div>
+                        <div className="form-group">
+                            <input type="button" value="Submit" className="btn btn-primary mt-2 mx-auto d-block w-100" onClick={() => this.postProduct()}/>
+                        </div>
                     </div>
-                    <div className="form-group">
-                        <label htmlFor="usr">Product Name:</label>
-                        <input type="text" className="form-control" id="usr"  onChange={(e) => this.setState({ name: e.target.value})}/>
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="usr">Category:</label>
-                        <select className="form-control w-100 p-2" onChange={(e) => this.setState({ category: e.target.value})}>
-                            <option disabled selected value/>
-                            {categories}
-                        </select>
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="pwd">Price:</label>
-                        <input type="number" min="1" step="any" className="form-control" id="pwd"  onChange={(e) => this.setState({ price: e.target.value})}/>
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="pwd">Discount:</label>
-                        <input type="number" min="1" step="any" className="form-control" id="pwd"  onChange={(e) => this.setState({ discount: e.target.value})}/>
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="exampleFormControlTextarea1">Description</label>
-                        <textarea className="form-control" id="exampleFormControlTextarea1" rows="4"  onChange={(e) => this.setState({ description: e.target.value})}/>
-                    </div>
-                    <div className="form-group">
-                        <input type="button" value="Submit" className="btn btn-primary mt-2 mx-auto d-block w-100" onClick={() => this.postProduct()}/>
-                    </div>
+
                 </div>
             </div>
         );

@@ -17,9 +17,10 @@ class Grid extends React.Component
                             {console.log(url)}
                             <div key={product._id}
                                  className="row d-flex justify-content-center">
+
                                 <img src={url}
                                      alt="..."
-                                     className="img-responsive w-100 h-100 p-1"/>
+                                     className="img-responsive w-100 h-100 p-1 productImg"/>
                                 <strong>
                                     <p
                                         className="font-weight-bold">
