@@ -48,6 +48,12 @@ class App extends React.Component
             if(rating.userId !== LoginState.getUserId())
             {
                 let comment = rating.comment;
+                let username = rating.username;
+                let imageLink = rating.imageLink;
+
+                const finalImageLink = require('../../uploads/profile-pic/' + imageLink);
+
+
                 const rate = this.state.starSize.map(i => {
                     return(
                         <div className="fivestars">
@@ -63,13 +69,32 @@ class App extends React.Component
                 });
 
                 return(
-                    <div  className="rateItemContainer">
-                        <div>
-                            <p id="rateName">{comment}</p>
+                    <div  className="rateItemContainer mt-3">
+
+
+                            <div className="rateImage">
+                                <img src={finalImageLink} className="rateImage rounded-circle"/>
+                            </div>
+
+                        <div className="rateRowDiv">
+                            <div>
+                                <strong className="ratingUserName">{username}</strong>
+                            </div>
+                            <div className="rowStarContainer">
+                                <div className="Rowstars">
+                                    {rate}
+                                </div>
+                            </div>
+
+                            <div>
+                                <p>{comment}</p>
+                            </div>
                         </div>
-                        <div className="rateItem">
-                            {rate}
-                        </div>
+
+
+
+
+
                     </div>
                 )
             }
@@ -121,7 +146,7 @@ class App extends React.Component
                                 <div className="rateItem">
                                     {userInputRatings}
                                     </div>
-                                    <div className="crudOperations">
+                                    <div className="crudOperations  mt-2">
                                     <input  className="form-control"  type="text" onChange={(e)=> this.setState({userTypingComment:e.target.value})} value={this.state.userTypingComment} placeholder="Enter your comment"/>
                                     <img className="crudImg" onClick={()=> this.updateRating(LoginState.getUserId(),productId,this.state.userCommentId,this.state.userTypingComment,this.state.selectedStarCount)} src={finishImage}/>
 
@@ -185,14 +210,14 @@ class App extends React.Component
             }
             else
             {
-
-                const formData = new FormData();
-                formData.append('userId',userId);
-                formData.append('productId',productId);
-                formData.append('comment',comment);
-                formData.append('rate',rate);
-                formData.append('username',rate);
-                formData.append('imageLink',rate);
+                //
+                // const formData = new FormData();
+                // formData.append('userId',userId);
+                // formData.append('productId',productId);
+                // formData.append('comment',comment);
+                // formData.append('rate',rate);
+                // formData.append('username',rate);
+                // formData.append('imageLink',rate);
 
 
                 //user needs to create new rating
