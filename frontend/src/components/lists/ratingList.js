@@ -171,6 +171,8 @@ class App extends React.Component
         {
             if (ratingId !== "")
             {
+
+
                 //user needs to update
                 axios.post("http://localhost:5000/api/ratings/update?rateId=" + ratingId + "&rate=" + rate + "&comment=" + comment)
                     .then(response => {
@@ -184,8 +186,17 @@ class App extends React.Component
             else
             {
 
+                const formData = new FormData();
+                formData.append('userId',userId);
+                formData.append('productId',productId);
+                formData.append('comment',comment);
+                formData.append('rate',rate);
+                formData.append('username',rate);
+                formData.append('imageLink',rate);
+
+
                 //user needs to create new rating
-                axios.post("http://localhost:5000/api/ratings/create?userId=" + userId + "&productId=" + productId + "&comment=" + comment + "&rate=" + rate)
+                axios.post("http://localhost:5000/api/ratings/create?userId=" + userId + "&productId=" + productId + "&comment=" + comment + "&rate=" + rate + "&imageLink=" + LoginState.getUserImage() + "&username=" + LoginState.getUserName())
                     .then(response => {
                         if (response.status === 200) {
                             var list = response.data;

@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 const ratingModel = require('./rating.model');
+const userModel = require('../user/user.model');
+var MongoDB= require('mongodb');
 
 exports.getAll = (req, res, next) => {
     ratingModel
@@ -13,6 +15,8 @@ exports.createRating = (req, res) => {
     const productId = req.query.productId;
     const comment = req.query.comment;
     const rate = req.query.rate;
+    const imageLink = req.query.imageLink;
+    const username = req.query.username;
 
     if (
         userId != null &&
@@ -25,12 +29,18 @@ exports.createRating = (req, res) => {
         rating.productId = productId;
         rating.comment = comment;
         rating.rate = rate;
+        rating.username = username;
+        rating.imageLink = imageLink;
+
 
         rating
             .save()
             .then(() => res.json('Rating was added!'))
             .catch((err) => res.status(400).json('Error: ' + err));
-    } else {
+
+
+    }
+    else {
         res.status(400).json('Error : parameters are missing!');
     }
 };

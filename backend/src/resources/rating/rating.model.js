@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 
 const ratingSchema = mongoose.Schema({
+    imageLink: String,
+    username : String,
     userId: String,
     productId: String,
     comment: String,

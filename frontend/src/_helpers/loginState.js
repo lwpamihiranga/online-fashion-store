@@ -25,3 +25,11 @@ exports.getUserId = () =>
 {
     return id;
 }
+exports.getUserImage = () =>
+{
+    return imageLink;
+}
+exports.getUserName = () =>
+{
+    return name;
+}
