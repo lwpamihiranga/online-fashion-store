@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import { Button } from 'react-bootstrap';
+import { Button, Alert } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShoppingCart, faHeart } from '@fortawesome/free-solid-svg-icons';
 
@@ -12,7 +12,17 @@ class App extends React.Component {
     constructor(props) {
         super(props);
 
-        this.state = { product: [], isFirstTime: true };
+        this.state = {
+            product: [],
+            isFirstTime: true,
+            isAlert: false,
+            alert: { variant: '', text: '' },
+        };
+
+        // this will remove the alert message in 5 secondss
+        setTimeout(() => {
+            this.setState({ isAlert: false });
+        }, 5000);
     }
 
     render() {
@@ -40,7 +50,8 @@ class App extends React.Component {
         });
 
         return (
-            <div className="productDetailscontainer">
+            <div className="productDetailscontainer" t>
+                {this.state.isAlert ? <Alert variant={this.state.alert.variant}>{this.state.alert.text}</Alert> : ''}
                 <div className="cont">
                     <div className="row">
                         <div className="col">
@@ -135,9 +146,20 @@ class App extends React.Component {
                     if (response.status === 200) {
                         var list = response.data;
                         if (list.length === 0) {
-                            alert('This product has already added to your wishList');
+                            // alert('This product has already added to your wishList');
+                            this.setState({
+                                isAlert: true,
+                                alert: {
+                                    variant: 'warning',
+                                    text: 'This product has already added to your wishList',
+                                },
+                            });
                         } else {
-                            alert('Successfully added to the wishList!');
+                            // alert('Successfully added to the wishList!');
+                            this.setState({
+                                isAlert: true,
+                                alert: { variant: 'success', text: 'Successfully added to the wishList!' },
+                            });
                         }
                     }
                 })
@@ -164,9 +186,20 @@ class App extends React.Component {
                     if (response.status === 200) {
                         var list = response.data;
                         if (list.length === 0) {
-                            alert('This product has already added to your cart');
+                            // alert('This product has already added to your cart');
+                            this.setState({
+                                isAlert: true,
+                                alert: {
+                                    variant: 'warning',
+                                    text: 'This product has already added to your cart',
+                                },
+                            });
                         } else {
-                            alert('Successfully added to the cart!');
+                            // alert('Successfully added to the cart!');
+                            this.setState({
+                                isAlert: true,
+                                alert: { variant: 'success', text: 'Successfully added to the cart!' },
+                            });
                         }
                     }
                 })
