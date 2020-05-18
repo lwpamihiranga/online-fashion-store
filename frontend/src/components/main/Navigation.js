@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import { BrowserRouter as Router, Link, Route } from 'react-router-dom';
 
 //components
@@ -14,7 +15,7 @@ import Error from './Error';
 
 import Roles from '../../_helpers/role';
 
-import { Navbar, Nav, Button } from 'react-bootstrap';
+import { Navbar, Nav, Button, NavDropdown } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShoppingCart, faHeart } from '@fortawesome/free-solid-svg-icons';
 import '../../css/style.css';
@@ -22,6 +23,17 @@ import '../../css/style.css';
 import LoginState from '../../_helpers/loginState';
 
 class App extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            categoryList: [],
+            selectedCategory: '',
+            productList: [],
+        };
+        this.getCategoriesFromApi();
+    }
+    categories = [];
+
     render() {
         //user login informations
         var name = localStorage.getItem('userName');
@@ -50,7 +62,16 @@ class App extends React.Component {
                                         <Nav.Link href="/" className="header-link">
                                             Home
                                         </Nav.Link>
-
+                                        <NavDropdown title="Catagories">
+                                            {this.categories.map((val) => {
+                                                return (
+                                                    <span>
+                                                        <NavDropdown.Item>{val.catName}</NavDropdown.Item>
+                                                        <NavDropdown.Divider />
+                                                    </span>
+                                                );
+                                            })}
+                                        </NavDropdown>
                                         {type != null && type === Roles.User && (
                                             <Nav.Link href="/cart" className="header-link">
                                                 <FontAwesomeIcon icon={faShoppingCart} />
@@ -141,6 +162,25 @@ class App extends React.Component {
         var id = localStorage.getItem('userId');
         var imageLink = localStorage.getItem('userImageLink');
         var email = localStorage.getItem('userEmail');
+    }
+
+    getCategoriesFromApi() {
+        //loading categories from the api to the state
+        axios
+            .get('http://localhost:5000/api/category/')
+            .then((response) => {
+                if (response.status === 200) {
+                    var list = response.data;
+                    this.categories = list;
+                    list.map((itm, index) => {
+                        if (index === 0) {
+                            this.setState({ categoryList: list, selectedCategory: itm._id });
+                            this.onCategoryChanged(itm._id);
+                        }
+                    });
+                }
+            })
+            .catch((error) => console.log('Category fetch error: ', error));
     }
 }
 export default App;
