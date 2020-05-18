@@ -66,7 +66,9 @@ class App extends React.Component {
                                             {this.categories.map((val) => {
                                                 return (
                                                     <span>
-                                                        <NavDropdown.Item>{val.catName}</NavDropdown.Item>
+                                                        <NavDropdown.Item href={'/productByCategory/' + val._id}>
+                                                            {val.catName}
+                                                        </NavDropdown.Item>
                                                         <NavDropdown.Divider />
                                                     </span>
                                                 );
@@ -140,6 +142,7 @@ class App extends React.Component {
                 <Route path={'/categories'} exact strict component={AdminCategoryView} />
                 <Route path={'/products'} exact strict component={ManagerView} />
                 <Route path={'/error'} exact strict component={Error} />
+                <Route path={'/productByCategory/:cid'} exact strict component={Category} />
             </Router>
         );
     }
