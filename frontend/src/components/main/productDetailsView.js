@@ -1,13 +1,12 @@
 import React from 'react';
 import axios from 'axios';
+import { Button } from 'react-bootstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faShoppingCart, faHeart } from '@fortawesome/free-solid-svg-icons';
 
 import css from '../../css/productDetailsView.css';
 import RatingList from '../lists/ratingList';
-const LoginState  = require('../../_helpers/loginState');
-
-
-
-
+const LoginState = require('../../_helpers/loginState');
 
 class App extends React.Component {
     constructor(props) {
@@ -17,8 +16,6 @@ class App extends React.Component {
     }
 
     render() {
-
-
         const productId = this.props.match.params.pid;
         this.getProductDetails(productId);
 
@@ -33,63 +30,60 @@ class App extends React.Component {
             name = product.name;
             price = product.price;
             imageLink = require('../../uploads/products/' + product.imageLink);
-            if(product.discount !== '' && product.discount >= 0)
-            {
+            if (product.discount !== '' && product.discount >= 0) {
                 discount = (product.discount / product.price) * 100;
-            }
-            else
-            {
+            } else {
                 discount = product.discount;
             }
-            discountPrice =  product.discount;
+            discountPrice = product.discount;
             description = product.description;
-
         });
 
         return (
             <div className="productDetailscontainer">
-
                 <div className="cont">
                     <div className="row">
                         <div className="col">
                             <img id="productImage" src={imageLink} />
                         </div>
                         <div className="col-sm-6 infoDiv">
-
                             <div className="productInfoContainer">
-                                <strong id="productName">
-                                    {name}
-                                </strong>
-                                {
-                                    discount !== '' && discount > 0
-                                    &&
-                                    <strong>
-                                        {'LKR ' + (price - discountPrice) + '.0/='}
-                                    </strong>
-                                }
-                                {
-                                    discount !== '' && discount > 0
-                                    &&
+                                <strong id="productName">{name}</strong>
+                                {discount !== '' && discount > 0 && (
+                                    <strong>{'LKR ' + (price - discountPrice) + '.0/='}</strong>
+                                )}
+                                {discount !== '' && discount > 0 && (
                                     <strong>
                                         <p className="font-weight-bold">
                                             {~~discount + '% OFF  |  '}
                                             <strike>{'LKR ' + price + '/='}</strike>
                                         </p>
                                     </strong>
-                                }
-                                {
-                                    discount === '' || discount <= 0
-                                    &&
-                                    <strong>
-                                        <p className="font-weight-bold">
-                                            {'LKR ' + price + '/='}
-                                        </p>
-                                    </strong>
-                                }
-                                <strong>
-                                    {description}
-                                </strong>
-                                <input
+                                )}
+                                {discount === '' ||
+                                    (discount <= 0 && (
+                                        <strong>
+                                            <p className="font-weight-bold">{'LKR ' + price + '/='}</p>
+                                        </strong>
+                                    ))}
+                                <strong>{description}</strong>
+                                <Button
+                                    variant="primary"
+                                    className="w-50 mt-3 btn"
+                                    onClick={() => this.addToCart(productId, LoginState.getUserId())}
+                                >
+                                    <FontAwesomeIcon icon={faShoppingCart} />
+                                    Add to Cart
+                                </Button>
+
+                                <Button
+                                    variant="primary"
+                                    className="w-50 mt-2 btn"
+                                    onClick={() => this.addToWishList(productId, LoginState.getUserId())}
+                                >
+                                    <FontAwesomeIcon icon={faHeart} /> Add to WishList
+                                </Button>
+                                {/* <input
                                     className="btn btn-primary w-50 mt-3 btn"
                                     type="button"
                                     value="Add to Cart"
@@ -100,21 +94,16 @@ class App extends React.Component {
                                     type="button"
                                     value="Add to WishList"
                                     onClick={() => this.addToWishList(productId, LoginState.getUserId())}
-                                />
+                                /> */}
                                 <div className="ratings">
                                     <RatingList productId={productId} />
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </div>
 
-
-
-                <div className="productDetails">
-
-                </div>
+                <div className="productDetails"></div>
             </div>
         );
     }
@@ -135,9 +124,7 @@ class App extends React.Component {
     }
 
     addToWishList = (productId, userId) => {
-
-        if(!LoginState.isUser())
-        {
+        if (!LoginState.isUser()) {
             return;
         }
 
@@ -166,12 +153,9 @@ class App extends React.Component {
     };
 
     addToCart = (productId, userId) => {
-
-        if(!LoginState.isUser())
-        {
+        if (!LoginState.isUser()) {
             return;
         }
-
 
         if (productId != null && userId != null) {
             axios
