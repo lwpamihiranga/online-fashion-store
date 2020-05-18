@@ -81,6 +81,23 @@ class Grid extends React.Component
                                         <input className="btn btn-primary mt-2 mx-auto d-block w-100" type="button"  value="Remove" onClick={() => this.removeProductFromWishList(LoginState.getUserId(),product._id)}/>
                                     </div>
                             }
+                            {
+                                isCartList &&
+                                    <div>
+                                        <input
+                                            className="btn btn-primary mt-2 mx-auto d-block w-100"
+                                            type="button"
+                                            value="Buy"
+                                            onClick={() => this.buyProduct(LoginState.getUserId(), product._id)}
+                                        />
+                                        <input
+                                            className="btn btn-primary mt-2 mx-auto d-block w-100"
+                                            type="button"
+                                            value="Remove"
+                                            onClick={() => this.removeProductFromCart(LoginState.getUserId(), product._id)}
+                                        />
+                                    </div>
+                            }
 
                         </div>
                     </div>
@@ -148,6 +165,17 @@ class Grid extends React.Component
         }
 
 
-    }
+    };
+    removeProductFromCart = (userId, productId) => {
+        axios
+            .post('http://localhost:5000/api/cart/delete?userId=' + userId + '&productId=' + productId)
+            .then((response) => {
+                if (response.status === 200)
+                {
+                  this.props.getCartListFromServer(userId);
+                }
+            })
+            .catch((error) => console.log('Remove product from cart post error: ', error));
+    };
 }
 export default Grid;
