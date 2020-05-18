@@ -4,6 +4,9 @@ import {Link} from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.css';
 import css from '../../css/wishListList.css';
 
+
+
+
 class App extends React.Component
 {
     constructor(props) {
@@ -52,23 +55,7 @@ class App extends React.Component
             </div>
         )
     }
-    getWishListFromServer(userId)
-    {
-        axios.get("http://localhost:5000/api/wishList/find?userId=" + userId)
-            .then(response => {
-                if(response.status === 200)
-                {
-                    if(this.state.isNeedToRefresh)
-                    {
-                        var list = response.data;
-                        list.reverse();
-                        this.setState({wishList :list, isNeedToRefresh : false});
-                    }
 
-                }
-            })
-            .catch(error => console.log(error));
-    }
     removeProductFromWishList = (userId,productId) => {
 
         axios.post("http://localhost:5000/api/wishList/delete?userId=" + userId + "&productId=" + productId)
