@@ -22,9 +22,6 @@ import '../../css/style.css';
 import LoginState from '../../_helpers/loginState';
 
 class App extends React.Component {
-
-
-
     render() {
         //user login informations
         var name = localStorage.getItem('userName');
@@ -35,21 +32,15 @@ class App extends React.Component {
         var email = localStorage.getItem('userEmail');
 
         var url;
-       if(LoginState.isLoggedIn())
-       {
-          url = require('../../uploads/profile-pic/' + LoginState.getUserImage());
-       }
-
-
+        if (LoginState.isLoggedIn()) {
+            url = require('../../uploads/profile-pic/' + LoginState.getUserImage());
+        }
 
         return (
             <Router>
                 <Route
                     path="/"
                     render={() => {
-
-
-
                         return (
                             <Navbar expand="lg" sticky="top" className="navbar-color bg-primary p-3">
                                 <Navbar.Brand href="/">Fashion Store</Navbar.Brand>
@@ -59,21 +50,7 @@ class App extends React.Component {
                                         <Nav.Link href="/" className="header-link">
                                             Home
                                         </Nav.Link>
-                                        {email != null && password != null && (
-                                            <Nav.Link href="/" className="header-link" onClick={this.LogoutUser}>
-                                                Logout
-                                            </Nav.Link>
-                                        )}
-                                        {email == null && password == null && (
-                                            <Nav.Link href="/login" className="header-link">
-                                                Login
-                                            </Nav.Link>
-                                        )}
-                                        {email == null && password == null && (
-                                            <Nav.Link href="/register" className="header-link">
-                                                Register
-                                            </Nav.Link>
-                                        )}
+
                                         {type != null && type === Roles.User && (
                                             <Nav.Link href="/cart" className="header-link">
                                                 <FontAwesomeIcon icon={faShoppingCart} />
@@ -97,18 +74,36 @@ class App extends React.Component {
                                             </Nav.Link>
                                         )}
                                     </Nav>
-                                    {
-                                        LoginState.isLoggedIn() &&
-                                        <Nav.Item  className="justify-content-end">
-                                            <img src={url} className="userImage rounded-circle"/>
+                                    <Nav>
+                                        {email == null && password == null && (
+                                            <Nav.Link href="/login" className="">
+                                                <Button variant="dark">Login</Button>
+                                            </Nav.Link>
+                                        )}
+                                        {email == null && password == null && (
+                                            <Nav.Link href="/register" className="">
+                                                <Button variant="dark">Register</Button>
+                                            </Nav.Link>
+                                        )}
+                                    </Nav>
+                                    {LoginState.isLoggedIn() && (
+                                        <Nav.Item className="justify-content-end">
+                                            <img src={url} className="userImage rounded-circle" />
                                         </Nav.Item>
-                                    }
+                                    )}
                                     {name != null && (
                                         <Navbar.Text className="justify-content-end">
                                             Signed in as:
                                             <a> {name}</a>
                                         </Navbar.Text>
                                     )}
+                                    <Nav>
+                                        {email != null && password != null && (
+                                            <Nav.Link href="/" className="" onClick={this.LogoutUser}>
+                                                <Button variant="dark">Logout</Button>
+                                            </Nav.Link>
+                                        )}
+                                    </Nav>
                                 </Navbar.Collapse>
                             </Navbar>
                         );
