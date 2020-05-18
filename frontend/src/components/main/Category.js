@@ -39,7 +39,7 @@ class App extends React.Component {
                             {categories}
                         </select>
                     </div>
-                    <GridView productList={this.state.productList}/>
+                    <GridView productList={this.state.productList} isCategory = {true}/>
                 </div>
             </div>
 
