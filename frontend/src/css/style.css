@@ -35,3 +35,8 @@
     background-size: cover;
     padding-top: 50px;
 }
+.userImage
+{
+    width: 35px;
+    height: 35px;
+}

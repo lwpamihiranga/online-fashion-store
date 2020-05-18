@@ -19,7 +19,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShoppingCart, faHeart } from '@fortawesome/free-solid-svg-icons';
 import '../../css/style.css';
 
+import LoginState from '../../_helpers/loginState';
+
 class App extends React.Component {
+
+
+
     render() {
         //user login informations
         var name = localStorage.getItem('userName');
@@ -29,11 +34,22 @@ class App extends React.Component {
         var imageLink = localStorage.getItem('userImageLink');
         var email = localStorage.getItem('userEmail');
 
+        var url;
+       if(LoginState.isLoggedIn())
+       {
+          url = require('../../uploads/profile-pic/' + LoginState.getUserImage());
+       }
+
+
+
         return (
             <Router>
                 <Route
                     path="/"
                     render={() => {
+
+
+
                         return (
                             <Navbar expand="lg" sticky="top" className="navbar-color bg-primary p-3">
                                 <Navbar.Brand href="/">Fashion Store</Navbar.Brand>
@@ -81,6 +97,12 @@ class App extends React.Component {
                                             </Nav.Link>
                                         )}
                                     </Nav>
+                                    {
+                                        LoginState.isLoggedIn() &&
+                                        <Nav.Item  className="justify-content-end">
+                                            <img src={url} className="userImage rounded-circle"/>
+                                        </Nav.Item>
+                                    }
                                     {name != null && (
                                         <Navbar.Text className="justify-content-end">
                                             Signed in as:
