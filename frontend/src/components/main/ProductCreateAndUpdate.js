@@ -13,6 +13,7 @@ class ManagerView extends React.Component {
         this.state = (
             {
                 categoryList : [],
+                productId : '',
                 name : '',
                 category : '',
                 price : '',
@@ -20,6 +21,8 @@ class ManagerView extends React.Component {
                 description : '',
                 imageLink : ''
             });
+
+
     }
 
 
@@ -28,11 +31,25 @@ class ManagerView extends React.Component {
         this.getAllCategories();
 
 
-        const categories = this.state.categoryList.map(cat => {
+        const productId = this.props.match.params.pid;
+        if(productId !== undefined)
+        {
+            if(this.state.productId === '')
+            {
+                this.getProductDetails(productId);
+            }
+        }
 
-            return (
-                <option value={cat._id}>{cat.catName}</option>
-            )
+
+        const categories = this.state.categoryList.map(cat => {
+            if(this.state.category === cat._id )
+            {
+                return(<option selected value={cat._id}>{cat.catName}</option>)
+            }
+            else
+            {
+                return (<option value={cat._id}>{cat.catName}</option>)
+            }
         });
 
 
@@ -52,7 +69,7 @@ class ManagerView extends React.Component {
                         </div>
                         <div className="form-group">
                             <label htmlFor="usr" className="label">Product Name:</label>
-                            <input type="text" className="form-control" id="usr"  onChange={(e) => this.setState({ name: e.target.value})}/>
+                            <input type="text" value={this.state.name} className="form-control" id="usr"  onChange={(e) => this.setState({ name: e.target.value})}/>
                         </div>
                         <div className="form-group">
                             <label htmlFor="usr" className="label">Category:</label>
@@ -63,19 +80,31 @@ class ManagerView extends React.Component {
                         </div>
                         <div className="form-group">
                             <label htmlFor="pwd" className="label">Price:</label>
-                            <input type="number" min="1" step="any" className="form-control" id="pwd"  onChange={(e) => this.setState({ price: e.target.value})}/>
+                            <input type="number" value={this.state.price} min="1" step="any" className="form-control" id="pwd"  onChange={(e) => this.setState({ price: e.target.value})}/>
                         </div>
                         <div className="form-group">
                             <label htmlFor="pwd" className="label">Discount:</label>
-                            <input type="number" min="1" step="any" className="form-control" id="pwd"  onChange={(e) => this.setState({ discount: e.target.value})}/>
+                            <input type="number" value={this.state.discount} min="1" step="any" className="form-control" id="pwd"  onChange={(e) => this.setState({ discount: e.target.value})}/>
                         </div>
                         <div className="form-group">
                             <label htmlFor="exampleFormControlTextarea1" className="label">Description</label>
-                            <textarea className="form-control" id="exampleFormControlTextarea1" rows="4"  onChange={(e) => this.setState({ description: e.target.value})}/>
+                            <textarea className="form-control" value={this.state.description} id="exampleFormControlTextarea1" rows="4"  onChange={(e) => this.setState({ description: e.target.value})}/>
                         </div>
-                        <div className="form-group">
-                            <input type="button" value="Submit" className="btn btn-primary mt-2 mx-auto d-block w-100" onClick={() => this.postProduct()}/>
-                        </div>
+                        {
+                            this.state.productId === ''
+                            &&
+                            <div className="form-group">
+                                <input type="button" value="Submit" className="btn btn-primary mt-2 mx-auto d-block w-100" onClick={() => this.postProduct()}/>
+                            </div>
+                        }
+                        {
+                            this.state.productId !== ''
+                            &&
+                            <div className="form-group">
+                                <input type="button" value="Update" className="btn btn-primary mt-2 mx-auto d-block w-100" onClick={() => this.updateProduct()}/>
+                            </div>
+                        }
+
                     </div>
 
                 </div>
@@ -148,6 +177,38 @@ class ManagerView extends React.Component {
             .catch(error => {
                 alert(error);
             })
+    };
+    getProductDetails = (id) => {
+        //loading the relevant product by the id
+        axios
+            .get('http://localhost:5000/api/products/findByProductId?id=' + id)
+            .then((response) => {
+                if (response.status === 200)
+                {
+
+                    const list = response.data;
+
+                    list.map(item => {
+
+
+                        this.setState({
+
+                            productId : item._id,
+                            name : item.name,
+                            category : item.categoryId,
+                            price : item.price,
+                            discount : item.discount,
+                            description : item.description,
+                            imageLink :item.imageLink
+                        })
+
+                    });
+                }
+            })
+            .catch((error) => console.log('Fetch product by id error: ', error));
+    };
+    updateProduct = () => {
+
     }
 }
 export default ManagerView;
