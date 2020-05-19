@@ -11,6 +11,7 @@ import Cart from './Cart';
 import Category from './Category';
 import AdminCategoryView from './AdminCategoryView';
 import ManagerView from './StoreManagerProductView';
+import RegisterManager from './RegisterStoreManager';
 import Error from './Error';
 
 import Roles from '../../_helpers/role';
@@ -91,6 +92,11 @@ class App extends React.Component {
                                                 Categories
                                             </Nav.Link>
                                         )}
+                                        {email != null && password != null && type === Roles.Admin && (
+                                            <Nav.Link href="/RegisterManager" className="header-link">
+                                                Register
+                                            </Nav.Link>
+                                        )}
                                         {email != null && password != null && type === Roles.StoreManager && (
                                             <Nav.Link href="/products" className="header-link">
                                                 Products
@@ -143,6 +149,8 @@ class App extends React.Component {
                 <Route path={'/products'} exact strict component={ManagerView} />
                 <Route path={'/error'} exact strict component={Error} />
                 <Route path={'/productByCategory/:cid'} exact strict component={Category} />
+                <Route path={'/RegisterManager'} exact strict component={RegisterManager} />
+
             </Router>
         );
     }

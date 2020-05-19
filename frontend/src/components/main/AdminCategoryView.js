@@ -26,7 +26,7 @@ class AdminCategoryView extends React.Component {
         });
 
         return (
-            <div className="container-fluid p-5 mt-5 ">
+            <div className="container-fluid p-5">
                 <div className="input-group mb-3 p-4 bg-primary">
                     <input
                         type="text"

@@ -17,17 +17,7 @@ class App extends React.Component {
     }
 
     render() {
-        // const categories = this.state.categoryList.map(cat => {
 
-        //     if(this.state.selectedCategory === cat._id)
-        //     {
-        //         return(<option selected value={cat._id}>{cat.catName}</option>)
-        //     }
-        //     else
-        //     {
-        //         return(<option value={cat._id}>{cat.catName}</option>)
-        //     }
-        // });
 
         const categoryId = this.props.match.params.cid;
 
@@ -40,11 +30,6 @@ class App extends React.Component {
         return (
             <div className="productBody">
                 <div className="productDiv">
-                    {/* <div>
-                        <select className="mt-2 mb-2" onChange={(e) => this.onCategoryChanged(e.target.value)}>
-                            {categories}
-                        </select>
-                    </div> */}
                     <GridView productList={this.state.productList} isCategory={true} />
                 </div>
             </div>
