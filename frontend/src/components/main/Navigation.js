@@ -13,6 +13,7 @@ import AdminCategoryView from './AdminCategoryView';
 import ManagerView from './StoreManagerProductView';
 import RegisterManager from './RegisterStoreManager';
 import Error from './Error';
+import ProductCreateAndUpdate from './ProductCreateAndUpdate';
 
 import Roles from '../../_helpers/role';
 
@@ -147,6 +148,7 @@ class App extends React.Component {
                 <Route path={'/cart'} exact strict component={Cart} />
                 <Route path={'/categories'} exact strict component={AdminCategoryView} />
                 <Route path={'/products'} exact strict component={ManagerView} />
+                <Route path={'/updateProduct'} exact strict component={ProductCreateAndUpdate} />
                 <Route path={'/error'} exact strict component={Error} />
                 <Route path={'/productByCategory/:cid'} exact strict component={Category} />
                 <Route path={'/register/manager'} exact strict component={RegisterManager} />

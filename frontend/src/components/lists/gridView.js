@@ -18,8 +18,9 @@ class Grid extends React.Component
         const isCategory = this.props.isCategory;
         const isWishList = this.props.isWishList;
         const isCartList = this.props.isCartList;
+        const isStoreMangerGridView = this.props.isStoreMangerGridView;
 
-        const rows = this.props.productList.map(product => {
+        const rows = this.props.productList.map((product,index) => {
 
             const url = require('../../uploads/products/' + product.imageLink);
 
@@ -98,6 +99,18 @@ class Grid extends React.Component
                                         />
                                     </div>
                             }
+                            {
+                                isStoreMangerGridView &&
+                                <div>
+                                    <Link to={'/updateProduct'} style={{ textDecoration: 'none' }}>
+                                        <input
+                                            className="btn btn-primary mt-2 mx-auto d-block w-100"
+                                            type="button"
+                                            value="Update"
+                                        />
+                                    </Link>
+                                </div>
+                            }
 
                         </div>
                     </div>
@@ -108,11 +121,47 @@ class Grid extends React.Component
 
 
 
+        const image = require('../../images/pic_add.png');
 
         return (
             <div>
 
                 <div className="row mt-1">
+                    {
+                        isStoreMangerGridView &&
+                        <div className='col-md-3 col-sm-6 col-xs-6 mb-4'>
+                            <div className="card">
+                                <div className="card-body">
+                                    <div
+                                         className="row d-flex justify-content-center">
+                                        <img src={image}
+                                             alt="..."
+                                             className="img-responsive p-1 productImg"/>
+                                    </div>
+                                    <strong>
+                                        <p className="font-weight-bold">
+                                            {'GIVE THE PRODUCT AN ATTRACTIVE NAME'}
+                                        </p>
+                                    </strong>
+                                    <strong>
+                                        <p className="font-weight-bold">
+                                            Place Your Price and Discount
+                                        </p>
+                                    </strong>
+                                    <div>
+                                        <Link to={'/updateProduct'} style={{ textDecoration: 'none' }}>
+                                            <input
+                                                className="btn btn-primary mt-2 mx-auto d-block w-100"
+                                                type="button"
+                                                value="Create New"
+                                            />
+                                        </Link>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    }
                     {rows}
                 </div>
             </div>
