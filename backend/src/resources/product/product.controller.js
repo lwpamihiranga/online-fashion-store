@@ -71,23 +71,51 @@ exports.createOne = (req, res, next) => {
 };
 
 exports.updateOne = (req, res, next) => {
-    const id = req.params.id;
 
-    const updateOps = {};
-    for (const ops of req.body) {
-        updateOps[ops.propName] = ops.value;
-    }
 
-    Product.update({ _id: id }, { $set: updateOps })
-        .exec()
-        .then((result) => {
-            res.status(200).json(result);
-        })
-        .catch((error) => {
-            res.status(400).json({
-                error: error,
+    const productId = req.body.productId;
+    const categoryId = req.body.categoryId;
+    const description = req.body.description;
+    const name = req.body.name;
+    const price = req.body.price;
+    const imageLink = req.file.originalname;
+    const discount = req.body.discount;
+
+    Product.updateOne({_id : productId}, {
+            name: name,
+            price : price,
+            description : description,
+            categoryId : categoryId,
+            discount : discount,
+            imageLink : imageLink})
+        .then(res => {
+            res.status(201).json({
+                message: 'product updated',
+                created: result,
             });
+        })
+        .catch(error => {
+            res.status(500).json({ error: error });
         });
+
+
+    // const id = req.params.id;
+    //
+    // const updateOps = {};
+    // for (const ops of req.body) {
+    //     updateOps[ops.propName] = ops.value;
+    // }
+    //
+    // Product.update({ _id: id }, { $set: updateOps })
+    //     .exec()
+    //     .then((result) => {
+    //         res.status(200).json(result);
+    //     })
+    //     .catch((error) => {
+    //         res.status(400).json({
+    //             error: error,
+    //         });
+    //     });
 };
 
 exports.deleteOne = (req, res, next) => {

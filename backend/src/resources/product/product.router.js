@@ -51,6 +51,11 @@ router
     .patch(ProductController.updateOne)
     .delete(ProductController.deleteOne);
 
+router
+    .route('/update')
+    .get(ProductController.getAll)
+    .post(FileHandler.single('imageLink'), ProductController.updateOne);
+
 
 
 

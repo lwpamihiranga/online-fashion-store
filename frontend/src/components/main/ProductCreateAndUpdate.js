@@ -28,8 +28,11 @@ class ManagerView extends React.Component {
 
     render() {
         this.checkAuthentication();
-        this.getAllCategories();
 
+        if(this.state.categoryList.length === 0)
+        {
+            this.getAllCategories();
+        }
 
         const productId = this.props.match.params.pid;
         if(productId !== undefined)
@@ -209,6 +212,49 @@ class ManagerView extends React.Component {
     };
     updateProduct = () => {
 
+        if(this.state.name === '' || this.state.price === '' || this.state.description === '' || this.state.category === '')
+        {
+            alert('Enter Details Properly!');
+            return;
+        }
+        if(this.state.imageLink === '')
+        {
+            alert('Upload an Image!');
+            return;
+        }
+
+        var formdata = new FormData();
+        formdata.append('productId',this.state.productId);
+        formdata.append('imageLink', this.state.imageLink);
+        formdata.append('name', this.state.name);
+        formdata.append('price', this.state.price);
+        formdata.append('description', this.state.description);
+        formdata.append('discount', this.state.discount);
+
+        if(this.state.discount !== '' && this.state.discount > 0)
+        {
+            formdata.append('hasDiscount', true);
+        }
+        else
+        {
+            formdata.append('hasDiscount', false);
+        }
+        formdata.append('categoryId',this.state.category);
+
+        axios.post('http://localhost:5000/api/products/update',formdata)
+            .then(res => {
+                if(res.status === 201)
+                {
+                    this.props.history.push('/products');
+                }
+                else
+                {
+                    this.props.history.push('/products');
+                }
+            })
+            .catch(error => {
+                this.props.history.push('/products');
+            })
     }
 }
 export default ManagerView;
