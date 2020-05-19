@@ -19,7 +19,8 @@ class ManagerView extends React.Component {
                 price : '',
                 discount : '',
                 description : '',
-                imageLink : ''
+                imageLink : '',
+                prevImageLink : ''
             });
 
 
@@ -202,7 +203,7 @@ class ManagerView extends React.Component {
                             price : item.price,
                             discount : item.discount,
                             description : item.description,
-                            imageLink :item.imageLink
+                            prevImageLink :item.imageLink
                         })
 
                     });
@@ -212,49 +213,72 @@ class ManagerView extends React.Component {
     };
     updateProduct = () => {
 
-        if(this.state.name === '' || this.state.price === '' || this.state.description === '' || this.state.category === '')
-        {
+        if (this.state.name === '' || this.state.price === '' || this.state.description === '' || this.state.category === '') {
             alert('Enter Details Properly!');
             return;
         }
-        if(this.state.imageLink === '')
-        {
-            alert('Upload an Image!');
-            return;
-        }
 
-        var formdata = new FormData();
-        formdata.append('productId',this.state.productId);
-        formdata.append('imageLink', this.state.imageLink);
-        formdata.append('name', this.state.name);
-        formdata.append('price', this.state.price);
-        formdata.append('description', this.state.description);
-        formdata.append('discount', this.state.discount);
-
-        if(this.state.discount !== '' && this.state.discount > 0)
+        if (this.state.imageLink === '')
         {
-            formdata.append('hasDiscount', true);
+            axios.post('http://localhost:5000/api/products/updateWithoutImage',{
+                productId : this.state.productId,
+                name:this.state.name,
+                price : this.state.price,
+                description : this.state.description,
+                discount : this.state.discount,
+                categoryId : this.state.category
+            })
+                .then(res => {
+                    if(res.status === 201)
+                    {
+                        this.props.history.push('/products');
+                    }
+                    else
+                    {
+                        this.props.history.push('/products');
+                    }
+                })
+                .catch(error => {
+                    this.props.history.push('/products');
+                })
         }
         else
         {
-            formdata.append('hasDiscount', false);
-        }
-        formdata.append('categoryId',this.state.category);
+            var formdata = new FormData();
+            formdata.append('productId',this.state.productId);
+            formdata.append('name', this.state.name);
+            formdata.append('price', this.state.price);
+            formdata.append('description', this.state.description);
+            formdata.append('discount', this.state.discount);
+            formdata.append('categoryId',this.state.category);
+            if(this.state.discount !== '' && this.state.discount > 0)
+            {
+                formdata.append('hasDiscount', true);
+            }
+            else
+            {
+                formdata.append('hasDiscount', false);
+            }
 
-        axios.post('http://localhost:5000/api/products/update',formdata)
-            .then(res => {
-                if(res.status === 201)
-                {
+            formdata.append('imageLink', this.state.imageLink);
+
+            axios.post('http://localhost:5000/api/products/update',formdata)
+                .then(res => {
+                    if(res.status === 201)
+                    {
+                        this.props.history.push('/products');
+                    }
+                    else
+                    {
+                        this.props.history.push('/products');
+                    }
+                })
+                .catch(error => {
                     this.props.history.push('/products');
-                }
-                else
-                {
-                    this.props.history.push('/products');
-                }
-            })
-            .catch(error => {
-                this.props.history.push('/products');
-            })
+                })
+
+        }
+
     }
 }
 export default ManagerView;

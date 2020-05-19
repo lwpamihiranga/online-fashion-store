@@ -17,12 +17,13 @@ class ManagerView extends React.Component {
             {
                 productList : []
             });
+        this.getAllProducts();
     }
 
 
     render() {
         this.checkAuthentication();
-        this.getAllProducts();
+
 
         return(
             <div className="productBody">
