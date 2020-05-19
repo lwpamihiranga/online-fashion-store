@@ -102,7 +102,7 @@ class Grid extends React.Component
                             {
                                 isStoreMangerGridView &&
                                 <div>
-                                    <Link to={'/updateProduct'} style={{ textDecoration: 'none' }}>
+                                    <Link to={'/products/update/' + product._id} style={{ textDecoration: 'none' }}>
                                         <input
                                             className="btn btn-primary mt-2 mx-auto d-block w-100"
                                             type="button"
@@ -149,7 +149,7 @@ class Grid extends React.Component
                                         </p>
                                     </strong>
                                     <div>
-                                        <Link to={'/updateProduct'} style={{ textDecoration: 'none' }}>
+                                        <Link to={'/products/create'} style={{ textDecoration: 'none' }}>
                                             <input
                                                 className="btn btn-primary mt-2 mx-auto d-block w-100"
                                                 type="button"
