@@ -93,7 +93,7 @@ class App extends React.Component {
                                             </Nav.Link>
                                         )}
                                         {email != null && password != null && type === Roles.Admin && (
-                                            <Nav.Link href="/RegisterManager" className="header-link">
+                                            <Nav.Link href="/register/manager" className="header-link">
                                                 Register
                                             </Nav.Link>
                                         )}
@@ -110,7 +110,7 @@ class App extends React.Component {
                                             </Nav.Link>
                                         )}
                                         {email == null && password == null && (
-                                            <Nav.Link href="/register" className="">
+                                            <Nav.Link href="/register/user" className="">
                                                 <Button variant="dark">Register</Button>
                                             </Nav.Link>
                                         )}
@@ -142,14 +142,14 @@ class App extends React.Component {
                 <Route path={'/'} exact strict component={Category} />
                 <Route path={'/product/:pid'} exact strict component={ProductDetailsView} />
                 <Route path={'/login'} exact strict component={Login} />
-                <Route path={'/register'} exact strict component={Register} />
+                <Route path={'/register/user'} exact strict component={Register} />
                 <Route path={'/wishList'} exact strict component={WishList} />
                 <Route path={'/cart'} exact strict component={Cart} />
                 <Route path={'/categories'} exact strict component={AdminCategoryView} />
                 <Route path={'/products'} exact strict component={ManagerView} />
                 <Route path={'/error'} exact strict component={Error} />
                 <Route path={'/productByCategory/:cid'} exact strict component={Category} />
-                <Route path={'/RegisterManager'} exact strict component={RegisterManager} />
+                <Route path={'/register/manager'} exact strict component={RegisterManager} />
 
             </Router>
         );

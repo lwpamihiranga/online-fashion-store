@@ -6,6 +6,8 @@ import Roles from '../../_helpers/role';
 import loginImage from '../../images/login_image.png';
 import '../../css/Login.css';
 
+import LoginState from '../../_helpers/loginState';
+
 class App extends React.Component {
     constructor(props) {
         super(props);
@@ -19,6 +21,10 @@ class App extends React.Component {
     }
 
     render() {
+
+        this.checkAuthentication();
+
+
         return (
             <div className="registerContainer">
                 <div className="inputFieldContainer">
@@ -91,6 +97,11 @@ class App extends React.Component {
             }
         } else {
             alert('Fill out Required fields');
+        }
+    };
+    checkAuthentication = () => {
+        if (!LoginState.isLoggedIn() || !LoginState.isAdmin()) {
+            this.props.history.push('/error');
         }
     };
 }
