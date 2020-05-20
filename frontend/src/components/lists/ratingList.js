@@ -69,7 +69,7 @@ class App extends React.Component
                 });
 
                 return(
-                    <div  className="rateItemContainer mt-3 bg-primary">
+                    <div  className="rateItemContainer mt-1 bg-primary">
 
 
                             <div className="rateImageDiv">
@@ -155,7 +155,9 @@ class App extends React.Component
                                     }
                                 </div>
                             </div>
-                    {list}
+                    <div className="mt-3">
+                        {list}
+                    </div>
                         </div>
 
             </div>
