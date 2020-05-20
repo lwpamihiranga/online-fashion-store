@@ -26,7 +26,7 @@ class App extends React.Component {
                     <input
                         type="file"
                         id="file-input"
-                        className="btn btn-primary mt-2 mx-auto d-block w-25"
+                        className="btn btn-primary mt-2 mx-auto d-block w-50"
                         name="imageLink"
                         onChange={(e) => this.setState({ imageLink: e.target.files[0] })}
                     />
@@ -60,7 +60,6 @@ class App extends React.Component {
                         value="Register"
                         onClick={() => this.register(Roles.User)}
                     />
-                    {/*<input className="btn btn-primary mt-2 mx-auto d-block w-75" type="button" value="Register as admin" onClick={() => this.register(Roles.Admin)}/>*/}
                 </div>
             </div>
         );
