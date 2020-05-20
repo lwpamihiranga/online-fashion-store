@@ -5,10 +5,11 @@
     height: auto;
     margin-right: auto;
     margin-left: auto;
-    background-image: url("https://www.sustainablejungle.com/wp-content/uploads/2019/06/Photo-by-Artem-Beliaikin-@belart84-on-Unsplash.jpg");
-    background-repeat: no-repeat;
-    box-shadow: inset 0 0 0 1000px rgba(0,0,0,.0);
-    background-size: cover;
+    background-color: white;
+    /*background-image: url("https://www.sustainablejungle.com/wp-content/uploads/2019/06/Photo-by-Artem-Beliaikin-@belart84-on-Unsplash.jpg");*/
+    /*background-repeat: no-repeat;*/
+    /*box-shadow: inset 0 0 0 1000px rgba(0,0,0,.0);*/
+    /*background-size: cover;*/
 }
 .label
 {

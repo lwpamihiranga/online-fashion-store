@@ -145,7 +145,7 @@ class Grid extends React.Component
                                     </strong>
                                     <strong>
                                         <p className="font-weight-bold">
-                                            Place Your Price and Discount
+                                            Price and Discount
                                         </p>
                                     </strong>
                                     <div>
