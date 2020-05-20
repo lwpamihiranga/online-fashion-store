@@ -19,7 +19,7 @@ import Roles from '../../_helpers/role';
 
 import { Navbar, Nav, Button, NavDropdown } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faShoppingCart, faHeart,faHome,faCaretSquareDown } from '@fortawesome/free-solid-svg-icons';
+import { faShoppingCart, faHeart,faHome,faCaretSquareDown,faAddressBook,faListAlt } from '@fortawesome/free-solid-svg-icons';
 import '../../css/style.css';
 
 import LoginState from '../../_helpers/loginState';
@@ -91,16 +91,19 @@ class App extends React.Component {
                                         )}
                                         {LoginState.isLoggedIn() && LoginState.isAdmin() && (
                                             <Nav.Link href="/categories" className="header-link">
+                                                <FontAwesomeIcon icon={faListAlt} className="icon mr-1" />
                                                 <strong className="navLinkColor">Categories</strong>
                                             </Nav.Link>
                                         )}
                                         {LoginState.isLoggedIn() && LoginState.isAdmin() && (
                                             <Nav.Link href="/register/manager" className="header-link">
+                                                <FontAwesomeIcon icon={faAddressBook} className="icon mr-1" />
                                                 <strong className="navLinkColor">Register</strong>
                                             </Nav.Link>
                                         )}
                                         {LoginState.isLoggedIn() && LoginState.isManager() && (
                                             <Nav.Link href="/products" className="header-link">
+                                                <FontAwesomeIcon icon={faListAlt} className="icon mr-1" />
                                                 <strong className="navLinkColor">Products</strong>
                                             </Nav.Link>
                                         )}
