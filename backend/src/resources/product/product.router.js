@@ -57,8 +57,6 @@ router
     .post(FileHandler.single('imageLink'), ProductController.updateOne);
 
 router.post('/updateWithoutImage',(req,res) => {
-
-
     const productId = req.body.productId;
     const categoryId = req.body.categoryId;
     const description = req.body.description;
