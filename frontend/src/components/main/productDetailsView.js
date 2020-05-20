@@ -83,7 +83,7 @@ class App extends React.Component {
                                     className="w-50 mt-3 btn"
                                     onClick={() => this.addToCart(productId, LoginState.getUserId())}
                                 >
-                                    <FontAwesomeIcon icon={faShoppingCart} />
+                                    <FontAwesomeIcon icon={faShoppingCart} className="mr-1" />
                                     Add to Cart
                                 </Button>
 
@@ -92,7 +92,7 @@ class App extends React.Component {
                                     className="w-50 mt-2 btn"
                                     onClick={() => this.addToWishList(productId, LoginState.getUserId())}
                                 >
-                                    <FontAwesomeIcon icon={faHeart} /> Add to WishList
+                                    <FontAwesomeIcon icon={faHeart} className="mr-1" /> Add to WishList
                                 </Button>
                                 {/* <input
                                     className="btn btn-primary w-50 mt-3 btn"
