@@ -72,7 +72,7 @@ router.post('/updateWithoutImage',(req,res) => {
         description : description,
         categoryId : categoryId,
         discount : discount})
-        .then(res => {
+        .then(result => {
             res.status(201).json({
                 message: 'product updated',
                 created: result,
