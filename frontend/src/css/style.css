@@ -47,3 +47,9 @@
     height: 50px;
     background-size: cover;
 }
+.navLinkColor
+{
+    color: black;
+    font-family: Arial;
+    font-size: 16px;
+}

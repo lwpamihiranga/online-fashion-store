@@ -59,9 +59,12 @@ class App extends React.Component {
                                 <Navbar.Collapse id="basic-navbar-nav">
                                     <Nav className="mr-auto">
                                         <Nav.Link href="/" className="header-link">
-                                            Home
+                                           <strong className="navLinkColor">Home</strong>
                                         </Nav.Link>
-                                        <NavDropdown title="Catagories">
+                                        <NavDropdown
+                                            title={
+                                                <strong className="navLinkColor">Categories</strong>
+                                            }>
                                             {this.categories.map((val) => {
                                                 return (
                                                     <span>
@@ -76,28 +79,28 @@ class App extends React.Component {
                                         {LoginState.isUser() && (
                                             <Nav.Link href="/cart" className="header-link">
                                                 <FontAwesomeIcon icon={faShoppingCart} />
-                                                Cart
+                                                <strong className="navLinkColor">Cart</strong>
                                             </Nav.Link>
                                         )}
                                         {LoginState.isUser() && (
                                             <Nav.Link href="/wishList" className="header-link">
                                                 <FontAwesomeIcon icon={faHeart} className="icon" />
-                                                WishList
+                                                <strong className="navLinkColor">WishList</strong>
                                             </Nav.Link>
                                         )}
                                         {LoginState.isLoggedIn() && LoginState.isAdmin() && (
                                             <Nav.Link href="/categories" className="header-link">
-                                                Categories
+                                                <strong className="navLinkColor">Categories</strong>
                                             </Nav.Link>
                                         )}
                                         {LoginState.isLoggedIn() && LoginState.isAdmin() && (
                                             <Nav.Link href="/register/manager" className="header-link">
-                                                Register
+                                                <strong className="navLinkColor">Register</strong>
                                             </Nav.Link>
                                         )}
                                         {LoginState.isLoggedIn() && LoginState.isManager() && (
                                             <Nav.Link href="/products" className="header-link">
-                                                Products
+                                                <strong className="navLinkColor">Products</strong>
                                             </Nav.Link>
                                         )}
                                     </Nav>
@@ -120,8 +123,9 @@ class App extends React.Component {
                                     )}
                                     {LoginState.getUserName() != null && (
                                         <Navbar.Text className="justify-content-end mr-3">
-                                            Signed in as:
-                                            <a> {LoginState.getUserName()}</a>
+                                            <strong className="navLinkColor">
+                                                Signed in as : {LoginState.getUserName()}
+                                            </strong>
                                         </Navbar.Text>
                                     )}
                                     <Nav>
