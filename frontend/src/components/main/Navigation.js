@@ -19,7 +19,7 @@ import Roles from '../../_helpers/role';
 
 import { Navbar, Nav, Button, NavDropdown } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faShoppingCart, faHeart } from '@fortawesome/free-solid-svg-icons';
+import { faShoppingCart, faHeart,faHome,faCaretSquareDown } from '@fortawesome/free-solid-svg-icons';
 import '../../css/style.css';
 
 import LoginState from '../../_helpers/loginState';
@@ -59,11 +59,12 @@ class App extends React.Component {
                                 <Navbar.Collapse id="basic-navbar-nav">
                                     <Nav className="mr-auto">
                                         <Nav.Link href="/" className="header-link">
+                                            <FontAwesomeIcon icon={faHome} className="mr-1" />
                                            <strong className="navLinkColor">Home</strong>
                                         </Nav.Link>
                                         <NavDropdown
                                             title={
-                                                <strong className="navLinkColor">Categories</strong>
+                                                    <strong className="navLinkColor ml-1"> <FontAwesomeIcon icon={faCaretSquareDown} className="mr-1" />Categories</strong>
                                             }>
                                             {this.categories.map((val) => {
                                                 return (
