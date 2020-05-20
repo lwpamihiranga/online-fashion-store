@@ -141,8 +141,12 @@ class App extends React.Component
             <div className="ratingContainer">
 
 
+
                     <div className="ratingList mt-3">
-                        <strong>{'RATINGS' + ' | ' + this.state.ratingAvg + ' out of 5'}</strong>
+                        <div className="avgDiv">
+                            <strong>{this.state.ratingList.length  +' RATINGS'}</strong>
+                            <strong>{this.state.ratingAvg.toFixed(1) + ' AVERAGE' }</strong>
+                        </div>
                             <div className="userInputRating">
                                 <div className="rateItem">
                                     {userInputRatings}

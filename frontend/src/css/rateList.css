@@ -115,3 +115,8 @@
     margin-right: -10px;
     margin-top: 2px;
 }
+.avgDiv
+{
+    display: flex;
+    flex-direction: column;
+}
