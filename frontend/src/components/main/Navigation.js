@@ -37,13 +37,6 @@ class App extends React.Component {
     categories = [];
 
     render() {
-        //user login informations
-        var name = localStorage.getItem('userName');
-        var password = localStorage.getItem('userPassword');
-        var type = localStorage.getItem('userType');
-        var id = localStorage.getItem('userId');
-        var imageLink = localStorage.getItem('userImageLink');
-        var email = localStorage.getItem('userEmail');
 
         var url;
         if (LoginState.isLoggedIn()) {
@@ -76,41 +69,41 @@ class App extends React.Component {
                                                 );
                                             })}
                                         </NavDropdown>
-                                        {type != null && type === Roles.User && (
+                                        {LoginState.isUser() && (
                                             <Nav.Link href="/cart" className="header-link">
                                                 <FontAwesomeIcon icon={faShoppingCart} />
                                                 Cart
                                             </Nav.Link>
                                         )}
-                                        {type != null && type === Roles.User && (
+                                        {LoginState.isUser() && (
                                             <Nav.Link href="/wishList" className="header-link">
                                                 <FontAwesomeIcon icon={faHeart} className="icon" />
                                                 WishList
                                             </Nav.Link>
                                         )}
-                                        {email != null && password != null && type === Roles.Admin && (
+                                        {LoginState.isLoggedIn() && LoginState.isAdmin() && (
                                             <Nav.Link href="/categories" className="header-link">
                                                 Categories
                                             </Nav.Link>
                                         )}
-                                        {email != null && password != null && type === Roles.Admin && (
+                                        {LoginState.isLoggedIn() && LoginState.isAdmin() && (
                                             <Nav.Link href="/register/manager" className="header-link">
                                                 Register
                                             </Nav.Link>
                                         )}
-                                        {email != null && password != null && type === Roles.StoreManager && (
+                                        {LoginState.isLoggedIn() && LoginState.isManager() && (
                                             <Nav.Link href="/products" className="header-link">
                                                 Products
                                             </Nav.Link>
                                         )}
                                     </Nav>
                                     <Nav>
-                                        {email == null && password == null && (
+                                        {!LoginState.isLoggedIn() && (
                                             <Nav.Link href="/login" className="">
                                                 <Button variant="dark">Login</Button>
                                             </Nav.Link>
                                         )}
-                                        {email == null && password == null && (
+                                        {!LoginState.isLoggedIn() && (
                                             <Nav.Link href="/register/user" className="">
                                                 <Button variant="dark">Register</Button>
                                             </Nav.Link>
@@ -121,14 +114,14 @@ class App extends React.Component {
                                             <img src={url} className="userImage rounded-circle" />
                                         </Nav.Item>
                                     )}
-                                    {name != null && (
+                                    {LoginState.getUserName() != null && (
                                         <Navbar.Text className="justify-content-end mr-3">
                                             Signed in as:
-                                            <a> {name}</a>
+                                            <a> {LoginState.getUserName()}</a>
                                         </Navbar.Text>
                                     )}
                                     <Nav>
-                                        {email != null && password != null && (
+                                        {LoginState.isLoggedIn() && (
                                             <Nav.Link href="/" className="" onClick={this.LogoutUser}>
                                                 <Button variant="dark">Logout</Button>
                                             </Nav.Link>
