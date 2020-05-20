@@ -43,6 +43,8 @@ class App extends React.Component {
             url = require('../../uploads/profile-pic/' + LoginState.getUserImage());
         }
 
+        const storeLogo = require('../../images/logo.png');
+
         return (
             <Router>
                 <Route
@@ -50,7 +52,9 @@ class App extends React.Component {
                     render={() => {
                         return (
                             <Navbar expand="lg" sticky="top" className="navbar-color bg-primary p-3">
-                                <Navbar.Brand href="/">Fashion Store</Navbar.Brand>
+                                <Navbar.Brand href="/">
+                                    <img src={storeLogo} className="storeLogo" />
+                                </Navbar.Brand>
                                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                                 <Navbar.Collapse id="basic-navbar-nav">
                                     <Nav className="mr-auto">
