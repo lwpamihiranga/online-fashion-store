@@ -25,7 +25,9 @@ class App extends React.Component
             starSize : [1,2,3,4,5],
             selectedStarCount : 1,
             userTypingComment : "",
-            userCommentId : ""
+            userCommentId : "",
+            ratingStarCount : 0,
+            ratingAvg : 0.00
         });
 
         this.updateRating = this.updateRating.bind();
@@ -41,6 +43,7 @@ class App extends React.Component
         {
             this.getRatingsByProductId(productId);
         }
+
 
 
         const list = this.state.ratingList.map(rating => {
@@ -139,9 +142,7 @@ class App extends React.Component
 
 
                     <div className="ratingList mt-3">
-                        <strong>RATINGS</strong>
-
-
+                        <strong>{'RATINGS' + ' | ' + this.state.ratingAvg + ' out of 5'}</strong>
                             <div className="userInputRating">
                                 <div className="rateItem">
                                     {userInputRatings}
@@ -176,7 +177,30 @@ class App extends React.Component
                         var list = response.data;
                         //making it reverse to get the latest comment to the top
                         list.reverse();
-                        this.setState({ratingList :list, isNeedToGetFromServer : false,isRatingNeedsToBeChanged : true,starSize : [1,2,3,4,5]});
+                        var count = 0;
+
+                        list.map((item,index) => {
+
+                            count = count + item.rate;
+
+                            if(index === list.length - 1)
+                            {
+
+                                var avg = 0.00;
+                                avg = count / list.length;
+                                this.setState(
+                                    {
+                                        ratingList :list,
+                                        isNeedToGetFromServer : false,
+                                        isRatingNeedsToBeChanged : true,
+                                        starSize : [1,2,3,4,5],
+                                        ratingStarCount : count,
+                                        ratingAvg : avg
+                                    });
+                            }
+
+                        });
+
                     }
 
                 }
