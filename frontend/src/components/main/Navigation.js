@@ -78,13 +78,13 @@ class App extends React.Component {
                                         </NavDropdown>
                                         {LoginState.isUser() && (
                                             <Nav.Link href="/cart" className="header-link">
-                                                <FontAwesomeIcon icon={faShoppingCart} />
+                                                <FontAwesomeIcon icon={faShoppingCart} className="mr-1" />
                                                 <strong className="navLinkColor">Cart</strong>
                                             </Nav.Link>
                                         )}
                                         {LoginState.isUser() && (
                                             <Nav.Link href="/wishList" className="header-link">
-                                                <FontAwesomeIcon icon={faHeart} className="icon" />
+                                                <FontAwesomeIcon icon={faHeart} className="icon mr-1" />
                                                 <strong className="navLinkColor">WishList</strong>
                                             </Nav.Link>
                                         )}
