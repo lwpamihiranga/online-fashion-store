@@ -117,12 +117,12 @@ class App extends React.Component {
                                         )}
                                     </Nav>
                                     {LoginState.isLoggedIn() && (
-                                        <Nav.Item className="justify-content-end">
+                                        <Nav.Item className="justify-content-end mr-2">
                                             <img src={url} className="userImage rounded-circle" />
                                         </Nav.Item>
                                     )}
                                     {name != null && (
-                                        <Navbar.Text className="justify-content-end">
+                                        <Navbar.Text className="justify-content-end mr-3">
                                             Signed in as:
                                             <a> {name}</a>
                                         </Navbar.Text>
