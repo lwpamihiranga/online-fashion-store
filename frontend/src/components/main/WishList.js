@@ -1,6 +1,4 @@
 import React from 'react';
-
-import WishListList from '../lists/wishListList';
 import LoginState from '../../_helpers/loginState';
 
 import GridView from '../lists/gridView';

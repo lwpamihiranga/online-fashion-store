@@ -1,6 +1,5 @@
 import React from 'react';
 import axios from 'axios';
-import CategoryList from '../lists/categoryList';
 import GridView from '../lists/gridView';
 import style from '../../css/style.css';
 

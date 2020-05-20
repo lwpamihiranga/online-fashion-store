@@ -19,7 +19,7 @@ class App extends React.Component {
     render() {
         return (
             <div className="loginContainer">
-                <div className="inputFieldContainer">
+                <div className="inputFieldContainer mt-5">
                     <img className="img-fluid mx-auto d-block loginImage" src={loginImage} />
                     <input
                         className="form-control  mx-auto d-block mt-4 w-75 p-4"
@@ -43,18 +43,6 @@ class App extends React.Component {
                         value="Login"
                         onClick={() => this.checkLogin(this.state.username, this.state.password, Roles.User)}
                     />
-                    {/*<input*/}
-                    {/*    className="btn btn-primary mt-2 mx-auto d-block w-75"*/}
-                    {/*    type="button"*/}
-                    {/*    value="Login as admin"*/}
-                    {/*    onClick={() => this.checkLogin(this.state.username, this.state.password, Roles.Admin)}*/}
-                    {/*/>*/}
-                    {/*<input*/}
-                    {/*    className="btn btn-primary mt-2 mx-auto d-block w-75"*/}
-                    {/*    type="button"*/}
-                    {/*    value="Login as store manager"*/}
-                    {/*    onClick={() => this.checkLogin(this.state.username, this.state.password, Roles.StoreManager)}*/}
-                    {/*/>*/}
                 </div>
             </div>
         );

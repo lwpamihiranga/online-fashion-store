@@ -1,13 +1,7 @@
 import React from 'react';
-
-import CartList from '../lists/cartList';
-
 import LoginState from '../../_helpers/loginState';
 import GridView from "../lists/gridView";
 import axios from "axios";
-
-
-
 
 
 class App extends React.Component {
