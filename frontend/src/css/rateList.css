@@ -49,7 +49,6 @@
 {
     display: flex;
     flex-direction: row;
-    background-color: #282c34;
     border-radius: 10px;
     padding-left: 10px;
 }
@@ -85,6 +84,15 @@
     width: 50px;
     height: 50px;
     background-size: cover;
+    border: 2px solid white;
+}
+.rateImageDiv
+{
+    margin-top: auto;
+    margin-bottom: auto;
+    width: 50px;
+    height: 50px;
+    background-size: cover;
 }
 .Rowstars
 {
@@ -100,7 +108,7 @@
 }
 .ratingUserName
 {
-    font-size: 20px;
+    font-size: 15px;
 }
 .rowStarContainer
 {

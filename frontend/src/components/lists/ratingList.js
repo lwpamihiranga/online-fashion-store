@@ -69,10 +69,10 @@ class App extends React.Component
                 });
 
                 return(
-                    <div  className="rateItemContainer mt-3">
+                    <div  className="rateItemContainer mt-3 bg-primary">
 
 
-                            <div className="rateImage">
+                            <div className="rateImageDiv">
                                 <img src={finalImageLink} className="rateImage rounded-circle"/>
                             </div>
 
