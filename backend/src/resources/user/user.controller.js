@@ -38,7 +38,6 @@ exports.register = (req, res, next) => {
                                 // this will send and email to the created manager's email
                                 if (user.type === Roles.StoreManager) {
                                     MailService.sendManagerMail(
-                                        req.adminEmail,
                                         user.email,
                                         user.name
                                     );
