@@ -162,6 +162,14 @@ class Grid extends React.Component
                             </div>
                         </div>
                     }
+                    {
+                        this.props.productList.length === 0 &&
+                            <div className="errorContainer mt-4">
+                                <div className="alert alert-danger" role="alert">
+                                   No Products to Display
+                                </div>
+                            </div>
+                    }
                     {rows}
                 </div>
             </div>
