@@ -2,8 +2,12 @@ import React from "react";
 import css from '../../css/gridView.css';
 import {Link} from "react-router-dom";
 import axios from "axios";
+import {Nav, NavDropdown} from 'react-bootstrap';
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faArrowDown,faShoppingCart} from "@fortawesome/free-solid-svg-icons";
 
 const LoginState = require('../../_helpers/loginState');
+const BuyMethod = require('../../_helpers/Buy');
 
 class Grid extends React.Component
 {
@@ -85,12 +89,35 @@ class Grid extends React.Component
                             {
                                 isCartList &&
                                     <div>
-                                        <input
-                                            className="btn btn-primary mt-2 mx-auto d-block w-100"
-                                            type="button"
-                                            value="Buy"
-                                            onClick={() => this.buyProduct(LoginState.getUserId(), product._id)}
-                                        />
+                                        <button  className="btn btn-primary mt-2 mx-auto d-block w-100">
+                                            <NavDropdown
+                                                title={
+                                                    <strong className="dropDownTitle ml-1"> <FontAwesomeIcon icon={faShoppingCart} className="mr-1" />Buy</strong>
+                                                }>
+                                                   <button
+                                                       className="dropDownButton"
+                                                       onClick={() => this.buyProduct(product._id,BuyMethod.Card)}>
+                                                           <NavDropdown.Item>
+                                                               {'Card'}
+                                                           </NavDropdown.Item>
+                                                           <NavDropdown.Divider />
+                                                   </button>
+                                                <button
+                                                    className="dropDownButton"
+                                                    onClick={() => this.buyProduct(product._id,BuyMethod.CashOnDelivery)}>
+                                                        <NavDropdown.Item>
+                                                            {'Cash on Delivery'}
+                                                        </NavDropdown.Item>
+                                                </button>
+
+                                            </NavDropdown>
+                                        </button>
+                                        {/*<input*/}
+                                        {/*    className="btn btn-primary mt-2 mx-auto d-block w-100"*/}
+                                        {/*    type="button"*/}
+                                        {/*    value="Buy"*/}
+                                        {/*    onClick={() => this.buyProduct(LoginState.getUserId(), product._id)}*/}
+                                        {/*/>*/}
                                         <input
                                             className="btn btn-primary mt-2 mx-auto d-block w-100"
                                             type="button"
@@ -233,6 +260,9 @@ class Grid extends React.Component
                 }
             })
             .catch((error) => console.log('Remove product from cart post error: ', error));
+    };
+    buyProduct = (id,type) => {
+
     };
 }
 export default Grid;
