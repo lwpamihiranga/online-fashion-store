@@ -70,3 +70,17 @@ exports.delete = (req, res, next) => {
         .then(() => res.json('Item was Deleted!').sendStatus(200))
         .catch((err) => res.status(400).json('Error: ' + err));
 };
+exports.update = (req,res,next) => {
+
+    const id = req.query.id;
+    const isBought = req.query.isBought;
+
+    CartModel.updateOne({_id : id},{isBought: isBought})
+        .then(res => {
+
+            res.status(200).json('Updated');
+        })
+        .catch(error => {
+            res.status(400).json('Error: ' + err)
+        });
+};
