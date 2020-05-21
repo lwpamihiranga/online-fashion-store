@@ -233,13 +233,9 @@ class ManagerView extends React.Component {
                     {
                         this.props.history.push('/products');
                     }
-                    else
-                    {
-                        this.props.history.push('/products');
-                    }
                 })
                 .catch(error => {
-                    this.props.history.push('/products');
+                   console.log(error);
                 })
         }
         else

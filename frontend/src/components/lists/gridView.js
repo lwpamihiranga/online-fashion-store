@@ -163,7 +163,7 @@ class Grid extends React.Component
                         </div>
                     }
                     {
-                        this.props.productList.length === 0 &&
+                        this.props.productList.length === 0 && isStoreMangerGridView === undefined &&
                             <div className="errorContainer mt-4">
                                 <div className="alert alert-danger" role="alert">
                                    No Products to Display
