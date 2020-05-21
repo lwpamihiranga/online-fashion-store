@@ -4,7 +4,7 @@ import {Link} from "react-router-dom";
 import axios from "axios";
 import {Nav, NavDropdown} from 'react-bootstrap';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faArrowDown,faShoppingCart} from "@fortawesome/free-solid-svg-icons";
+import {faArrowDown,faShoppingCart,faCheck} from "@fortawesome/free-solid-svg-icons";
 
 const LoginState = require('../../_helpers/loginState');
 const BuyMethod = require('../../_helpers/Buy');
@@ -116,11 +116,13 @@ class Grid extends React.Component
                                         }
                                         {
                                             product.isBought &&
-                                            <input
-                                                className="btn btn-primary mt-2 mx-auto d-block w-100"
-                                                type="button"
-                                                disabled
-                                                value="You Bought It"/>
+                                            <button  className="btn btn-primary mt-2 mx-auto d-block w-100" disabled>
+                                                <NavDropdown
+                                                    title={
+                                                        <strong className="dropDownTitle ml-1"> <FontAwesomeIcon icon={faCheck} className="mr-1" />You Bought It</strong>
+                                                    }>
+                                                </NavDropdown>
+                                            </button>
                                         }
                                         <input
                                             className="btn btn-primary mt-2 mx-auto d-block w-100"
