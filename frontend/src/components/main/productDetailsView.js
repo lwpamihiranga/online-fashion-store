@@ -35,6 +35,7 @@ class App extends React.Component {
         var discount;
         var discountPrice = 0;
         var description;
+        var productCount;
 
         this.state.product.map((product) => {
             name = product.name;
@@ -47,6 +48,7 @@ class App extends React.Component {
             }
             discountPrice = product.discount;
             description = product.description;
+            productCount = product.productCount;
         });
 
         return (
@@ -94,6 +96,9 @@ class App extends React.Component {
                                 >
                                     <FontAwesomeIcon icon={faHeart} className="mr-1" /> Add to WishList
                                 </Button>
+                                <div>
+                                    <p>{productCount}</p>
+                                </div>
                                 {/* <input
                                     className="btn btn-primary w-50 mt-3 btn"
                                     type="button"
@@ -125,6 +130,7 @@ class App extends React.Component {
             .get('http://localhost:5000/api/products/findByProductId?id=' + id)
             .then((response) => {
                 if (response.status === 200) {
+                    
                     if (this.state.isFirstTime) {
                         var product = response.data;
                         this.setState({ product: product, isFirstTime: false });
@@ -195,11 +201,20 @@ class App extends React.Component {
                                 },
                             });
                         } else {
+                            var count = this.state.product[0].productCount--;
+                            axios.patch('http://localhost:5000/api/products/updateProductCount/'+ productId, {"productCount": 30})
+                            .then(response => {
+                                if(response.status === 200) {
+                                    console.log('product count updated')
+                                }
+                            })
                             // alert('Successfully added to the cart!');
                             this.setState({
                                 isAlert: true,
                                 alert: { variant: 'success', text: 'Successfully added to the cart!' },
                             });
+
+                    
                         }
                     }
                 })
