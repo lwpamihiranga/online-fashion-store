@@ -38,3 +38,14 @@
     -webkit-line-clamp: 2; /* number of lines to show */
     -webkit-box-orient: vertical;
 }
+.dropDownButton
+{
+    background: transparent;
+    border: none !important;
+    width: 100%;
+    text-align: left;
+}
+.dropDownTitle
+{
+    color: white;
+}
