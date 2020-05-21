@@ -63,13 +63,15 @@ router.post('/updateWithoutImage',(req,res) => {
     const name = req.body.name;
     const price = req.body.price;
     const discount = req.body.discount;
+    const productCount = req.body.productCount;
 
     Product.updateOne({_id : productId}, {
         name: name,
         price : price,
         description : description,
         categoryId : categoryId,
-        discount : discount})
+        discount : discount,
+        productCount: productCount})
         .then(result => {
             res.status(201).json({
                 message: 'product updated',
@@ -83,7 +85,26 @@ router.post('/updateWithoutImage',(req,res) => {
 });
 
 
-
+router.patch('/updateProductCount/:id', (req, res) => {
+    const id = req.params.id;
+    
+    console.log(req.body.productCount);
+    // const updateOps = {};
+    // for (const ops of req.body) {
+    //     updateOps[ops.propName] = ops.value;
+    // }
+    console.log(id);
+    Product.update({ _id: id }, { productCount: req.body.productCount })
+        .exec()
+        .then((result) => {
+            res.status(200).json(result);
+        })
+        .catch((error) => {
+            res.status(400).json({
+                error: error,
+            });
+        });
+})
 
 
 router.get('/:id', (req, res) => {
@@ -144,7 +165,6 @@ router.patch('/:id', (req, res) => {
     for (const ops of req.body) {
         updateOps[ops.propName] = ops.value;
     }
-
     Product.update({ _id: id }, { $set: updateOps })
         .exec()
         .then((result) => {
