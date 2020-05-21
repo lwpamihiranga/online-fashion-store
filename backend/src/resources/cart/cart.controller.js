@@ -21,6 +21,7 @@ exports.create = (req, res, next) => {
                     const cart = new CartModel();
                     cart.productId = productId;
                     cart.userId = userId;
+                    cart.isBought = false;
                     cart.save()
                         .then((cartList) => res.status(200).json(cartList))
                         .catch((err) => res.status(400).json('Error: ' + err));
@@ -44,6 +45,7 @@ exports.find = (req, res, next) => {
             list.map((item) => {
                 ProductModel.find({ _id: item.productId }).then((itm) => {
                     itm.map((it) => {
+                        it.isBought = item.isBought;
                         productList.push(it);
                     });
 
@@ -75,12 +77,8 @@ exports.update = (req,res,next) => {
     const id = req.query.id;
     const isBought = req.query.isBought;
 
-    CartModel.updateOne({_id : id},{isBought: isBought})
-        .then(res => {
-
-            res.status(200).json('Updated');
-        })
-        .catch(error => {
-            res.status(400).json('Error: ' + err)
-        });
+    CartModel
+        .update({ productId: id }, { isBought: isBought })
+        .then(() => res.json('Updated! '+ id).status(200))
+        .catch((err) => res.status(400).json('Error: ' + err));
 };

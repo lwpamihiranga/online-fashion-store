@@ -89,35 +89,39 @@ class Grid extends React.Component
                             {
                                 isCartList &&
                                     <div>
-                                        <button  className="btn btn-primary mt-2 mx-auto d-block w-100">
-                                            <NavDropdown
-                                                title={
-                                                    <strong className="dropDownTitle ml-1"> <FontAwesomeIcon icon={faShoppingCart} className="mr-1" />Buy</strong>
-                                                }>
-                                                   <button
-                                                       className="dropDownButton"
-                                                       onClick={() => this.buyProduct(product._id,BuyMethod.Card)}>
-                                                           <NavDropdown.Item>
-                                                               {'Card'}
-                                                           </NavDropdown.Item>
-                                                           <NavDropdown.Divider />
-                                                   </button>
-                                                <button
-                                                    className="dropDownButton"
-                                                    onClick={() => this.buyProduct(product._id,BuyMethod.CashOnDelivery)}>
-                                                        <NavDropdown.Item>
-                                                            {'Cash on Delivery'}
-                                                        </NavDropdown.Item>
-                                                </button>
-
-                                            </NavDropdown>
-                                        </button>
-                                        {/*<input*/}
-                                        {/*    className="btn btn-primary mt-2 mx-auto d-block w-100"*/}
-                                        {/*    type="button"*/}
-                                        {/*    value="Buy"*/}
-                                        {/*    onClick={() => this.buyProduct(LoginState.getUserId(), product._id)}*/}
-                                        {/*/>*/}
+                                        {
+                                            !product.isBought &&
+                                                <button  className="btn btn-primary mt-2 mx-auto d-block w-100">
+                                                    <NavDropdown
+                                                        title={
+                                                            <strong className="dropDownTitle ml-1"> <FontAwesomeIcon icon={faShoppingCart} className="mr-1" />Buy</strong>
+                                                        }>
+                                                        <button
+                                                            className="dropDownButton"
+                                                            onClick={() => this.buyProduct(product._id,BuyMethod.Card)}>
+                                                            <NavDropdown.Item>
+                                                                {'Card'}
+                                                            </NavDropdown.Item>
+                                                            <NavDropdown.Divider />
+                                                        </button>
+                                                        <button
+                                                            className="dropDownButton"
+                                                            onClick={() => this.buyProduct(product._id,BuyMethod.CashOnDelivery)}>
+                                                            <NavDropdown.Item>
+                                                                {'Cash on Delivery'}
+                                                            </NavDropdown.Item>
+                                                        </button>
+                                                </NavDropdown>
+                                            </button>
+                                        }
+                                        {
+                                            product.isBought &&
+                                            <input
+                                                className="btn btn-primary mt-2 mx-auto d-block w-100"
+                                                type="button"
+                                                disabled
+                                                value="You Bought It"/>
+                                        }
                                         <input
                                             className="btn btn-primary mt-2 mx-auto d-block w-100"
                                             type="button"
@@ -261,8 +265,19 @@ class Grid extends React.Component
             })
             .catch((error) => console.log('Remove product from cart post error: ', error));
     };
-    buyProduct = (id,type) => {
+    buyProduct = (pid,type) => {
 
+        axios.patch('http://localhost:5000/api/cart?id=' + pid + '&isBought=' + true)
+            .then(res => {
+                if(res.status === 200)
+                {
+                    this.props.getCartListFromServer(LoginState.getUserId());
+                }
+
+            })
+            .catch(error => {
+                console.log(error);
+            })
     };
 }
 export default Grid;
