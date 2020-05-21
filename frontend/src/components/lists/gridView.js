@@ -40,7 +40,6 @@ class Grid extends React.Component
 
                     <div className="card">
                         <div className="card-body">
-                            {console.log(url)}
                             <div key={product._id}
                                  className="row d-flex justify-content-center">
 
@@ -116,12 +115,8 @@ class Grid extends React.Component
                                         }
                                         {
                                             product.isBought &&
-                                            <button  className="btn btn-primary mt-2 mx-auto d-block w-100" disabled>
-                                                <NavDropdown
-                                                    title={
-                                                        <strong className="dropDownTitle ml-1"> <FontAwesomeIcon icon={faCheck} className="mr-1" />You Bought It</strong>
-                                                    }>
-                                                </NavDropdown>
+                                            <button  className="btn btn-primary mt-2 mx-auto d-block w-100 disableButton" disabled>
+                                                <strong className="dropDownTitle ml-1"> <FontAwesomeIcon icon={faCheck} className="mr-1" />You Bought It</strong>
                                             </button>
                                         }
                                         <input
