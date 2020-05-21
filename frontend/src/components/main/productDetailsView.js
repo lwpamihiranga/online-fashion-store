@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import { Button, Alert } from 'react-bootstrap';
+import { Button, Alert, Badge } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShoppingCart, faHeart } from '@fortawesome/free-solid-svg-icons';
 
@@ -80,6 +80,7 @@ class App extends React.Component {
                                         </strong>
                                     ))}
                                 <strong>{description}</strong>
+                                {productCount !== 0 ? (
                                 <Button
                                     variant="primary"
                                     className="w-50 mt-3 btn"
@@ -88,7 +89,17 @@ class App extends React.Component {
                                     <FontAwesomeIcon icon={faShoppingCart} className="mr-1" />
                                     Add to Cart
                                 </Button>
-
+                                ): (
+                                    <Button
+                                    variant="danger"
+                                    className="w-50 mt-3 btn"
+                                    onClick={() => this.addToCart(productId, LoginState.getUserId())}
+                                    disabled
+                                >
+                                    <FontAwesomeIcon icon={faShoppingCart} className="mr-1" />
+                                    Add to Cart
+                                </Button>  
+                                )}
                                 <Button
                                     variant="primary"
                                     className="w-50 mt-2 btn"
@@ -97,7 +108,9 @@ class App extends React.Component {
                                     <FontAwesomeIcon icon={faHeart} className="mr-1" /> Add to WishList
                                 </Button>
                                 <div>
-                                    <p>{productCount}</p>
+                                    {productCount === 0? (<Badge variant="danger">Out of Stock</Badge>): ( <Badge variant="secondary">Available - {productCount}</Badge>)}
+                                
+                                   
                                 </div>
                                 {/* <input
                                     className="btn btn-primary w-50 mt-3 btn"
