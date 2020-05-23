@@ -11,12 +11,13 @@ const storage = multer.diskStorage({
     destination: function (req, file, cb) {
         console.log('dest req: ', req.baseUrl);
         if (req.baseUrl === '/api/users') {
-            return cb(null,'../../frontend/src/uploads/profile-pic');
+   
+            return cb(null, __dirname.split('backend')[0].concat('/frontend/src/uploads/profile-pic'));
         } else if (req.baseUrl === '/api/products') {
-            return cb(null,'../../frontend/src/uploads/products');
+            return cb(null,__dirname.split('backend')[0].concat('/frontend/src/uploads/products'));
         }
 
-        cb(null,'../../frontend/src/uploads/other');
+        cb(null,__dirname.split('backend')[0].concat('/frontend/src/uploads/other'));
     },
     filename: function (req, file, cb) {
         cb(null,file.originalname);
