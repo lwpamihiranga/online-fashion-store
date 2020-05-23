@@ -92,8 +92,7 @@ class App extends React.Component {
         localStorage.setItem('userImageLink', userObject.imageLink);
         localStorage.setItem('userEmail', userObject.email);
 
-
-        this.props.history.push('/');
+        window.location.href = '/';
     }
 }
 export default App;
