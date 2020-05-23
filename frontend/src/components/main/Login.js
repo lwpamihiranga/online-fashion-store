@@ -27,7 +27,7 @@ class App extends React.Component {
                         type="text"
                         value={this.state.username}
                         onChange={(e) => this.setState({ username: e.target.value })}
-                        placeholder="Username"
+                        placeholder="Email"
                     />
                     <input
                         className="form-control  mx-auto d-block mt-2 w-75 p-4"
@@ -92,7 +92,8 @@ class App extends React.Component {
         localStorage.setItem('userImageLink', userObject.imageLink);
         localStorage.setItem('userEmail', userObject.email);
 
-        window.location.href = 'http://localhost:3000/';
+
+        this.props.history.push('/');
     }
 }
 export default App;
