@@ -5,7 +5,6 @@ const Product = require('./product.model');
 const ProductController = require('./product.controller');
 const FileHandler = require('../../utils/file-upload');
 
-
 router.get('/findByCategoryId', (req, res) => {
     const id = req.query.id;
     Product.find({ categoryId: id })
@@ -38,8 +37,6 @@ router.get('/findByProductId', (req, res) => {
         });
 });
 
-
-
 router
     .route('/')
     .get(ProductController.getAll)
@@ -66,27 +63,30 @@ router.post('/updateWithImage', FileHandler.single('imageLink'), (req, res) => {
     const discount = req.body.discount;
     const productCount = req.body.productCount;
 
-    Product.updateOne({_id : productId}, {
+    Product.updateOne(
+        { _id: productId },
+        {
             name: name,
-            price : price,
-            description : description,
-            categoryId : categoryId,
-            discount : discount,
-            imageLink : imageLink,
-            productCount: productCount
-        })
-        .then(res => {
+            price: price,
+            description: description,
+            categoryId: categoryId,
+            discount: discount,
+            imageLink: imageLink,
+            productCount: productCount,
+        }
+    )
+        .then((res) => {
             res.status(201).json({
                 message: 'product updated',
                 created: result,
             });
         })
-        .catch(error => {
+        .catch((error) => {
             res.status(500).json({ error: error });
         });
 });
 
-router.post('/updateWithoutImage',(req,res) => {
+router.post('/updateWithoutImage', (req, res) => {
     const productId = req.body.productId;
     const categoryId = req.body.categoryId;
     const description = req.body.description;
@@ -95,34 +95,31 @@ router.post('/updateWithoutImage',(req,res) => {
     const discount = req.body.discount;
     const productCount = req.body.productCount;
 
-    Product.updateOne({_id : productId}, {
-        name: name,
-        price : price,
-        description : description,
-        categoryId : categoryId,
-        discount : discount,
-        productCount: productCount})
-        .then(result => {
+    Product.updateOne(
+        { _id: productId },
+        {
+            name: name,
+            price: price,
+            description: description,
+            categoryId: categoryId,
+            discount: discount,
+            productCount: productCount,
+        }
+    )
+        .then((result) => {
             res.status(201).json({
                 message: 'product updated',
                 created: result,
             });
         })
-        .catch(error => {
+        .catch((error) => {
             res.status(500).json({ error: error });
         });
-
 });
-
 
 router.patch('/updateProductCount/:id', (req, res) => {
     const id = req.params.id;
-    
-    console.log(req.body.productCount);
-    // const updateOps = {};
-    // for (const ops of req.body) {
-    //     updateOps[ops.propName] = ops.value;
-    // }
+
     console.log(id);
     Product.update({ _id: id }, { productCount: req.body.productCount })
         .exec()
@@ -134,8 +131,7 @@ router.patch('/updateProductCount/:id', (req, res) => {
                 error: error,
             });
         });
-})
-
+});
 
 router.get('/:id', (req, res) => {
     const id = req.params.id;
@@ -167,8 +163,8 @@ router.get('/:id', (req, res) => {
 router.post('/', (req, res) => {
     const product = new Product({
         _id: new mongoose.Types.ObjectId(),
-        categoryId : req.body.categoryId,
-        description : req.body.description,
+        categoryId: req.body.categoryId,
+        description: req.body.description,
         name: req.body.name,
         price: req.body.price,
     });

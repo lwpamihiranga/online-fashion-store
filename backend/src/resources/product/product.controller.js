@@ -4,8 +4,6 @@ const fs = require('fs');
 const Multer = require('multer');
 const Product = require('../product/product.model');
 
-
-
 exports.getAll = (req, res, next) => {
     Product.find()
         .exec()
@@ -54,7 +52,7 @@ exports.createOne = (req, res, next) => {
         hasDiscount: req.body.hasDiscount,
         discount: req.body.discount,
         imageLink: req.file.originalname,
-        productCount: req.body.productCount
+        productCount: req.body.productCount,
     });
 
     product
@@ -71,8 +69,7 @@ exports.createOne = (req, res, next) => {
 };
 
 exports.updateOne = (req, res, next) => {
-
-    console.log('ranned')
+    console.log('ranned');
 
     const productId = req.body.productId;
     const categoryId = req.body.categoryId;
@@ -83,33 +80,13 @@ exports.updateOne = (req, res, next) => {
     const discount = req.body.discount;
     const productCount = req.body.productCount;
 
-    // Product.updateOne({_id : productId}, {
-    //         name: name,
-    //         price : price,
-    //         description : description,
-    //         categoryId : categoryId,
-    //         discount : discount,
-    //         imageLink : imageLink,
-    //         productCount: productCount
-    //     })
-    //     .then(res => {
-    //         res.status(201).json({
-    //             message: 'product updated',
-    //             created: result,
-    //         });
-    //     })
-    //     .catch(error => {
-    //         res.status(500).json({ error: error });
-    //     });
-
-
     const id = req.params.id;
-    
+
     const updateOps = {};
     for (const ops of req.body) {
         updateOps[ops.propName] = ops.value;
     }
-    
+
     Product.update({ _id: id }, { $set: updateOps })
         .exec()
         .then((result) => {

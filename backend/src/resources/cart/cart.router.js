@@ -8,6 +8,6 @@ router.get('/find', CartController.find);
 
 router.post('/create', CartController.create);
 router.post('/delete', CartController.delete);
-router.patch('/',CartController.update);
+router.patch('/', CartController.update);
 
 module.exports = router;

@@ -72,13 +72,11 @@ exports.delete = (req, res, next) => {
         .then(() => res.json('Item was Deleted!').sendStatus(200))
         .catch((err) => res.status(400).json('Error: ' + err));
 };
-exports.update = (req,res,next) => {
-
+exports.update = (req, res, next) => {
     const id = req.query.id;
     const isBought = req.query.isBought;
 
-    CartModel
-        .update({ productId: id }, { isBought: isBought })
-        .then(() => res.json('Updated! '+ id).status(200))
+    CartModel.update({ productId: id }, { isBought: isBought })
+        .then(() => res.json('Updated! ' + id).status(200))
         .catch((err) => res.status(400).json('Error: ' + err));
 };
