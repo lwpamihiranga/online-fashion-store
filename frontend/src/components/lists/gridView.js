@@ -199,7 +199,7 @@ class Grid extends React.Component {
     }
     deleteProduct = (productId) => {
         axios
-            .delete('http://localhost:5000/api/products/' + productId)
+            .delete('http://161.35.114.131:5000/api/products/' + productId)
             .then((response) => {
                 if (response.status === 200) {
                     alert('Product deleted');
@@ -212,7 +212,7 @@ class Grid extends React.Component {
     };
     removeProductFromWishList = (userId, productId) => {
         axios
-            .post('http://localhost:5000/api/wishList/delete?userId=' + userId + '&productId=' + productId)
+            .post('http://161.35.114.131:5000/api/wishList/delete?userId=' + userId + '&productId=' + productId)
             .then((response) => {
                 if (response.status === 200) {
                     this.props.getWishListFromServer(userId);
@@ -223,7 +223,7 @@ class Grid extends React.Component {
     addToCart = (userId, productId) => {
         if (productId != null && userId != null) {
             axios
-                .post('http://localhost:5000/api/cart/create?productId=' + productId + '&userId=' + userId)
+                .post('http://161.35.114.131:5000/api/cart/create?productId=' + productId + '&userId=' + userId)
                 .then((response) => {
                     if (response.status === 200) {
                         var list = response.data;
@@ -246,7 +246,7 @@ class Grid extends React.Component {
     };
     removeProductFromCart = (userId, productId) => {
         axios
-            .post('http://localhost:5000/api/cart/delete?userId=' + userId + '&productId=' + productId)
+            .post('http://161.35.114.131:5000/api/cart/delete?userId=' + userId + '&productId=' + productId)
             .then((response) => {
                 if (response.status === 200) {
                     this.props.getCartListFromServer(userId);
@@ -256,7 +256,7 @@ class Grid extends React.Component {
     };
     buyProduct = (pid, type) => {
         axios
-            .patch('http://localhost:5000/api/cart?id=' + pid + '&isBought=' + true)
+            .patch('http://161.35.114.131:5000/api/cart?id=' + pid + '&isBought=' + true)
             .then((res) => {
                 if (res.status === 200) {
                     this.props.getCartListFromServer(LoginState.getUserId());

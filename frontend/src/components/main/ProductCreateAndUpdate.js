@@ -191,7 +191,7 @@ class ManagerView extends React.Component {
     };
     getAllCategories = () => {
         axios
-            .get('http://localhost:5000/api/category')
+            .get('http://161.35.114.131:5000/api/category')
             .then((response) => {
                 if (response.status === 200) {
                     this.setState({ categoryList: response.data });
@@ -230,7 +230,7 @@ class ManagerView extends React.Component {
         formdata.append('productCount', this.state.productCount);
 
         axios
-            .post('http://localhost:5000/api/products', formdata)
+            .post('http://161.35.114.131:5000/api/products', formdata)
             .then((res) => {
                 if (res.status === 201) {
                     // alert('Upload success');
@@ -253,7 +253,7 @@ class ManagerView extends React.Component {
     getProductDetails = (id) => {
         //loading the relevant product by the id
         axios
-            .get('http://localhost:5000/api/products/findByProductId?id=' + id)
+            .get('http://161.35.114.131:5000/api/products/findByProductId?id=' + id)
             .then((response) => {
                 if (response.status === 200) {
                     const list = response.data;
@@ -287,7 +287,7 @@ class ManagerView extends React.Component {
 
         if (this.state.imageLink === '') {
             axios
-                .post('http://localhost:5000/api/products/updateWithoutImage', {
+                .post('http://161.35.114.131:5000/api/products/updateWithoutImage', {
                     productId: this.state.productId,
                     name: this.state.name,
                     price: this.state.price,
@@ -322,7 +322,7 @@ class ManagerView extends React.Component {
             formdata.append('productCount', this.state.productCount);
 
             axios
-                .post('http://localhost:5000/api/products/updateWithImage', formdata)
+                .post('http://161.35.114.131:5000/api/products/updateWithImage', formdata)
                 .then((res) => {
                     if (res.status === 201) {
                         this.props.history.push('/products');

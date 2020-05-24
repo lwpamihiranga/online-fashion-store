@@ -35,7 +35,7 @@ class App extends React.Component {
     };
     getCartListFromServer = (userId) => {
         axios
-            .get('http://localhost:5000/api/cart/find?userId=' + userId)
+            .get('http://161.35.114.131:5000/api/cart/find?userId=' + userId)
             .then((response) => {
                 if (response.status === 200) {
                     var list = response.data;

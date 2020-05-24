@@ -131,7 +131,7 @@ class App extends React.Component {
     getProductDetails(id) {
         //loading the relevant product by the id
         axios
-            .get('http://localhost:5000/api/products/findByProductId?id=' + id)
+            .get('http://161.35.114.131:5000/api/products/findByProductId?id=' + id)
             .then((response) => {
                 if (response.status === 200) {
                     if (this.state.isFirstTime) {
@@ -150,7 +150,7 @@ class App extends React.Component {
 
         if (productId != null && userId != null) {
             axios
-                .post('http://localhost:5000/api/wishList/create?productId=' + productId + '&userId=' + userId)
+                .post('http://161.35.114.131:5000/api/wishList/create?productId=' + productId + '&userId=' + userId)
                 .then((response) => {
                     if (response.status === 200) {
                         var list = response.data;
@@ -190,7 +190,7 @@ class App extends React.Component {
 
         if (productId != null && userId != null) {
             axios
-                .post('http://localhost:5000/api/cart/create?productId=' + productId + '&userId=' + userId)
+                .post('http://161.35.114.131:5000/api/cart/create?productId=' + productId + '&userId=' + userId)
                 .then((response) => {
                     if (response.status === 200) {
                         var list = response.data;
@@ -206,7 +206,7 @@ class App extends React.Component {
                         } else {
                             var count = --this.state.product[0].productCount;
                             axios
-                                .patch('http://localhost:5000/api/products/updateProductCount/' + productId, {
+                                .patch('http://161.35.114.131:5000/api/products/updateProductCount/' + productId, {
                                     productCount: count,
                                 })
                                 .then((response) => {
