@@ -1,5 +1,5 @@
 module.exports = {
     Admin: 'Admin',
-    StoreManager: 'Store Manager',
+    StoreManager: 'Manager',
     User: 'User'
-}
+};

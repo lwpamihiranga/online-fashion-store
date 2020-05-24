@@ -8,6 +8,10 @@ import css from '../../css/rateList.css';
 import axios from "axios";
 import {Link} from "react-router-dom";
 
+
+const LoginState = require('../../_helpers/loginState');
+
+
 class App extends React.Component
 {
 
@@ -21,7 +25,9 @@ class App extends React.Component
             starSize : [1,2,3,4,5],
             selectedStarCount : 1,
             userTypingComment : "",
-            userCommentId : ""
+            userCommentId : "",
+            ratingStarCount : 0,
+            ratingAvg : 0.00
         });
 
         this.updateRating = this.updateRating.bind();
@@ -29,15 +35,6 @@ class App extends React.Component
 
     }
     render() {
-
-
-        //user login informations
-        var name = localStorage.getItem('userName');
-        var password = localStorage.getItem('userPassword');
-        var type = localStorage.getItem('userType');
-        var userid = localStorage.getItem('userId');
-        var imageLink = localStorage.getItem('userImageLink');
-        var email = localStorage.getItem('userEmail');
 
 
         //productId
@@ -48,11 +45,18 @@ class App extends React.Component
         }
 
 
+
         const list = this.state.ratingList.map(rating => {
 
-            if(rating.userId !== userid)
+            if(rating.userId !== LoginState.getUserId())
             {
                 let comment = rating.comment;
+                let username = rating.username;
+                let imageLink = rating.imageLink;
+
+                const finalImageLink = require('../../uploads/profile-pic/' + imageLink);
+
+
                 const rate = this.state.starSize.map(i => {
                     return(
                         <div className="fivestars">
@@ -68,13 +72,32 @@ class App extends React.Component
                 });
 
                 return(
-                    <div  className="rateItemContainer">
-                        <div>
-                            <p id="rateName">{comment}</p>
+                    <div  className="rateItemContainer mt-1 bg-primary">
+
+
+                            <div className="rateImageDiv">
+                                <img src={finalImageLink} className="rateImage rounded-circle"/>
+                            </div>
+
+                        <div className="rateRowDiv">
+                            <div>
+                                <strong className="ratingUserName">{username}</strong>
+                            </div>
+                            <div className="rowStarContainer">
+                                <div className="Rowstars">
+                                    {rate}
+                                </div>
+                            </div>
+
+                            <div>
+                                <p>{comment}</p>
+                            </div>
                         </div>
-                        <div className="rateItem">
-                            {rate}
-                        </div>
+
+
+
+
+
                     </div>
                 )
             }
@@ -116,29 +139,31 @@ class App extends React.Component
 
 
             <div className="ratingContainer">
-                {(this.state.ratingList.length > 0 || (userid != null)) &&
 
-                    <div className="ratingList">
-                        <h3 id="commentText">Comments</h3>
 
-                        {userid != null && type === 'user' &&
+
+                    <div className="ratingList mt-3">
+                        <div className="avgDiv">
+                            <strong>{this.state.ratingList.length  +' RATINGS'}</strong>
+                            <strong>{this.state.ratingAvg.toFixed(1) + ' AVERAGE' }</strong>
+                        </div>
                             <div className="userInputRating">
                                 <div className="rateItem">
                                     {userInputRatings}
                                     </div>
-                                    <div className="crudOperations">
-                                    <input id="commentInput" type="text" onChange={(e)=> this.setState({userTypingComment:e.target.value})} value={this.state.userTypingComment} placeholder="Enter your comment"/>
-                                    <img className="crudImg" onClick={()=> this.updateRating(userid,productId,this.state.userCommentId,this.state.userTypingComment,this.state.selectedStarCount)} src={finishImage}/>
+                                    <div className="crudOperations  mt-2">
+                                    <input  className="form-control"  type="text" onChange={(e)=> this.setState({userTypingComment:e.target.value})} value={this.state.userTypingComment} placeholder="Enter your comment"/>
+                                    <img className="crudImg" onClick={()=> this.updateRating(LoginState.getUserId(),productId,this.state.userCommentId,this.state.userTypingComment,this.state.selectedStarCount)} src={finishImage}/>
 
-                                    {this.state.userCommentId != "" &&
-                                    <img className="crudImg" onClick={()=> this.deleteRating(productId,this.state.userCommentId)} src={deleteImage}/>
+                                    {this.state.userCommentId !== "" &&
+                                     <img className="crudImg" onClick={()=> this.deleteRating(productId,this.state.userCommentId)} src={deleteImage}/>
                                     }
                                 </div>
                             </div>
-                    }
-                    {list}
+                    <div className="mt-3">
+                        {list}
+                    </div>
                         </div>
-                }
 
             </div>
 
@@ -147,7 +172,7 @@ class App extends React.Component
     getRatingsByProductId(id)
     {
         //loading products according to the id and store in states
-        axios.get("http://localhost:5000/api/ratings/findByProductId?productId=" + id)
+        axios.get("http://161.35.114.131:5000/api/ratings/findByProductId?productId=" + id)
             .then(response => {
                 if(response.status === 200)
                 {
@@ -156,7 +181,30 @@ class App extends React.Component
                         var list = response.data;
                         //making it reverse to get the latest comment to the top
                         list.reverse();
-                        this.setState({ratingList :list, isNeedToGetFromServer : false,isRatingNeedsToBeChanged : true,starSize : [1,2,3,4,5]});
+                        var count = 0;
+
+                        list.map((item,index) => {
+
+                            count = count + item.rate;
+
+                            if(index === list.length - 1)
+                            {
+
+                                var avg = 0.00;
+                                avg = count / list.length;
+                                this.setState(
+                                    {
+                                        ratingList :list,
+                                        isNeedToGetFromServer : false,
+                                        isRatingNeedsToBeChanged : true,
+                                        starSize : [1,2,3,4,5],
+                                        ratingStarCount : count,
+                                        ratingAvg : avg
+                                    });
+                            }
+
+                        });
+
                     }
 
                 }
@@ -165,6 +213,11 @@ class App extends React.Component
     }
     updateRating = (userId,productId,ratingId,comment,rate) => {
 
+
+        if(!LoginState.isUser())
+        {
+            return;
+        }
         if(this.state.userTypingComment === "")
         {
             alert("Enter a comment");
@@ -173,8 +226,10 @@ class App extends React.Component
         {
             if (ratingId !== "")
             {
+
+
                 //user needs to update
-                axios.post("http://localhost:5000/api/ratings/update?rateId=" + ratingId + "&rate=" + rate + "&comment=" + comment)
+                axios.post("http://161.35.114.131:5000/api/ratings/update?rateId=" + ratingId + "&rate=" + rate + "&comment=" + comment)
                     .then(response => {
                         if (response.status === 200) {
                             var list = response.data;
@@ -185,9 +240,18 @@ class App extends React.Component
             }
             else
             {
+                //
+                // const formData = new FormData();
+                // formData.append('userId',userId);
+                // formData.append('productId',productId);
+                // formData.append('comment',comment);
+                // formData.append('rate',rate);
+                // formData.append('username',rate);
+                // formData.append('imageLink',rate);
+
 
                 //user needs to create new rating
-                axios.post("http://localhost:5000/api/ratings/create?userId=" + userId + "&productId=" + productId + "&comment=" + comment + "&rate=" + rate)
+                axios.post("http://161.35.114.131:5000/api/ratings/create?userId=" + userId + "&productId=" + productId + "&comment=" + comment + "&rate=" + rate + "&imageLink=" + LoginState.getUserImage() + "&username=" + LoginState.getUserName())
                     .then(response => {
                         if (response.status === 200) {
                             var list = response.data;
@@ -202,11 +266,16 @@ class App extends React.Component
             }
         }
 
-    }
+    };
     deleteRating = (productId,id) => {
 
 
-        axios.post("http://localhost:5000/api/ratings/delete?rateId=" + id)
+        if(!LoginState.isUser())
+        {
+            return;
+        }
+
+        axios.post("http://161.35.114.131:5000/api/ratings/delete?rateId=" + id)
             .then(response => {
                 if(response.status === 200)
                 {

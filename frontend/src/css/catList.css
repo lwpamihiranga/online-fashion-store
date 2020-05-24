@@ -10,11 +10,11 @@
 }
 .categoryItem:hover
 {
-    background-color: white;
+    /*background-color: white;*/
 }
 .categoryItem
 {
-    width: 90%;
+    width: 95%;
     background-color: #e5e4e8;
     margin-top: 30px;
     min-height: 200px;
@@ -34,7 +34,7 @@
 }
 #mainName
 {
-    margin-left: 5%;
+    margin-left: 2.5%;
     color: white;
     padding-top: 50px;
 
@@ -45,7 +45,7 @@
     flex-direction: row;
     margin-right: auto;
     margin-left: auto;
-    width: 90%;
+    width: 95%;
     height: auto;
     background-color: white;
     border-radius: 10px;
@@ -65,4 +65,9 @@
     background-color: rebeccapurple;
     color: white;
     border-radius: 10px;
+}
+.adminCategories
+{
+    width: 50%;
+    float: left;
 }

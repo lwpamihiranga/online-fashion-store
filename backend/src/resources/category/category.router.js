@@ -1,34 +1,19 @@
 const express = require('express');
 const router = express.Router();
-const mongoose =  require('mongoose');
-const categoryModel = require('./category.model');
 
-router.get('/', (req, res) => {
+const CategoryController = require('./category.controller');
+const Auth = require('../../utils/auth');
 
-    categoryModel.find()
-        .then(categories => res.status(200).json(categories))
-        .catch(err => res.status(400).json('Error: ' + err));
-});
+router.get('/', CategoryController.getAll);
+router.get('/find', CategoryController.findOne);
 
-router.post('/create',(req,res) => {
-
-    const catName = req.body.catName;
-
-    if(catName != null)
-    {
-
-        let category = new categoryModel();
-        category.catName = catName;
-
-        category
-            .save()
-            .then(()=> res.json('Category was added!'))
-            .catch(err => res.status(400).json('Error: ' + err));
-    }
-    else
-    {
-        res.status(400).json('Error : parameters are missing!');
-    }
-});
+/**
+ * checkAdmin middleware check the user type for admin before creating a category
+ */
+// TODO: this route should be corrected to / only. REST API route system should be universal
+router.post('/', Auth.checkAdmin, CategoryController.createOne);
+// router.post('/',CategoryController.createOne);
+router.post('/delete', CategoryController.deleteOne);
+router.post('/update', CategoryController.updateOne);
 
 module.exports = router;
