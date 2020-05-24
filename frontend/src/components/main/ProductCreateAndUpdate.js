@@ -20,7 +20,8 @@ class ManagerView extends React.Component {
                 discount : '',
                 description : '',
                 imageLink : '',
-                prevImageLink : ''
+                prevImageLink : '',
+                productCount: ''
             });
 
 
@@ -94,6 +95,10 @@ class ManagerView extends React.Component {
                             <label htmlFor="exampleFormControlTextarea1" className="label">Description</label>
                             <textarea className="form-control" value={this.state.description} id="exampleFormControlTextarea1" rows="4"  onChange={(e) => this.setState({ description: e.target.value})}/>
                         </div>
+                        <div className="form-group">
+                            <label htmlFor="exampleFormControlTextarea1" className="label">Product Count</label>
+                            <input type="number" value={this.state.productCount} min="1" step="any" className="form-control" id="pwd"  onChange={(e) => this.setState({ productCount: e.target.value})}/>
+                        </div>
                         {
                             this.state.productId === ''
                             &&
@@ -166,7 +171,8 @@ class ManagerView extends React.Component {
             formdata.append('hasDiscount', false);
         }
         formdata.append('categoryId',this.state.category);
-
+        formdata.append('productCount', this.state.productCount);
+        
         axios.post('http://localhost:5000/api/products',formdata)
             .then(res => {
                 if(res.status === 201)
