@@ -11,19 +11,16 @@
     margin-right: 2px;
 }
 
-.productDiv
-{
+.productDiv {
     width: 90%;
-    background-color: #F1F1F1;
+    background-color: #f1f1f1;
     margin-left: auto;
     margin-right: auto;
     border-radius: 10px;
     min-height: 250px;
     padding: 40px;
-
 }
-.productBody
-{
+.productBody {
     width: 100%;
     height: auto;
     margin-right: auto;
@@ -36,20 +33,17 @@
     /*background-size: cover;*/
     padding-top: 50px;
 }
-.userImage
-{
+.userImage {
     width: 35px;
     height: 35px;
     border: 2px solid white;
 }
-.storeLogo
-{
+.storeLogo {
     width: auto;
     height: 50px;
     background-size: cover;
 }
-.navLinkColor
-{
+.navLinkColor {
     color: black;
     font-family: Arial;
     font-size: 90%;

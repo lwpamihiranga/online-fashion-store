@@ -1,15 +1,13 @@
 import React from 'react';
 import LoginState from '../../_helpers/loginState';
-import GridView from "../lists/gridView";
-import axios from "axios";
-
+import GridView from '../lists/gridView';
+import axios from 'axios';
 
 class App extends React.Component {
-
     constructor(props) {
         super(props);
 
-        this.state = ({productList : []});
+        this.state = { productList: [] };
 
         this.getCartListFromServer(LoginState.getUserId());
     }
@@ -20,7 +18,11 @@ class App extends React.Component {
         return (
             <div className="productBody">
                 <div className="productDiv">
-                    <GridView  productList={this.state.productList}  isCartList = {true} getCartListFromServer={this.getCartListFromServer}/>
+                    <GridView
+                        productList={this.state.productList}
+                        isCartList={true}
+                        getCartListFromServer={this.getCartListFromServer}
+                    />
                 </div>
             </div>
         );
@@ -32,19 +34,16 @@ class App extends React.Component {
         }
     };
     getCartListFromServer = (userId) => {
-
-        axios.get('http://localhost:5000/api/cart/find?userId=' + userId)
+        axios
+            .get('http://localhost:5000/api/cart/find?userId=' + userId)
             .then((response) => {
                 if (response.status === 200) {
-
                     var list = response.data;
                     list.reverse();
-                    this.setState({ productList: list});
-
+                    this.setState({ productList: list });
                 }
             })
             .catch((error) => console.log(error));
-
     };
 }
 export default App;

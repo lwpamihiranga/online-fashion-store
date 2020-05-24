@@ -11,13 +11,9 @@ class App extends React.Component {
             selectedCategory: '',
             productList: [],
         };
-        // this.getCategoriesFromApi();
-        // this.getProducts();
     }
 
     render() {
-
-
         const categoryId = this.props.match.params.cid;
 
         if (categoryId !== undefined) {
@@ -34,44 +30,6 @@ class App extends React.Component {
             </div>
         );
     }
-
-    // getCategoriesFromApi() {
-    //     //loading categories from the api to the state
-    //     axios
-    //         .get('http://localhost:5000/api/category/')
-    //         .then((response) => {
-    //             if (response.status === 200) {
-    //                 var list = response.data;
-
-    //                 list.map((itm,index) => {
-    //                     if(index === 0)
-    //                     {
-    //                         this.setState({ categoryList: list,selectedCategory : itm._id });
-    //                         this.onCategoryChanged( itm._id);
-    //                     }
-    //                 });
-
-    //             }
-    //         })
-    //         .catch((error) => console.log('Category fetch error: ', error));
-    // }
-    // onCategoryChanged = (catId) => {
-
-    //     this.setState({ selectedCategory: catId});
-
-    //     axios.get('http://localhost:5000/api/products/findByCategoryId?id=' + catId)
-    //         .then(res => {
-
-    //             if(res.status === 200)
-    //             {
-    //                 this.setState({productList : res.data});
-    //             }
-
-    //         })
-    //         .catch(error => {
-
-    //         });
-    // }
 
     getProducts = () => {
         axios

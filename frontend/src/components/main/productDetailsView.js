@@ -81,24 +81,24 @@ class App extends React.Component {
                                     ))}
                                 <strong>{description}</strong>
                                 {productCount !== 0 ? (
-                                <Button
-                                    variant="primary"
-                                    className="w-50 mt-3 btn"
-                                    onClick={() => this.addToCart(productId, LoginState.getUserId())}
-                                >
-                                    <FontAwesomeIcon icon={faShoppingCart} className="mr-1" />
-                                    Add to Cart
-                                </Button>
-                                ): (
                                     <Button
-                                    variant="danger"
-                                    className="w-50 mt-3 btn"
-                                    onClick={() => this.addToCart(productId, LoginState.getUserId())}
-                                    disabled
-                                >
-                                    <FontAwesomeIcon icon={faShoppingCart} className="mr-1" />
-                                    Add to Cart
-                                </Button>  
+                                        variant="primary"
+                                        className="w-50 mt-3 btn"
+                                        onClick={() => this.addToCart(productId, LoginState.getUserId())}
+                                    >
+                                        <FontAwesomeIcon icon={faShoppingCart} className="mr-1" />
+                                        Add to Cart
+                                    </Button>
+                                ) : (
+                                    <Button
+                                        variant="danger"
+                                        className="w-50 mt-3 btn"
+                                        onClick={() => this.addToCart(productId, LoginState.getUserId())}
+                                        disabled
+                                    >
+                                        <FontAwesomeIcon icon={faShoppingCart} className="mr-1" />
+                                        Add to Cart
+                                    </Button>
                                 )}
                                 <Button
                                     variant="primary"
@@ -108,22 +108,13 @@ class App extends React.Component {
                                     <FontAwesomeIcon icon={faHeart} className="mr-1" /> Add to WishList
                                 </Button>
                                 <div>
-                                    {productCount === 0? (<Badge variant="danger">Out of Stock</Badge>): ( <Badge variant="secondary">Available - {productCount}</Badge>)}
-                                
-                                   
+                                    {productCount === 0 ? (
+                                        <Badge variant="danger">Out of Stock</Badge>
+                                    ) : (
+                                        <Badge variant="secondary">Available - {productCount}</Badge>
+                                    )}
                                 </div>
-                                {/* <input
-                                    className="btn btn-primary w-50 mt-3 btn"
-                                    type="button"
-                                    value="Add to Cart"
-                                    onClick={() => this.addToCart(productId, LoginState.getUserId())}
-                                />
-                                <input
-                                    className="btn btn-primary w-50 mt-2 btn"
-                                    type="button"
-                                    value="Add to WishList"
-                                    onClick={() => this.addToWishList(productId, LoginState.getUserId())}
-                                /> */}
+
                                 <div className="ratings">
                                     <RatingList productId={productId} />
                                 </div>
@@ -143,7 +134,6 @@ class App extends React.Component {
             .get('http://localhost:5000/api/products/findByProductId?id=' + id)
             .then((response) => {
                 if (response.status === 200) {
-                    
                     if (this.state.isFirstTime) {
                         var product = response.data;
                         this.setState({ product: product, isFirstTime: false });
@@ -215,19 +205,20 @@ class App extends React.Component {
                             });
                         } else {
                             var count = --this.state.product[0].productCount;
-                            axios.patch('http://localhost:5000/api/products/updateProductCount/'+ productId, {"productCount": count})
-                            .then(response => {
-                                if(response.status === 200) {
-                                    console.log('product count updated')
-                                }
-                            })
+                            axios
+                                .patch('http://localhost:5000/api/products/updateProductCount/' + productId, {
+                                    productCount: count,
+                                })
+                                .then((response) => {
+                                    if (response.status === 200) {
+                                        console.log('product count updated');
+                                    }
+                                });
                             // alert('Successfully added to the cart!');
                             this.setState({
                                 isAlert: true,
                                 alert: { variant: 'success', text: 'Successfully added to the cart!' },
                             });
-
-                    
                         }
                     }
                 })

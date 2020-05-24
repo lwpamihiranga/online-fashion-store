@@ -19,7 +19,14 @@ import Roles from '../../_helpers/role';
 
 import { Navbar, Nav, Button, NavDropdown } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faShoppingCart, faHeart,faHome,faArrowDown,faAddressBook,faListAlt } from '@fortawesome/free-solid-svg-icons';
+import {
+    faShoppingCart,
+    faHeart,
+    faHome,
+    faArrowDown,
+    faAddressBook,
+    faListAlt,
+} from '@fortawesome/free-solid-svg-icons';
 import '../../css/style.css';
 
 import LoginState from '../../_helpers/loginState';
@@ -37,7 +44,6 @@ class App extends React.Component {
     categories = [];
 
     render() {
-
         var url;
         if (LoginState.isLoggedIn()) {
             url = require('../../uploads/profile-pic/' + LoginState.getUserImage());
@@ -60,12 +66,17 @@ class App extends React.Component {
                                     <Nav className="mr-auto">
                                         <Nav.Link href="/" className="header-link">
                                             <FontAwesomeIcon icon={faHome} className="mr-1" />
-                                           <strong className="navLinkColor">Home</strong>
+                                            <strong className="navLinkColor">Home</strong>
                                         </Nav.Link>
                                         <NavDropdown
                                             title={
-                                                    <strong className="navLinkColor ml-1"> <FontAwesomeIcon icon={faArrowDown} className="mr-1" />Categories</strong>
-                                            }>
+                                                <strong className="navLinkColor ml-1">
+                                                    {' '}
+                                                    <FontAwesomeIcon icon={faArrowDown} className="mr-1" />
+                                                    Categories
+                                                </strong>
+                                            }
+                                        >
                                             {this.categories.map((val) => {
                                                 return (
                                                     <span>
@@ -158,7 +169,6 @@ class App extends React.Component {
                 <Route path={'/error'} exact strict component={Error} />
                 <Route path={'/productByCategory/:cid'} exact strict component={Category} />
                 <Route path={'/register/manager'} exact strict component={RegisterManager} />
-
             </Router>
         );
     }

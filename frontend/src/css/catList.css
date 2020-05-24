@@ -1,19 +1,16 @@
-.categoryList
-{
+.categoryList {
     width: 85%;
     background-color: rebeccapurple;
     margin-left: auto;
     margin-right: auto;
     border-radius: 15px;
-    padding:20px;
+    padding: 20px;
     margin-top: 4%;
 }
-.categoryItem:hover
-{
+.categoryItem:hover {
     /*background-color: white;*/
 }
-.categoryItem
-{
+.categoryItem {
     width: 95%;
     background-color: #e5e4e8;
     margin-top: 30px;
@@ -23,24 +20,19 @@
     margin-left: auto;
     margin-right: auto;
     border-radius: 10px;
-
 }
-#catName
-{
+#catName {
     text-align: center;
     padding: 1%;
     color: #282c34;
     size: 30px;
 }
-#mainName
-{
+#mainName {
     margin-left: 2.5%;
     color: white;
     padding-top: 50px;
-
 }
-.navigation
-{
+.navigation {
     display: flex;
     flex-direction: row;
     margin-right: auto;
@@ -51,8 +43,7 @@
     border-radius: 10px;
     padding: 5px;
 }
-.NavigationItem
-{
+.NavigationItem {
     color: rebeccapurple;
     margin-left: 15px;
     padding-top: 5px;
@@ -60,14 +51,12 @@
     padding-left: 8px;
     padding-right: 8px;
 }
-.NavigationItem:hover
-{
+.NavigationItem:hover {
     background-color: rebeccapurple;
     color: white;
     border-radius: 10px;
 }
-.adminCategories
-{
+.adminCategories {
     width: 50%;
     float: left;
 }

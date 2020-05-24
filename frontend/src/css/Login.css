@@ -1,5 +1,4 @@
-.loginContainer
-{
+.loginContainer {
     width: 95%;
     margin-left: auto;
     margin-right: auto;
@@ -8,9 +7,8 @@
     padding-bottom: 100px;
     border-radius: 10px;
 }
-.inputFieldContainer
-{
-    background-color: #F1F1F1;
+.inputFieldContainer {
+    background-color: #f1f1f1;
     width: 100%;
     max-width: 600px;
     margin-left: auto;
@@ -22,8 +20,7 @@
     flex-direction: column;
     border-radius: 15px;
 }
-.textInput
-{
+.textInput {
     width: 70%;
     margin-right: auto;
     margin-left: auto;
@@ -31,8 +28,7 @@
     margin-top: 15px;
     padding-left: 10px;
 }
-.buttons
-{
+.buttons {
     width: 71%;
     margin-right: auto;
     margin-left: auto;
@@ -43,20 +39,16 @@
     padding-left: 10px;
     cursor: pointer;
     border-radius: 10px;
-
 }
 
-.NavigationItem
-{
+.NavigationItem {
     cursor: pointer;
 }
-.loginImage
-{
+.loginImage {
     width: 25%;
     height: 25%;
 }
-.registerContainer
-{
+.registerContainer {
     width: 95%;
     margin-left: auto;
     margin-right: auto;
