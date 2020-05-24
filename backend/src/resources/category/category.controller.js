@@ -46,43 +46,31 @@ exports.getAll = (req, res, next) => {
 };
 
 exports.deleteOne = (req, res, next) => {
-
-    Category.deleteOne({_id : req.body.id})
+    Category.deleteOne({ _id: req.body.id })
         .exec()
-        .then(result => {
-
+        .then((result) => {
             res.status(200).json('Deleted!');
-            // Product.deleteMany({categoryId : req.body.id})
-            //     .then(result => {
-            //         res.status(200).json('Deleted!');
-            //     })
-            //     .catch(error => {
-            //         res.status(400).json('Not deleted ' + error);
-            //     });
-
         })
-        .catch(error => {
+        .catch((error) => {
             res.status(400).json('Not deleted ' + error);
         });
 };
-exports.updateOne = (req,res,next) => {
-
-    Category.updateOne({_id : req.body.id},{catName : req.body.catName})
+exports.updateOne = (req, res, next) => {
+    Category.updateOne({ _id: req.body.id }, { catName: req.body.catName })
         .exec()
-        .then(result => {
+        .then((result) => {
             res.status(200).json('Updated');
         })
-        .catch(error => {
-           req.status(400).json('Error ' + error);
+        .catch((error) => {
+            req.status(400).json('Error ' + error);
         });
 };
-exports.findOne = (req,res,next) => {
-
-    Category.find({_id: req.query.id})
-        .then(result => {
+exports.findOne = (req, res, next) => {
+    Category.find({ _id: req.query.id })
+        .then((result) => {
             res.status(200).json(result);
         })
-        .catch(error => {
+        .catch((error) => {
             res.status(400).json('Error : ' + error);
-        })
+        });
 };
