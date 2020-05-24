@@ -4,6 +4,7 @@ import LoginState from '../../_helpers/loginState';
 import '../../css/StoreManager.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
+import { Alert } from 'react-bootstrap';
 
 class ManagerView extends React.Component {
 
@@ -20,10 +21,18 @@ class ManagerView extends React.Component {
                 discount : '',
                 description : '',
                 imageLink : '',
-                prevImageLink : ''
+                prevImageLink : '',
+                productCount: '',
+                isAlert: false,
+                alert: {
+                    variant: '',
+                    text: ''
+                }
             });
 
-
+            setTimeout(() => {
+                this.setState({ isAlert: false });
+            }, 5000);
     }
 
 
@@ -59,6 +68,7 @@ class ManagerView extends React.Component {
 
         return (
             <div className="container-fluid">
+                {this.state.isAlert ? <Alert variant={this.state.alert.variant} style={{marginTop: '15px'}}>{this.state.alert.text}</Alert> : ''}
                 <div className="p-5">
                     <div className="form-group2">
                         <div className="form-group">
@@ -93,6 +103,10 @@ class ManagerView extends React.Component {
                         <div className="form-group">
                             <label htmlFor="exampleFormControlTextarea1" className="label">Description</label>
                             <textarea className="form-control" value={this.state.description} id="exampleFormControlTextarea1" rows="4"  onChange={(e) => this.setState({ description: e.target.value})}/>
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="exampleFormControlTextarea1" className="label">Product Count</label>
+                            <input type="number" value={this.state.productCount} min="1" step="any" className="form-control" id="pwd"  onChange={(e) => this.setState({ productCount: e.target.value})}/>
                         </div>
                         {
                             this.state.productId === ''
@@ -166,16 +180,26 @@ class ManagerView extends React.Component {
             formdata.append('hasDiscount', false);
         }
         formdata.append('categoryId',this.state.category);
+        formdata.append('productCount', this.state.productCount);
 
         axios.post('http://localhost:5000/api/products',formdata)
             .then(res => {
                 if(res.status === 201)
                 {
-                    alert('Upload success');
+                    // alert('Upload success');
+                    this.setState({
+                        isAlert: true,
+                        alert: { variant: 'success', text: 'Upload success!' },
+                    });
                 }
                 else
                 {
-                    alert('Upload Failed');
+                    // alert('Upload Failed');
+                    this.setState({
+                        isAlert: true,
+                        alert: { variant: 'danger', text: 'Upload failed!' },
+                    });
+                    
                 }
             })
             .catch(error => {
@@ -203,7 +227,8 @@ class ManagerView extends React.Component {
                             price : item.price,
                             discount : item.discount,
                             description : item.description,
-                            prevImageLink :item.imageLink
+                            prevImageLink :item.imageLink,
+                            productCount: item.productCount
                         })
 
                     });
@@ -226,7 +251,8 @@ class ManagerView extends React.Component {
                 price : this.state.price,
                 description : this.state.description,
                 discount : this.state.discount,
-                categoryId : this.state.category
+                categoryId : this.state.category,
+                productCount: this.state.productCount
             })
                 .then(res => {
                     if(res.status === 201)
@@ -257,6 +283,7 @@ class ManagerView extends React.Component {
             }
 
             formdata.append('imageLink', this.state.imageLink);
+            formdata.append('productCount', this.state.productCount);
 
             axios.post('http://localhost:5000/api/products/updateWithImage',formdata)
                 .then(res => {
