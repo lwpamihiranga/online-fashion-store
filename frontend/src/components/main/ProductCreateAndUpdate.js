@@ -258,7 +258,7 @@ class ManagerView extends React.Component {
 
             formdata.append('imageLink', this.state.imageLink);
 
-            axios.post('http://localhost:5000/api/products/update',formdata)
+            axios.post('http://localhost:5000/api/products/updateWithImage',formdata)
                 .then(res => {
                     if(res.status === 201)
                     {
