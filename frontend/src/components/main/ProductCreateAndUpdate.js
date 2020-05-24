@@ -4,6 +4,7 @@ import LoginState from '../../_helpers/loginState';
 import '../../css/StoreManager.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
+import { Alert } from 'react-bootstrap';
 
 class ManagerView extends React.Component {
 
@@ -21,10 +22,17 @@ class ManagerView extends React.Component {
                 description : '',
                 imageLink : '',
                 prevImageLink : '',
-                productCount: ''
+                productCount: '',
+                isAlert: false,
+                alert: {
+                    variant: '',
+                    text: ''
+                }
             });
 
-
+            setTimeout(() => {
+                this.setState({ isAlert: false });
+            }, 5000);
     }
 
 
@@ -60,6 +68,7 @@ class ManagerView extends React.Component {
 
         return (
             <div className="container-fluid">
+                {this.state.isAlert ? <Alert variant={this.state.alert.variant} style={{marginTop: '15px'}}>{this.state.alert.text}</Alert> : ''}
                 <div className="p-5">
                     <div className="form-group2">
                         <div className="form-group">
@@ -177,11 +186,20 @@ class ManagerView extends React.Component {
             .then(res => {
                 if(res.status === 201)
                 {
-                    alert('Upload success');
+                    // alert('Upload success');
+                    this.setState({
+                        isAlert: true,
+                        alert: { variant: 'success', text: 'Upload success!' },
+                    });
                 }
                 else
                 {
-                    alert('Upload Failed');
+                    // alert('Upload Failed');
+                    this.setState({
+                        isAlert: true,
+                        alert: { variant: 'danger', text: 'Upload failed!' },
+                    });
+                    
                 }
             })
             .catch(error => {
