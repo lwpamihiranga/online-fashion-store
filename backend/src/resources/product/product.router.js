@@ -56,6 +56,36 @@ router
     .get(ProductController.getAll)
     .post(FileHandler.single('imageLink'), ProductController.updateOne);
 
+router.post('/updateWithImage', FileHandler.single('imageLink'), (req, res) => {
+    const productId = req.body.productId;
+    const categoryId = req.body.categoryId;
+    const description = req.body.description;
+    const name = req.body.name;
+    const price = req.body.price;
+    const imageLink = req.file.originalname;
+    const discount = req.body.discount;
+    const productCount = req.body.productCount;
+
+    Product.updateOne({_id : productId}, {
+            name: name,
+            price : price,
+            description : description,
+            categoryId : categoryId,
+            discount : discount,
+            imageLink : imageLink,
+            productCount: productCount
+        })
+        .then(res => {
+            res.status(201).json({
+                message: 'product updated',
+                created: result,
+            });
+        })
+        .catch(error => {
+            res.status(500).json({ error: error });
+        });
+});
+
 router.post('/updateWithoutImage',(req,res) => {
     const productId = req.body.productId;
     const categoryId = req.body.categoryId;
