@@ -214,8 +214,8 @@ class App extends React.Component {
                                 },
                             });
                         } else {
-                            var count = this.state.product[0].productCount--;
-                            axios.patch('http://localhost:5000/api/products/updateProductCount/'+ productId, {"productCount": 30})
+                            var count = --this.state.product[0].productCount;
+                            axios.patch('http://localhost:5000/api/products/updateProductCount/'+ productId, {"productCount": count})
                             .then(response => {
                                 if(response.status === 200) {
                                     console.log('product count updated')
