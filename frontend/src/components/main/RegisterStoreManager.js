@@ -21,9 +21,7 @@ class App extends React.Component {
     }
 
     render() {
-
         this.checkAuthentication();
-
 
         return (
             <div className="registerContainer">

@@ -1,59 +1,49 @@
-.rateItem
-{
+.rateItem {
     display: flex;
     flex-direction: row;
 }
-.star
-{
+.star {
     width: 20px;
     height: 20px;
     margin-top: auto;
     margin-bottom: auto;
 }
-.inputstarInactive
-{
+.inputstarInactive {
     width: 30px;
     height: 30px;
     cursor: pointer;
 }
-.inputstarActive
-{
+.inputstarActive {
     width: 30px;
     height: 30px;
     cursor: pointer;
 }
-#rateName
-{
+#rateName {
     color: black;
     max-lines: 1;
     font-size: 15px;
     width: 100%;
     margin-top: 10px;
 }
-.crudOperations
-{
+.crudOperations {
     display: flex;
     flex-direction: row;
 }
-.crudImg
-{
+.crudImg {
     width: 40px;
     height: 40px;
     cursor: pointer;
 }
-#commentInput
-{
+#commentInput {
     width: 45%;
 }
-.rateItemContainer
-{
+.rateItemContainer {
     display: flex;
     flex-direction: row;
     border-radius: 10px;
     padding-left: 10px;
 }
-.ratingList
-{
+.ratingList {
     background-color: white;
     border-radius: 10px;
     width: 100%;
@@ -61,24 +51,18 @@
     margin-right: auto;
     padding-bottom: 30px;
 }
-#commentText
-{
+#commentText {
     font-size: 20px;
 }
-.fivestars
-{
+.fivestars {
     margin-top: -10px;
 }
-.ratingContainer
-{
-
+.ratingContainer {
 }
-.userInputRating
-{
+.userInputRating {
     width: 100%;
 }
-.rateImage
-{
+.rateImage {
     margin-top: auto;
     margin-bottom: auto;
     width: 50px;
@@ -86,37 +70,31 @@
     background-size: cover;
     border: 2px solid white;
 }
-.rateImageDiv
-{
+.rateImageDiv {
     margin-top: auto;
     margin-bottom: auto;
     width: 50px;
     height: 50px;
     background-size: cover;
 }
-.Rowstars
-{
+.Rowstars {
     display: flex;
     flex-direction: row;
 }
-.rateRowDiv
-{
+.rateRowDiv {
     color: white;
     width: 100%;
     padding-left: 10px;
     padding-top: 10px;
 }
-.ratingUserName
-{
+.ratingUserName {
     font-size: 15px;
 }
-.rowStarContainer
-{
+.rowStarContainer {
     margin-right: -10px;
     margin-top: 2px;
 }
-.avgDiv
-{
+.avgDiv {
     display: flex;
     flex-direction: column;
 }

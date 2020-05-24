@@ -1,4 +1,3 @@
-
 var name = localStorage.getItem('userName');
 var password = localStorage.getItem('userPassword');
 var type = localStorage.getItem('userType');
@@ -7,7 +6,6 @@ var imageLink = localStorage.getItem('userImageLink');
 var email = localStorage.getItem('userEmail');
 
 const Roles = require('../_helpers/role');
-
 
 exports.isUser = () => {
     return type === Roles.User;
@@ -21,15 +19,12 @@ exports.isManager = () => {
 exports.isLoggedIn = () => {
     return !(id === null || id === '');
 };
-exports.getUserId = () =>
-{
+exports.getUserId = () => {
     return id;
-}
-exports.getUserImage = () =>
-{
+};
+exports.getUserImage = () => {
     return imageLink;
-}
-exports.getUserName = () =>
-{
+};
+exports.getUserName = () => {
     return name;
-}
+};

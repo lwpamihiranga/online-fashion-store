@@ -2,17 +2,15 @@ import React from 'react';
 import LoginState from '../../_helpers/loginState';
 
 import GridView from '../lists/gridView';
-import axios from "axios";
+import axios from 'axios';
 
 class App extends React.Component {
-
     constructor(props) {
         super(props);
-        this.state = ({productList : []});
+        this.state = { productList: [] };
 
         this.getWishListFromServer(LoginState.getUserId());
     }
-
 
     render() {
         this.checkAuthentication();
@@ -20,7 +18,11 @@ class App extends React.Component {
         return (
             <div className="productBody">
                 <div className="productDiv">
-                    <GridView  productList={this.state.productList}  isWishList = {true} getWishListFromServer={this.getWishListFromServer}/>
+                    <GridView
+                        productList={this.state.productList}
+                        isWishList={true}
+                        getWishListFromServer={this.getWishListFromServer}
+                    />
                 </div>
             </div>
         );
@@ -32,19 +34,18 @@ class App extends React.Component {
         }
     };
     getWishListFromServer = (userId) => {
-
-        axios.get("http://localhost:5000/api/wishList/find?userId=" + userId)
-            .then(response => {
+        axios
+            .get('http://localhost:5000/api/wishList/find?userId=' + userId)
+            .then((response) => {
                 if (response.status === 200) {
                     var list = response.data;
                     list.reverse();
-                    this.setState({productList: list});
+                    this.setState({ productList: list });
 
                     console.log(list.length);
                 }
             })
-            .catch(error => console.log(error));
-
-    }
+            .catch((error) => console.log(error));
+    };
 }
 export default App;
