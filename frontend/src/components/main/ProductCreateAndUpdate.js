@@ -172,7 +172,7 @@ class ManagerView extends React.Component {
         }
         formdata.append('categoryId',this.state.category);
         formdata.append('productCount', this.state.productCount);
-        
+
         axios.post('http://localhost:5000/api/products',formdata)
             .then(res => {
                 if(res.status === 201)
@@ -209,7 +209,8 @@ class ManagerView extends React.Component {
                             price : item.price,
                             discount : item.discount,
                             description : item.description,
-                            prevImageLink :item.imageLink
+                            prevImageLink :item.imageLink,
+                            productCount: item.productCount
                         })
 
                     });
@@ -232,7 +233,8 @@ class ManagerView extends React.Component {
                 price : this.state.price,
                 description : this.state.description,
                 discount : this.state.discount,
-                categoryId : this.state.category
+                categoryId : this.state.category,
+                productCount: this.state.productCount
             })
                 .then(res => {
                     if(res.status === 201)
@@ -263,6 +265,7 @@ class ManagerView extends React.Component {
             }
 
             formdata.append('imageLink', this.state.imageLink);
+            formdata.append('productCount', this.state.productCount);
 
             axios.post('http://localhost:5000/api/products/updateWithImage',formdata)
                 .then(res => {
