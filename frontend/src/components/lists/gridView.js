@@ -2,7 +2,7 @@ import React from "react";
 import css from '../../css/gridView.css';
 import {Link} from "react-router-dom";
 import axios from "axios";
-import {Nav, NavDropdown} from 'react-bootstrap';
+import {Nav, NavDropdown, Button} from 'react-bootstrap';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faArrowDown,faShoppingCart,faCheck} from "@fortawesome/free-solid-svg-icons";
 
@@ -137,6 +137,9 @@ class Grid extends React.Component
                                             value="Update"
                                         />
                                     </Link>
+                                    <Button style={{marginTop: '5px'}} onClick={() => this.deleteProduct(product._id)}>
+                                        Delete
+                                    </Button>
                                 </div>
                             }
 
@@ -204,6 +207,18 @@ class Grid extends React.Component
 
         )
 
+    }
+    deleteProduct = (productId) => {
+        axios.delete("http://localhost:5000/api/products/" + productId)
+            .then(response => {
+                if(response.status === 200) {
+                    alert('Product deleted');
+                    window.location.reload(false);
+                }
+            })
+            .catch(err => {
+                alert('Error! Unable to delete the product');
+            })
     }
     removeProductFromWishList = (userId,productId) => {
 
