@@ -76,7 +76,7 @@ class App extends React.Component {
                 formdata.append('password', this.state.password);
 
                 axios
-                    .post('http://localhost:5000/api/users/register', formdata)
+                    .post('http://161.35.114.131:5000/api/users/register', formdata)
                     .then((res) => {
                         if (res.status === 201) {
                             alert('Successfully Registered!');

@@ -63,7 +63,7 @@ class List extends React.Component {
 
     update = (id) => {
         axios
-            .post('http://localhost:5000/api/category/update', {
+            .post('http://161.35.114.131:5000/api/category/update', {
                 id: id,
                 catName: this.state.typingCatName,
             })
@@ -79,7 +79,7 @@ class List extends React.Component {
 
     delete = (id) => {
         axios
-            .post('http://localhost:5000/api/category/delete', {
+            .post('http://161.35.114.131:5000/api/category/delete', {
                 id: id,
             })
             .then((res) => {
@@ -94,7 +94,7 @@ class List extends React.Component {
 
     getCategoryFromAPI = (id) => {
         axios
-            .get('http://localhost:5000/api/category/find?id=' + id)
+            .get('http://161.35.114.131:5000/api/category/find?id=' + id)
             .then((res) => {
                 if (res.status === 200) {
                     var list = res.data;

@@ -33,7 +33,7 @@ class App extends React.Component {
     };
     getWishListFromServer = (userId) => {
 
-        axios.get("http://localhost:5000/api/wishList/find?userId=" + userId)
+        axios.get("http://161.35.114.131:5000/api/wishList/find?userId=" + userId)
             .then(response => {
                 if (response.status === 200) {
                     var list = response.data;

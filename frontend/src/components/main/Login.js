@@ -66,7 +66,7 @@ class App extends React.Component {
         };
 
         axios
-            .post('http://localhost:5000/api/users/login', bodyObj)
+            .post('http://161.35.114.131:5000/api/users/login', bodyObj)
             .then((response) => {
                 if (response.status === 200) {
                     const token = response.data.token;

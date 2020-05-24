@@ -172,7 +172,7 @@ class App extends React.Component
     getRatingsByProductId(id)
     {
         //loading products according to the id and store in states
-        axios.get("http://localhost:5000/api/ratings/findByProductId?productId=" + id)
+        axios.get("http://161.35.114.131:5000/api/ratings/findByProductId?productId=" + id)
             .then(response => {
                 if(response.status === 200)
                 {
@@ -229,7 +229,7 @@ class App extends React.Component
 
 
                 //user needs to update
-                axios.post("http://localhost:5000/api/ratings/update?rateId=" + ratingId + "&rate=" + rate + "&comment=" + comment)
+                axios.post("http://161.35.114.131:5000/api/ratings/update?rateId=" + ratingId + "&rate=" + rate + "&comment=" + comment)
                     .then(response => {
                         if (response.status === 200) {
                             var list = response.data;
@@ -251,7 +251,7 @@ class App extends React.Component
 
 
                 //user needs to create new rating
-                axios.post("http://localhost:5000/api/ratings/create?userId=" + userId + "&productId=" + productId + "&comment=" + comment + "&rate=" + rate + "&imageLink=" + LoginState.getUserImage() + "&username=" + LoginState.getUserName())
+                axios.post("http://161.35.114.131:5000/api/ratings/create?userId=" + userId + "&productId=" + productId + "&comment=" + comment + "&rate=" + rate + "&imageLink=" + LoginState.getUserImage() + "&username=" + LoginState.getUserName())
                     .then(response => {
                         if (response.status === 200) {
                             var list = response.data;
@@ -275,7 +275,7 @@ class App extends React.Component
             return;
         }
 
-        axios.post("http://localhost:5000/api/ratings/delete?rateId=" + id)
+        axios.post("http://161.35.114.131:5000/api/ratings/delete?rateId=" + id)
             .then(response => {
                 if(response.status === 200)
                 {

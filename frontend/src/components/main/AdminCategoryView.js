@@ -50,7 +50,7 @@ class AdminCategoryView extends React.Component {
 
     getAllCategories() {
         axios
-            .get('http://localhost:5000/api/category')
+            .get('http://161.35.114.131:5000/api/category')
             .then((response) => {
                 if (response.status === 200) {
                     var list = response.data;
@@ -71,7 +71,7 @@ class AdminCategoryView extends React.Component {
         } else {
             axios
                 .post(
-                    'http://localhost:5000/api/category/',
+                    'http://161.35.114.131:5000/api/category/',
                     { catName: this.state.typingCatName },
                     { headers: { Authorization: localStorage.getItem('token') } }
                 )

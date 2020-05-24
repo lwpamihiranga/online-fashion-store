@@ -42,7 +42,7 @@ class ManagerView extends React.Component {
     };
     getAllProducts = () => {
 
-        axios.get('http://localhost:5000/api/products')
+        axios.get('http://161.35.114.131:5000/api/products')
             .then(res => {
 
                 if(res.status === 200)

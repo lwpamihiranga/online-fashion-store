@@ -209,7 +209,7 @@ class Grid extends React.Component
 
     }
     deleteProduct = (productId) => {
-        axios.delete("http://localhost:5000/api/products/" + productId)
+        axios.delete("http://161.35.114.131:5000/api/products/" + productId)
             .then(response => {
                 if(response.status === 200) {
                     alert('Product deleted');
@@ -222,7 +222,7 @@ class Grid extends React.Component
     }
     removeProductFromWishList = (userId,productId) => {
 
-        axios.post("http://localhost:5000/api/wishList/delete?userId=" + userId + "&productId=" + productId)
+        axios.post("http://161.35.114.131:5000/api/wishList/delete?userId=" + userId + "&productId=" + productId)
             .then(response => {
                 if(response.status === 200)
                 {
@@ -235,7 +235,7 @@ class Grid extends React.Component
 
         if(productId != null && userId != null)
         {
-            axios.post("http://localhost:5000/api/cart/create?productId=" + productId +"&userId=" + userId)
+            axios.post("http://161.35.114.131:5000/api/cart/create?productId=" + productId +"&userId=" + userId)
                 .then(response => {
                     if (response.status === 200)
                     {
@@ -268,7 +268,7 @@ class Grid extends React.Component
     };
     removeProductFromCart = (userId, productId) => {
         axios
-            .post('http://localhost:5000/api/cart/delete?userId=' + userId + '&productId=' + productId)
+            .post('http://161.35.114.131:5000/api/cart/delete?userId=' + userId + '&productId=' + productId)
             .then((response) => {
                 if (response.status === 200)
                 {
@@ -279,7 +279,7 @@ class Grid extends React.Component
     };
     buyProduct = (pid,type) => {
 
-        axios.patch('http://localhost:5000/api/cart?id=' + pid + '&isBought=' + true)
+        axios.patch('http://161.35.114.131:5000/api/cart?id=' + pid + '&isBought=' + true)
             .then(res => {
                 if(res.status === 200)
                 {

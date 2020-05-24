@@ -186,7 +186,7 @@ class App extends React.Component {
     getCategoriesFromApi() {
         //loading categories from the api to the state
         axios
-            .get('http://localhost:5000/api/category/')
+            .get('http://161.35.114.131:5000/api/category/')
             .then((response) => {
                 if (response.status === 200) {
                     var list = response.data;

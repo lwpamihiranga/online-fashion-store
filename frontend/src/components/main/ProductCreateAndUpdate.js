@@ -137,7 +137,7 @@ class ManagerView extends React.Component {
     };
     getAllCategories = () => {
 
-        axios.get('http://localhost:5000/api/category')
+        axios.get('http://161.35.114.131:5000/api/category')
             .then(response => {
 
                 if(response.status === 200)
@@ -182,7 +182,7 @@ class ManagerView extends React.Component {
         formdata.append('categoryId',this.state.category);
         formdata.append('productCount', this.state.productCount);
 
-        axios.post('http://localhost:5000/api/products',formdata)
+        axios.post('http://161.35.114.131:5000/api/products',formdata)
             .then(res => {
                 if(res.status === 201)
                 {
@@ -209,7 +209,7 @@ class ManagerView extends React.Component {
     getProductDetails = (id) => {
         //loading the relevant product by the id
         axios
-            .get('http://localhost:5000/api/products/findByProductId?id=' + id)
+            .get('http://161.35.114.131:5000/api/products/findByProductId?id=' + id)
             .then((response) => {
                 if (response.status === 200)
                 {
@@ -245,7 +245,7 @@ class ManagerView extends React.Component {
 
         if (this.state.imageLink === '')
         {
-            axios.post('http://localhost:5000/api/products/updateWithoutImage',{
+            axios.post('http://161.35.114.131:5000/api/products/updateWithoutImage',{
                 productId : this.state.productId,
                 name:this.state.name,
                 price : this.state.price,
@@ -285,7 +285,7 @@ class ManagerView extends React.Component {
             formdata.append('imageLink', this.state.imageLink);
             formdata.append('productCount', this.state.productCount);
 
-            axios.post('http://localhost:5000/api/products/updateWithImage',formdata)
+            axios.post('http://161.35.114.131:5000/api/products/updateWithImage',formdata)
                 .then(res => {
                     if(res.status === 201)
                     {
