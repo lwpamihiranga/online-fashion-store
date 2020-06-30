@@ -3,7 +3,7 @@ const sgMail = require('@sendgrid/mail');
 exports.sendManagerMail = (receiverMail, receiverName) => {
     sgMail.setApiKey(
         process.env.SENDGRID_API_KEY ||
-            '***REMOVED***'
+            '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'
     );
 
     const msg = {
